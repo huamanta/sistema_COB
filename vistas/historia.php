@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Basic Form Element | Kiaalap - Kiaalap Admin Template</title>
+    <title>COB | historia clinica</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
 		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon1.png">
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -68,142 +68,6 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-</head>
-
-<body>
-    <!--[if lt IE 8]>
-		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-	<![endif]-->
-    <!-- Start Left menu area -->
-    <?php include "fragments/menu.php"; ?>
-    <!-- End Left menu area -->
-    <!-- Start Welcome area -->
-    <div class="all-content-wrapper">
-      <div class="container-fluid">
-          <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <div class="logo-pro">
-                      <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="header-advance-area">
-        <?php include "fragments/header.php"; ?>
-        <div class="breadcome-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="breadcome-list single-page-breadcome">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="breadcome-heading">
-                                        <form role="search" class="sr-input-func">
-                                            <input type="text" placeholder="Search..." class="search-int form-control">
-                                            <a href="#"><i class="fa fa-search"></i></a>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <ul class="breadcome-menu">
-                                        <li><a href="#">Home</a> <span class="bread-slash">/</span>
-                                        </li>
-                                        <li><span class="bread-blod" onclick="printDiv()">Add Professor</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-        <!-- Basic Form Start -->
-        <div class="basic-form-area mg-b-15" id="imprimir">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="sparkline8-list mt-b-30">
-                            <div class="sparkline8-graph">
-                                <div class="basic-login-form-ad">
-                                    <div class="row">
-                                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                                        </div>
-                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12" style="color: #5d6e92; border: 1px #5d6e92 solid; margin-top: 10px">
-                                          <div class="col-md-12">
-                                            <h3 style="text-align: center; margin-top: 10px">ODONTOGRAMA</h3>
-                                          </div>
-                                          <div class="form-group col-md-9">
-                                          </div>
-                                          <div class="form-group col-md-3">
-                                              <input name="fecha_documento" id="fecha_documento" type="date" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">FECHA/DATE</label>
-                                          </div>
-                                          <div class="col-md-12">
-                                            <label for="">FICHA DE IDENTIFICACION</label>
-                                          </div>
-                                          <div class="form-group col-md-7">
-                                              <input name="nombre_paciente" id="nombre_paciente" type="tex" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">NOMBRE/NAME</label>
-                                          </div>
-                                          <div class="form-group col-md-3">
-                                              <input name="fecha_nacimiento_paciente" id="fecha_nacimiento_paciente" type="date" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">F. NACIMIENTO/BIRTHDAY</label>
-                                          </div>
-                                          <div class="form-group col-md-2">
-                                              <input name="edad_paciente" id="edad_paciente" type="text" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">EDAD/AGE</label>
-                                          </div>
-
-                                          <div class="form-group col-md-2">
-                                              <select class="form-control" name="genero_paciente" id="genero_paciente">
-                                                <option value="" hidden selected>SELECCIONAR...</option>
-                                                <option value="1">M</option>
-                                                <option value="2">F</option>
-                                              </select>
-                                              <label class="pull-right" for="">SEXO/GENDER</label>
-                                          </div>
-                                          <div class="form-group col-md-4">
-                                            <select class="form-control" name="id_estado_civil" id="id_estado_civil">
-                                              <option value="" hidden selected>SELECCIONAR...</option>
-                                              <option value="1">SOLTERO</option>
-                                              <option value="2">CASADO</option>
-                                            </select>
-                                              <label class="pull-right" for="">ESTADO CIVIL/CIVIL STATUS</label>
-                                          </div>
-                                          <div class="form-group col-md-6">
-                                              <input name="ubigeo_paciente" id="ubigeo_paciente" type="text" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">LUGAR DE NACIMIENTO/BIRTH PLACE</label>
-                                          </div>
-                                          <div class="form-group col-md-6">
-                                              <input name="ocupacion_paciente" id="ocupacion_paciente" type="text" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">OCUPACION/OCUPATION</label>
-                                          </div>
-                                          <div class="form-group col-md-6">
-                                              <input name="telefono_paciente" id="telefono_paciente" type="number" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">TELEFONO/PHONE</label>
-                                          </div>
-                                          <div class="form-group col-md-8">
-                                              <input name="direccion_paciente" id="direccion_paciente" type="text" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">DIRECCION/ADDRES</label>
-                                          </div>
-                                          <div class="form-group col-md-4">
-                                              <input name="email_paciente" id="email_paciente" type="text" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">CORREO ELECTRONICO/EMAIL</label>
-                                          </div>
-                                          <div class="col-md-12">
-                                            <label for="">EN CASO DE EMERGENCIA LLAMAR A:</label>
-                                          </div>
-                                          <div class="form-group col-md-8">
-                                              <input name="" id="" type="text" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">NOMBRE/NAME</label>
-                                          </div>
-                                          <div class="form-group col-md-4">
-                                              <input name="" id="" type="text" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">TELEFONO/PHONE</label>
-                                          </div>
-
     <style media="screen">
     .checkbox label:after,
 .radio label:after {
@@ -264,6 +128,141 @@
     opacity: .5;
 }
     </style>
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+    <!-- Start Left menu area -->
+    <?php include "fragments/menu.php"; ?>
+    <!-- End Left menu area -->
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="logo-pro">
+                      <a href="index.html"><img class="main-logo" src="img/logo/logo1.png" alt="" /></a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="header-advance-area">
+        <?php include "fragments/header.php"; ?>
+        <div class="breadcome-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="breadcome-list single-page-breadcome">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="breadcome-heading">
+                                        <form role="search" class="sr-input-func">
+                                            <input type="text" placeholder="Search..." class="search-int form-control">
+                                            <a href="#"><i class="fa fa-search"></i></a>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <ul class="breadcome-menu">
+                                        <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                                        </li>
+                                        <li><span class="bread-blod" onclick="printDiv()">Add Professor</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- Basic Form Start -->
+        <div class="basic-form-area mg-b-15" id="imprimir">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline8-list mt-b-30">
+                            <div class="sparkline8-graph">
+                                <div class="basic-login-form-ad">
+                                    <div class="row">
+                                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12" style="color: #5d6e92; border: 1px #5d6e92 solid; margin-top: 10px">
+                                          <div class="col-md-12">
+                                            <h3 style="text-align: center; margin-top: 10px">HISTORIA CLINICA</h3>
+                                          </div>
+                                          <div class="form-group col-md-9">
+                                          </div>
+                                          <div class="form-group col-md-3">
+                                              <input name="fecha_documento" id="fecha_documento" type="date" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">FECHA/DATE</label>
+                                          </div>
+                                          <div class="col-md-12">
+                                            <label for="">FICHA DE IDENTIFICACION</label>
+                                          </div>
+                                          <div class="form-group col-md-7">
+                                              <input name="nombre_paciente" id="nombre_paciente" type="text" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">NOMBRE/NAME</label>
+                                          </div>
+                                          <div class="form-group col-md-3">
+                                              <input name="fecha_nacimiento_paciente" id="fecha_nacimiento_paciente" type="date" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">F. NACIMIENTO/BIRTHDAY</label>
+                                          </div>
+                                          <div class="form-group col-md-2">
+                                              <input name="edad_paciente" id="edad_paciente" type="text" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">EDAD/AGE</label>
+                                          </div>
+
+                                          <div class="form-group col-md-2">
+                                              <select class="form-control" name="genero_paciente" id="genero_paciente">
+                                                <option value="" hidden selected>SELECCIONAR...</option>
+                                                <option value="1">M</option>
+                                                <option value="2">F</option>
+                                              </select>
+                                              <label class="pull-right" for="">SEXO/GENDER</label>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                            <select class="form-control" name="id_estado_civil" id="id_estado_civil">
+                                              <option value="" hidden selected>SELECCIONAR...</option>
+                                              <option value="1">SOLTERO</option>
+                                              <option value="2">CASADO</option>
+                                            </select>
+                                              <label class="pull-right" for="">ESTADO CIVIL/CIVIL STATUS</label>
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                              <input name="ubigeo_paciente" id="ubigeo_paciente" type="text" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">LUGAR DE NACIMIENTO/BIRTH PLACE</label>
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                              <input name="ocupacion_paciente" id="ocupacion_paciente" type="text" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">OCUPACION/OCUPATION</label>
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                              <input name="telefono_paciente" id="telefono_paciente" type="number" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">TELEFONO/PHONE</label>
+                                          </div>
+                                          <div class="form-group col-md-8">
+                                              <input name="direccion_paciente" id="direccion_paciente" type="text" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">DIRECCION/ADDRES</label>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                              <input name="email_paciente" id="email_paciente" type="text" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">CORREO ELECTRONICO/EMAIL</label>
+                                          </div>
+                                          <div class="col-md-12">
+                                            <label for="">EN CASO DE EMERGENCIA LLAMAR A:</label>
+                                          </div>
+                                          <div class="form-group col-md-8">
+                                              <input name="apoderado_paciente" id="apoderado_paciente" type="text" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">NOMBRE/NAME</label>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                              <input name="telefono_apoderado" id="telefono_apoderado" type="text" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">TELEFONO/PHONE</label>
+                                          </div>
                                           <div class="col-md-12">
                                             <label for="">ANTECEDENTES PATOLOGICOS</label>
                                           </div>
@@ -276,165 +275,19 @@
                                           </div>
                                           <div class="col-md-12">
                                             <div class="col-md-6" style="border-right: 1px #ccc solid">
-                                              <div class="col-md-12">
-                                                <div class="col-md-1" style="width: 8.33333333%;">
-                                                </div>
-                                                <div class="col-md-1" style="width: 8.33333333%;">
-                                                </div>
-                                                <div class="col-md-1" style="width: 8.33333333%;">
-                                                </div>
-                                                <div class="col-md-1" style="width: 8.33333333%;">
-                                                </div>
-                                                <div class="col-md-1" style="width: 8.33333333%;">
-                                                  <label for="">18</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1" style="width: 8.33333333%;">
-                                                  <label for="">17</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1" style="width: 8.33333333%;">
-                                                  <label for="">16</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1" style="width: 8.33333333%;">
-                                                  <label for="">15</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1" style="width: 8.33333333%;">
-                                                  <label for="">14</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1" style="width: 8.33333333%;">
-                                                  <label for="">13</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1" style="width: 8.33333333%;">
-                                                  <label for="">12</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1" style="width: 8.33333333%;">
-                                                  <label for="">11</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
+                                              <div class="col-md-12" id="bloque1">
+
                                               </div>
-                                              <div class="col-md-12" style="margin-top: 10px">
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">55</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">54</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">53</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">52</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">51</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
+                                              <div class="col-md-12" id="bloque2" style="margin-top: 10px">
+
                                               </div>
                                             </div>
                                             <div class="col-md-6">
-                                              <div class="col-md-12">
-                                                <div class="col-md-1">
-                                                  <label for="">21</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">22</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">23</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">24</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">25</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">26</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">27</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">28</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
+                                              <div class="col-md-12" id="bloque3">
 
                                               </div>
-                                              <div class="col-md-12" style="margin-top: 10px">
+                                              <div class="col-md-12" id="bloque4" style="margin-top: 10px">
 
-                                                <div class="col-md-1">
-                                                  <label for="">61</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">62</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">63</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">64</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <label for="">65</label>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
                                               </div>
                                             </div>
                                           </div>
@@ -462,167 +315,18 @@
                                           <div class="col-md-12">
                                             <div class="col-md-6" style="border-right: 1px #ccc solid">
 
-                                              <div class="col-md-12">
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">85</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">84</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">83</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">82</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">81</label>
-                                                </div>
+                                              <div class="col-md-12" id="bloque5">
+
                                               </div>
-                                              <div class="col-md-12" style="margin-top: 10px">
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">48</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">47</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">46</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">45</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">44</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">43</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">42</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">41</label>
-                                                </div>
+                                              <div class="col-md-12" id="bloque6" style="margin-top: 10px">
+
                                               </div>
                                             </div>
                                             <div class="col-md-6">
-                                              <div class="col-md-12">
+                                              <div class="col-md-12" id="bloque7">
 
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">71</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">72</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">73</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">74</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">75</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
                                               </div>
-                                              <div class="col-md-12" style="margin-top: 10px">
-                                                <div class="col-md-1">
-                                                  <i class="fa fa-close" style="font-size: 25px; color: #006df0; position: absolute; left: 18px;"></i>
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">31</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">32</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">33</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <i class="fa fa-close" style="font-size: 25px; color: #006df0; position: absolute; left: 18px;"></i>
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">34</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">35</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                  <i class="fa fa-close" style="font-size: 25px; color: #006df0; position: absolute; left: 18px;"></i>
-                                                  <i class="fa fa-life-ring" style="font-size: 25px;"></i>
-                                                  <label for="">36</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">37</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  <label for="">38</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-1">
-                                                </div>
+                                              <div class="col-md-12" id="bloque8" style="margin-top: 10px">
 
                                               </div>
                                             </div>
@@ -637,7 +341,7 @@
                                             <textarea name="name"  style="border: 1px #5d6e92 solid" class="form-control" rows="1" cols="40"></textarea>
                                           </div>
                                           <div class="form-group col-md-12">
-                                            <table class="table">
+                                            <table class="table table-responsive">
                                               <thead style="background: #5d6e92; color: white">
                                                 <tr>
                                                   <th>TRATAMIENTO</th>
@@ -647,25 +351,11 @@
                                                 </tr>
                                               </thead>
                                               <tbody id="table_tratamiento">
-                                                <tr>
-                                                  <td>
-                                                    <input type="text" class="form-control" name="" value="">
-                                                  </td>
-                                                  <td>
-                                                    <input type="text" class="form-control" name="" value="">
-                                                  </td>
-                                                  <td>
-                                                    <input type="text" class="form-control" name="" value="">
-                                                  </td>
-                                                  <td>
-                                                    <input type="text" class="form-control" name="" value="">
-                                                  </td>
-                                                </tr>
                                               </tbody>
                                             </table>
                                           </div>
                                           <div class="form-group col-md-12">
-                                            <table class="table">
+                                            <table class="table table-responsive">
                                               <thead style="background: #5d6e92; color: white">
                                                 <tr>
                                                   <th>TRATAMIENTO</th>
@@ -677,7 +367,7 @@
                                               <tbody>
                                                 <tr>
                                                   <td>
-                                                    <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" readonly class="form-control" name="" value="">
+                                                    <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid"  class="form-control" name="" value="">
                                                   </td>
                                                   <td>
                                                     <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
