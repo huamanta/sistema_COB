@@ -2,56 +2,6 @@ listarAntecedentesForSelected();
 listarTratamientoTable();
 listarDientes();
 
-listarDepartamentos();
-listarProvincias();
-
-function listarProvincias() {
-      var url = 'http://localhost/restapi/v1/ubigeo/data_list';
-      var token = '8f126c231ef98f4e45d331dc1bc336278935fed6f09fc214f07691258baa16b0';
-      var data = 'ubigeo=01'
-      $.ajax({
-        url: url,
-        headers: {
-        'Authorization': token,
-        },
-        type: 'GET',
-        data: data,
-        accepts: "application/json",
-        crossDomain: true,
-        beforeSend: function () {
-          //$('#btn_login_auth').html('AUTENTICANDO...');
-        },
-        success: function (response) {
-          console.log(response);
-        }
-      });
-}
-
-function listarDepartamentos() {
-      var url = 'http://localhost/restapi/v1/ubigeo/all';
-      var token = '8f126c231ef98f4e45d331dc1bc336278935fed6f09fc214f07691258baa16b0';
-      $.ajax({
-        url: url,
-        headers: {
-        'Authorization': token,
-        },
-        type: 'GET',
-        accepts: "application/json",
-        crossDomain: true,
-        beforeSend: function () {
-          //$('#btn_login_auth').html('AUTENTICANDO...');
-        },
-        success: function (response) {
-          $.each(response, function (i, item) {
-            var departamentos = response[i].departamentos;
-            $.each(departamentos, function (i, item) {
-              //console.log('<option value="'+departamentos[i].ubigeo+'">'+departamentos[i].nombre+'</option>');
-            })
-          });
-        }
-      });
-}
-
 var hoy = new Date();
 var dd = hoy.getDate();
 var mm = hoy.getMonth()+1;

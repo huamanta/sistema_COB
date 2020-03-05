@@ -61,21 +61,31 @@ public function guardarPaciente($tipo_doc_paciente, $numero_documento, $nombres_
 
 public function listarPacientes()
 {
-  $stm = $this->conn->prepare("SELECT * FROM persona WHERE deleted_at IS NULL");
-  $stm->execute();
-  $data = Array();
-  foreach ($stm as $result) {
-    $data[] = array(
-      'id_persona' => $result['id_persona'],
-      'created_at' => $result['created_at'],
-      'primer_nombre' => $result['primer_nombre'],
-      'numero_documento' => $result['numero_documento'],
-      'email' => $result['email'],
-      'telefono' => $result['telefono'],
-      'ubigeo' => $result['ubigeo'],
-    );
+  try {
+    $stm = $this->conn->prepare("SELECT * FROM persona pe, paciente pa WHERE pe.id_persona = pa.id_persona AND pa.deleted_at IS NULL");
+    $stm->execute();
+    $data = Array();
+    $count = 1;
+    foreach ($stm as $result) {
+      $data[] = array(
+        '0' => $count++,
+        '1' => date('d-m-Y', strtotime($result['created_at'])),
+        '2' => $result['primer_nombre'].' '.$result['segundo_nombre'].' '.$result['primer_apellido'].' '.$result['segundo_apellido'],
+        '3' => $result['numero_documento'],
+        '4' => $result['email'],
+        '5' => $result['telefono'],
+        '6' => $result['ubigeo'],
+      );
+    }
+    $results = array(
+            "sEcho"=>1, //Información para el datatables
+            "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+            "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+            "aaData"=>$data);
+            return json_encode($results);
+  } catch (\Exception $e) {
+    die($e->getMessage());
   }
-  return json_encode($data);
 }
 
 }

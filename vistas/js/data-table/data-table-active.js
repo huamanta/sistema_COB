@@ -7,5 +7,5 @@
 						exportDataType: $(this).val()
 					});
 				});
- 
-})(jQuery); 
+
+})(jQuery);
