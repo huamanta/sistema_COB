@@ -22,7 +22,7 @@
 .modal-close-area a{
 	    color: #fff;
     font-size: 16px;
-    background: #006DF0;
+    background: #354a77;
     height: 30px;
     width: 30px;
     text-align: center;
@@ -30,6 +30,7 @@
     display: block;
     border-radius: 50%;
 }
+
 .modal-close-area a:hover{
 	    color: #303030;
 }
@@ -176,7 +177,7 @@
 	color:#fff;
 }
 .header-color-modal.bg-color-1{
-	background:#006DF0;
+	background:#354a77;
 }
 .header-color-modal.bg-color-2{
 	background:#8e44ad;
@@ -230,10 +231,20 @@
 .modal-footer a{
 	font-size:14px;
 	color:#fff;
-	background: #006DF0;
+	background: #354a77;
 	padding:10px 20px;
 	border-radius:3px;
 }
+
+.modal-footer button{
+	font-size:14px;
+	color:#fff;
+	background: #354a77;
+	padding:10px 20px;
+	border-radius:3px;
+	border: 2px #354a77 solid;
+}
+
 .modal-footer a:hover{
 	color:#fff;
 }

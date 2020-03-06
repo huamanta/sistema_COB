@@ -274,6 +274,7 @@ function Redirect(id_paciente, id_persona) {
       id_persona: id_persona
   }, true);
 }
+
 function redirect_by_post(purl, pparameters, in_new_tab) {
     pparameters = (typeof pparameters == 'undefined') ? {} : pparameters;
     in_new_tab = (typeof in_new_tab == 'undefined') ? true : in_new_tab;

@@ -41,10 +41,8 @@ function listarRoles() {
       {
           "text": '<i class="fa fa-plus"> Nuevo rol</i>',
           action: function ( e, dt, node, config ) {
+            $('#PrimaryModalalert').modal('show');
             $('#div_id_rol').html('');
-            $('#lista_roles_page').addClass('hidden');
-            $('#add_permisos_rol').addClass('hidden');
-            $('#add_roles_page').removeClass('hidden');
             $('#form_add_rol')[0].reset();
           },
           "titleAttr": 'Nuevo'
@@ -75,24 +73,15 @@ function listarRoles() {
    })
 }
 
-$('#id_cancelar').click(function (e) {
-  e.preventDefault();
-  $('#lista_roles_page').removeClass('hidden');
-  $('#add_roles_page').addClass('hidden');
-  $('#add_permisos_rol').addClass('hidden');
-});
 
 $('#regresar_lista').click(function (e) {
   e.preventDefault();
   $('#lista_roles_page').removeClass('hidden');
-  $('#add_roles_page').addClass('hidden');
   $('#add_permisos_rol').addClass('hidden');
 });
 
 function editarRol(id_rol) {
-  $('#lista_roles_page').addClass('hidden');
-  $('#add_permisos_rol').addClass('hidden');
-  $('#add_roles_page').removeClass('hidden');
+  $('#PrimaryModalalert').modal('show');
   $.ajax({
     type: 'POST',
     url: '../model/roles_permisos.php?action=listar_data_rol',
@@ -111,7 +100,6 @@ function editarRol(id_rol) {
 function agregarPermisoRol(id_rol) {
   $('#lista_roles_page').addClass('hidden');
   $('#add_permisos_rol').removeClass('hidden');
-  $('#add_roles_page').addClass('hidden');
   listarRolesPermisosAll(id_rol);
   listarRolesPermisosRol(id_rol);
 }
@@ -183,7 +171,40 @@ function listarRolesPermisosAll(id_rol) {
 }
 
 function eliminarRol(id_rol) {
+  swal({
+          title: "¿Eliminar registro?",
+          text: "Podra volver a recuperar el registro",
+          type: "info",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          showLoaderOnConfirm: true,
+      },
+      function(){
 
+            $.ajax({
+             type: "POST",
+             url: '../model/paciente.php?action=eliminarPaciente',
+             data: 'id_paciente='+id, // serializes the form's elements.
+             success: function(res)
+
+             {
+               var jsonData = JSON.parse(res);
+
+               if (jsonData.success == "1"){
+                 swal({
+                     type: "success",
+                     title: "Eliminado correctamente",
+                     timer: 1000,
+                     showConfirmButton: false
+                 });
+                 listarPacientes();
+               }else {
+
+               }
+             }
+           });
+
+      });
 }
 
 $('#form_add_rol').submit(function (e) {

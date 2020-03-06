@@ -16,9 +16,12 @@
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/sweetalert/sweetalert.css" rel="stylesheet">
     <!-- Bootstrap CSS
 		============================================ -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css"><!-- modals CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/modals.css">
     <!-- owl.carousel CSS
 		============================================ -->
     <link rel="stylesheet" href="css/owl.carousel.css">
@@ -147,8 +150,41 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                        <a href="index.html"><img class="main-logo" src="img/logo/logo1.png" alt="" /></a>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header header-color-modal bg-color-1">
+                      <h4 class="modal-title">BG Color Header Modal</h4>
+                      <div class="modal-close-area modal-close-df">
+                          <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                      </div>
+                  </div>
+                    <form id="form_add_rol" method="POST" >
+                    <div class="modal-body">
+                      <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group" id="div_id_rol" hidden>
+
+                            </div>
+                            <div class="form-group">
+                                <input name="nombre_rol" id="nombre_rol" type="text" class="form-control" placeholder="Nombre rol" value="">
+                            </div>
+                              <div class="form-group">
+                                  <input name="abreviacion_rol" id="abreviacion_rol" type="text" class="form-control" placeholder="Abreviacion" value="">
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a data-dismiss="modal" href="#" style="background: #bb9c7f">Cancel</a>
+                        <button type="submit" name="button">Guardar</button>
+                    </div>
+                  </form>
                 </div>
             </div>
         </div>
@@ -216,61 +252,6 @@
           </div>
         </div>
         <!-- Single pro tab review Start-->
-        <div class="single-pro-review-area mt-t-30 mg-b-15 hidden" id="add_roles_page">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="product-payment-inner-st">
-                          <div class="sparkline13-hd">
-                              <div class="main-sparkline13-hd">
-                                  <h1>Projects <span class="table-project-n">Data</span> Table</h1>
-                              </div>
-                          </div>
-                            <form id="form_add_rol" method="POST" >
-                                <div id="myTabContent" class="tab-content custom-product-edit">
-                                  <div class="row" id="id_persona" hidden>
-
-                                  </div>
-                                    <div class="product-tab-list tab-pane fade active in" id="description">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <div class="review-content-section">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                                  <div class="form-group" id="div_id_rol" hidden>
-
-                                                                  </div>
-                                                                  <div class="form-group">
-                                                                      <input name="nombre_rol" id="nombre_rol" type="text" class="form-control" placeholder="Nombre rol" value="">
-                                                                  </div>
-                                                                    <div class="form-group">
-                                                                        <input name="abreviacion_rol" id="abreviacion_rol" type="text" class="form-control" placeholder="Abreviacion" value="">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <center>
-                                                <button type="button" class="btn btn-danger waves-effect waves-light" id="id_cancelar">CANCELAR</button>
-                                                <button type="submit" style="background-color: #354a77; color: white; border-color: #354a77" class="btn btn-succes waves-effect waves-light">GUARDAR</button>
-                                            </center>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="single-pro-review-area mt-t-30 mg-b-15 hidden" id="add_permisos_rol">
             <div class="container-fluid">
                 <div class="row">
@@ -278,12 +259,12 @@
                         <div class="product-payment-inner-st">
                           <div class="sparkline13-hd">
                               <div class="main-sparkline13-hd">
-                                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                   <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                    <h1>Projects <span class="table-project-n">Data</span> Table</h1>
+                                    <h1>Administración <span class="table-project-n">de</span> permisos</h1>
                                   </div>
-                                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                                    <button type="button" class="btn btn-primary" name="button" id="regresar_lista">Regresar</button>
+                                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12" style="float: right">
+                                    <button type="button" class="btn btn-primary" name="button" id="regresar_lista" style="background: #354a77; float: right">Regresar</button>
                                   </div>
                                 </div>
                               </div>
@@ -292,6 +273,9 @@
                                     <div class="product-tab-list tab-pane fade active in" id="description">
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                              <center>
+                                                <h5>Rutas del sistema</h5>
+                                              </center>
                                                 <div class="review-content-section">
                                                             <div class="row">
                                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -303,6 +287,9 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                              <center>
+                                                <h5>Permisos del rol</h5>
+                                              </center>
                                                 <div class="review-content-section">
                                                             <div class="row">
                                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -387,6 +374,7 @@
         <!-- tab JS
     		============================================ -->
         <script src="js/tab.js"></script>
+        <script src="js/sweetalert/sweetalert.min.js"></script>
         <!-- plugins JS
     		============================================ -->
         <script src="js/plugins.js"></script>
