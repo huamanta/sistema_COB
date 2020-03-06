@@ -16,6 +16,7 @@
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/sweetalert/sweetalert.css" rel="stylesheet">
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -145,6 +146,7 @@
                                               <th>Email</th>
                                               <th>Telefono</th>
                                               <th>Ubigeo</th>
+                                              <th>Acciones</th>
                                           </tr>
                                       </thead>
                                   </table>
@@ -214,6 +216,7 @@
         <!-- Chart JS
     		============================================ -->
         <script src="js/chart/jquery.peity.min.js"></script>
+          <script src="js/sweetalert/sweetalert.min.js"></script>
         <script src="js/peity/peity-active.js"></script>
         <!-- tab JS
     		============================================ -->

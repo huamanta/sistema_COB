@@ -22,13 +22,27 @@ switch ($action) {
   if (!isset($_POST['id_persona'])) {
     // code...
   echo $paciente->guardarPaciente($tipo_doc_paciente, $numero_documento, $nombres_paciente, $apellidos_paciente, $fecha_nacimiento, $ocupacion_paciente, $genero_paciente, $estado_civil, $email_paciente, $direccion_paciente,  $ubigeo_paciente, $telefono_paciente, $nombre_apoderado, $telefono_apoderado);
-  }
+  }else {
+          $id_persona = $_POST['id_persona'];
+          $id_paciente = $_POST['id_paciente'];
+      echo $paciente->actualizarPaciente($id_paciente, $id_persona, $tipo_doc_paciente, $numero_documento, $nombres_paciente, $apellidos_paciente, $fecha_nacimiento, $ocupacion_paciente, $genero_paciente, $estado_civil, $email_paciente, $direccion_paciente,  $ubigeo_paciente, $telefono_paciente,$nombre_apoderado, $telefono_apoderado);
+    }
     break;
     case 'listar':
       // code...
       echo $paciente->listarPacientes();
 
-      break;
+    break;
+    case 'eliminarPaciente':
+        // code...
+        $id_paciente = $_POST['id_paciente'];
+        echo $paciente-> eliminarPaciente($id_paciente);
+    break;
+    case 'dataPaciente':
+          // code...
+          $id_paciente = $_POST['id_paciente'];
+          echo $paciente->verDataPaciente($id_paciente);
+    break;
   default:
     // code...
     break;

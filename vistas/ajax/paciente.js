@@ -170,41 +170,156 @@ $("#numero_documento").keyup(function(a){
   }
 })
 
+$("#addPaciente").validate({
+  rules: {
+    nombres: "required",
+    apellidos: "required",
+    email: {
+      email: true
+    }
+  },
+  messages: {
+    nombres: "Please specify your name",
+    apellidos:"Please specify your last name",
+    numero_documento: "Please specify your Number Document",
+    email: {
+      required: "We need your email address to contact you",
+      email: "Your email address must be in the format of name@domain.com"
+    }
+  },
+  submitHandler: function(form){
+    var formData = $("#addPaciente").serialize();
 
+    $.ajax({
+        type: "POST",
+        url:'../model/paciente.php?action=guardar',
+        data: formData,
+        beforeSend: function() {
+          //$("#ingresar").html('Autenticando...');
+        },
+        success: function(response) {
+          var jsonData = JSON.parse(response);
 
+          console.log(response);
 
-$("#addPaciente").submit(function (e){
- e.preventDefault();
- var formData = $(this).serialize();
- $.ajax({
-     type: "POST",
-     url:'../model/paciente.php?action=guardar',
-     data: formData,
-     beforeSend: function() {
-       //$("#ingresar").html('Autenticando...');
-     },
-     success: function(response) {
+          if (jsonData.success == "1") {
+            $('#tipo_doc').val('');
+            $('#numero_documento').val('');
+            $('#nombres').val('');
+            $('#apellidos').val('');
+            $('#direccion').val('');
+            $('#ubigeo').val('');
+            $('#fecha_nacimiento').val('');
+            $('#tipo_doc').val('');
+            $('#ocupacion').val('');
+            $('#genero').val('');
+            $('#estado_civil').val('');
+            $('#telefono').val('');
+            $('#email').val('');
+            $('#nombre_apoderado').val('');
+            $('#telefono_apoderado').val('');
+            $('#id_paciente').hide();
+            $('#id_persona').hide();
+            $("#addPaciente")[0].reset();
 
-       var jsonData = JSON.parse(response);
-       if (jsonData.success == "1") {
-         $('#tipo_doc').val('');
-         $('#numero_documento').val('');
-         $('#nombres').val('');
-         $('#apellidos').val('');
-         $('#direccion').val('');
-         $('#ubigeo').val('');
-         $('#fecha_nacimiento').val('');
-         $('#tipo_doc').val('');
-         $('#ocupacion').val('');
-         $('#genero').val('');
-         $('#estado_civil').val('');
-         $('#telefono').val('');
-         $('#email').val('');
-         $('#nombre_apoderado').val('');
-         $('#telefono_apoderado').val('');
-       }else {
-       }
+          }else {
+          }
 
-     }
-   });
-})
+        }
+      });
+  }
+});
+
+function eliminarPaciente(id)
+{
+  swal({
+          title: "¿Eliminar registro?",
+          text: "Podra volver a recuperar el registro",
+          type: "info",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          showLoaderOnConfirm: true,
+      },
+      function(){
+
+            $.ajax({
+             type: "POST",
+             url: '../model/paciente.php?action=eliminarPaciente',
+             data: 'id_paciente='+id, // serializes the form's elements.
+             success: function(res)
+
+             {
+               var jsonData = JSON.parse(res);
+
+               if (jsonData.success == "1"){
+                 swal({
+                     type: "success",
+                     title: "Eliminado correctamente",
+                     timer: 1000,
+                     showConfirmButton: false
+                 });
+                 listarPacientes();
+               }else {
+
+               }
+             }
+           });
+
+      });
+}
+
+function Redirect(id_paciente, id_persona) {
+  redirect_by_post('paciente.php', {
+      id_paciente: id_paciente,
+      id_persona: id_persona
+  }, true);
+}
+function redirect_by_post(purl, pparameters, in_new_tab) {
+    pparameters = (typeof pparameters == 'undefined') ? {} : pparameters;
+    in_new_tab = (typeof in_new_tab == 'undefined') ? true : in_new_tab;
+
+    var form = document.createElement("form");
+    $(form).attr("id", "reg-form").attr("name", "reg-form").attr("action", purl).attr("method", "post").attr("enctype", "multipart/form-data");
+    if (in_new_tab) {
+        $(form).attr("target", "");
+    }
+    $.each(pparameters, function(key) {
+        $(form).append('<input type="text" name="' + key + '" value="' + this + '" />');
+    });
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+
+    return false;
+}
+verDataPaciente($('#id_paciente').val(),$('#id_persona').val());
+function verDataPaciente(id_paciente, id_persona)
+      {
+        $.ajax({
+            type: "POST",
+            url:'../model/paciente.php?action=dataPaciente',
+            data: 'id_paciente='+id_paciente+'id_persona='+id_persona,
+            beforeSend: function() {
+              //$("#ingresar").html('Autenticando...');
+            },
+            success: function(response) {
+              var json = JSON.parse(response);
+              console.log(json);
+              $("#tipo_doc").val(json.id_tipo_documento);
+              $("#numero_documento").val(json.numero_documento);
+              $("#nombres").val(json.primer_nombre+' '+json.segundo_nombre);
+              $("#apellidos").val(json.primer_apellido+' '+json.segundo_apellido);
+              $("#fecha_nacimiento").val(json.fecha_nacimiento);
+              $("#ocupacion").val(json.ocupacion);
+              $("#genero").val(json.id_genero);
+              $("#estado_civil").val(json.id_estado_civil);
+              $("#email").val(json.email);
+              $("#direccion").val(json.direccion);
+              $("#ubigeo").val(json.ubigeo);
+              $("#telefono").val(json.telefono);
+              $("#nombre_apoderado").val(json.nombre_apoderado);
+              $("#telefono_apoderado").val(json.telefono_apoderado);
+
+            }
+          });
+      }
