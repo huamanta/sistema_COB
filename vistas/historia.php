@@ -16,6 +16,7 @@
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -168,7 +169,7 @@
                                     <ul class="breadcome-menu">
                                         <li><a href="#">Home</a> <span class="bread-slash">/</span>
                                         </li>
-                                        <li><span class="bread-blod" onclick="printDiv()">Add Professor</span>
+                                        <li><span class="bread-blod">Add Professor</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -180,24 +181,27 @@
         </div>
         </div>
         <!-- Basic Form Start -->
-        <div class="basic-form-area mg-b-15" id="imprimir">
+        <div class="basic-form-area mg-b-15">
             <div class="container-fluid">
+
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="sparkline8-list mt-b-30">
                             <div class="sparkline8-graph">
                                 <div class="basic-login-form-ad">
                                     <div class="row">
-                                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                                        </div>
-                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12" style="color: #5d6e92; border: 1px #5d6e92 solid; margin-top: 10px">
+                                        <form class="" id="form_add_historia" action="index.html" method="get">
+                                          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+
+                                          </div>
+                                        <div class="col-lg-10 col-md-10  col-sm-10 col-xs-12" style="color: #5d6e92; border: 1px #5d6e92 solid; margin-top: 10px"  id="printElement">
                                           <div class="col-md-12">
                                             <h3 style="text-align: center; margin-top: 10px">HISTORIA CLINICA</h3>
                                           </div>
                                           <div class="form-group col-md-9">
                                           </div>
                                           <div class="form-group col-md-3">
-                                              <input name="fecha_documento" id="fecha_documento" type="date" class="form-control" placeholder="">
+                                              <input name="fecha_documento" id="fecha_documento" type="text" class="form-control" placeholder="">
                                               <label class="pull-right" for="">FECHA/DATE</label>
                                           </div>
                                           <div class="col-md-12">
@@ -208,7 +212,7 @@
                                               <label class="pull-right" for="">NOMBRE/NAME</label>
                                           </div>
                                           <div class="form-group col-md-3">
-                                              <input name="fecha_nacimiento_paciente" id="fecha_nacimiento_paciente" type="date" class="form-control" placeholder="">
+                                              <input name="fecha_nacimiento_paciente" id="fecha_nacimiento_paciente" type="text" class="form-control" placeholder="">
                                               <label class="pull-right" for="">F. NACIMIENTO/BIRTHDAY</label>
                                           </div>
                                           <div class="form-group col-md-2">
@@ -334,11 +338,11 @@
 
                                           <div class="form-group col-md-12">
                                             <label for="">DIAGNOSTICO</label>
-                                            <textarea name="name"  style="border: 1px #5d6e92 solid" class="form-control" rows="1" cols="40"></textarea>
+                                            <textarea name="diagnostico" id="diagnostico"  style="border: 1px #5d6e92 solid" class="form-control" rows="1" cols="40"></textarea>
                                           </div>
                                           <div class="form-group col-md-12">
                                             <label for="">OBSERVACIONES</label>
-                                            <textarea name="name"  style="border: 1px #5d6e92 solid" class="form-control" rows="1" cols="40"></textarea>
+                                            <textarea name="observaciones" id="observaciones"  style="border: 1px #5d6e92 solid" class="form-control" rows="1" cols="40"></textarea>
                                           </div>
                                           <div class="form-group col-md-12">
                                             <table class="table table-responsive">
@@ -370,7 +374,7 @@
                                                     <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid"  class="form-control" name="" value="">
                                                   </td>
                                                   <td>
-                                                    <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
+                                                    <input type="date" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
                                                   </td>
                                                   <td>
                                                     <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
@@ -382,7 +386,15 @@
                                               </tbody>
                                             </table>
                                           </div>
+
                                         </div>
+                                        <div class="col-md-12">
+                                          <center>
+                                            <button class="btn btn-primary" type="submit" name="button">Guardar</button>
+                                            <button class="btn btn-success" type="button" name="button" id="printButton">Imprimir</button>
+                                          </center>
+                                        </div>
+                                      </form>
                                     </div>
                                 </div>
                             </div>
@@ -434,6 +446,7 @@
 		============================================ -->
     <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/scrollbar/mCustomScrollbar-active.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <!-- metisMenu JS
 		============================================ -->
     <script src="js/metisMenu/metisMenu.min.js"></script>
@@ -454,6 +467,7 @@
     <!-- historia JS
 		============================================ -->
     <script src="ajax/historia.js"></script>
+    <script src="js/print.js"></script>
 
 </body>
 

@@ -13,9 +13,48 @@ if(dd<10) {
 if(mm<10) {
     mm='0'+mm;
 }
-var date = yyyy+ "-" + mm + "-" + dd ;
+var date = mm + "/" + dd + "/" + yyyy;
+
+
+
 
 $('#fecha_documento').val(date);
+$('.input-group-append').html('');
+
+$('#fecha_nacimiento_paciente').change(function () {
+  var fechaNace = new Date($(this).val());
+    var fechaActual = new Date()
+
+    var mes = fechaActual.getMonth();
+    var dia = fechaActual.getDate();
+    var año = fechaActual.getFullYear();
+
+    fechaActual.setDate(dia);
+    fechaActual.setMonth(mes);
+    fechaActual.setFullYear(año);
+
+    edad = Math.floor(((fechaActual - fechaNace) / (1000 * 60 * 60 * 24) / 365));
+
+    $('#edad_paciente').val(edad);
+})
+
+$('#fecha_nacimiento_paciente').keyup(function () {
+  var fechaNace = new Date($(this).val());
+    var fechaActual = new Date()
+
+    var mes = fechaActual.getMonth();
+    var dia = fechaActual.getDate();
+    var año = fechaActual.getFullYear();
+
+    fechaActual.setDate(dia);
+    fechaActual.setMonth(mes);
+    fechaActual.setFullYear(año);
+
+    edad = Math.floor(((fechaActual - fechaNace) / (1000 * 60 * 60 * 24) / 365));
+
+    $('#edad_paciente').val(edad);
+})
+
 
 function listarAntecedentesForSelected() {
   $.ajax({
@@ -48,7 +87,7 @@ function listarAntecedentesForSelected() {
           '<p style="margin-top: 10px">OTROS </p>'+
         '</div>'+
         '<div class="col-md-8">'+
-          '<input type="text" class="form-control">'+
+          '<input type="text" name="otro_antecedente" id="otro_antecedente" class="form-control">'+
         '</div>'+
       '</div>';
       $("#antecedentes_patologicos").html(html);
@@ -140,16 +179,6 @@ function calcularCantidad(id_tratamiento) {
 
 }
 
-function printDiv() {
-          var objeto=document.getElementById('imprimir');
-
-   //obtenemos el objeto a imprimir
-          var ventana=window.open('','_blank');  //abrimos una ventana vacía nueva
-          ventana.document.write(objeto.innerHTML);  //imprimimos el HTML del objeto en la nueva ventana
-          ventana.document.close();  //cerramos el documento
-          ventana.print();  //imprimimos la ventana
-          ventana.close();  //cerramos la ventana
-        }
 
 function listarDientes() {
   listarDientesBloque1();
@@ -435,3 +464,8 @@ function eliminarAntecedenteHistoria(id_detalle_historia) {
     }
   })
 }
+
+$('#form_add_historia').submit(function (e) {
+  e.preventDefault();
+  console.log($(this).serialize());
+});

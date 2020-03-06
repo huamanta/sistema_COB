@@ -117,7 +117,7 @@ class Historia
         'segundo_nombre' => $result['segundo_nombre'],
         'primer_apellido' => $result['primer_apellido'],
         'segundo_apellido' => $result['segundo_apellido'],
-        'fecha_nacimiento' => $result['fecha_nacimiento'],
+        'fecha_nacimiento' => date('m/d/Y', strtotime($result['fecha_nacimiento'])),
         'edad' => $this->calculateAgePatient($result['fecha_nacimiento']),
         'id_genero' => $result['id_genero'],
         'id_estado_civil' => $result['id_estado_civil'],
