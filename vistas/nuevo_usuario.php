@@ -21,6 +21,9 @@
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- modals CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/modals.css">
     <!-- owl.carousel CSS
 		============================================ -->
     <link rel="stylesheet" href="css/owl.carousel.css">
@@ -129,20 +132,25 @@
                             <ul id="myTabedu1" class="tab-review-design">
                                 <li class="active"><a href="#description">Información Básica</a></li>
                                 <li><a href="#reviews">Información de contacto</a></li>
-                                <li><a href="#INFORMATION"> Informacion de referencia</a></li>
+                                <?php if (!isset($_POST['id_usuario']) && !isset($_POST['id_persona'])): ?>
+                                  <li><a href="#INFORMATION"> Informacion de la cuenta</a></li>
+                                <?php endif; ?>
+                                <li class="pull-right">
+                                  <button type="button" class="btn btn-primary" name="button" style="background: #354a77" id="lista_usuarios">Lista Usuarios</button>
+                                </li>
                             </ul>
                             <style media="screen">
                                .invalid{
                                  color: red;
                                }
                             </style>
-                            <form id="addPaciente" method="POST" >
+                            <form id="add_usuario" method="POST" >
                                 <div id="myTabContent" class="tab-content custom-product-edit">
 
                                   <div class="row" id="div_id_paciente" >
-                                    <?php if (isset($_POST['id_paciente']) && isset($_POST['id_persona'])) {
+                                    <?php if (isset($_POST['id_usuario']) && isset($_POST['id_persona'])) {
                                       ?>
-                                        <input type="hidden" class="form-control" name="id_paciente" id="id_paciente" value="<?php echo $_POST['id_paciente']; ?>">
+                                        <input type="hidden" class="form-control" name="id_usuario" id="id_usuario" value="<?php echo $_POST['id_usuario']; ?>">
                                         <input type="hidden" class="form-control" name="id_persona" id="id_persona" value="<?php echo $_POST['id_persona']; ?>">
 
                                       <?php
@@ -156,10 +164,9 @@
                                                     <div id="dropzone1" class="pro-ad">
                                                             <div class="row">
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-
                                                                   <div class="form-group">
-                                                                      <select name="tipo_doc"id="tipo_doc" class="form-control">
-                                                                          <option value="" selected="hidden" disabled="">Tipo Documento</option>
+                                                                      <select name="tipo_doc" id="tipo_doc" class="form-control">
+                                                                          <option value="" selected  hidden>Tipo Documento</option>
                                                                           <option value="1">DNI</option>
                                                                           <option value="2">PASSPORTE</option>
                                                                     </select>
@@ -171,10 +178,7 @@
                                                                         <input name="nombres" id="nombres" type="text" class="form-control" placeholder="Nombres" value="" >
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <input name="apellidos" id="apellidos"type="text" class="form-control" placeholder="Apellidos" value="">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <input name="direccion" id="direccion"type="text" class="form-control" placeholder="Direccion" value="">
+                                                                        <input name="apellidos" id="apellidos" type="text" class="form-control" placeholder="Apellidos" value="">
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <input name="ocupacion" id="ocupacion"type="text" class="form-control" placeholder="Ocupación" value="">
@@ -227,12 +231,21 @@
                                                     <div class="row">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                             <div class="devit-card-custom">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control" id="email"name="email"placeholder="Email" value="">
+                                                              <div class="row">
+                                                                <div class="col-md-6">
+                                                                  <div class="form-group">
+                                                                      <input type="text" class="form-control" id="email" name="email"placeholder="Email" value="">
+                                                                  </div>
+                                                                  <div class="form-group">
+                                                                      <input type="number" class="form-control" id="telefono" name="telefono"placeholder="Telefono" value="">
+                                                                  </div>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <input type="number" class="form-control" id="telefono"name="telefono"placeholder="Telefono" value="">
+                                                                <div class="col-md-6">
+                                                                  <div class="form-group">
+                                                                      <input name="direccion" id="direccion" type="text" class="form-control" placeholder="Direccion" value="">
+                                                                  </div>
                                                                 </div>
+                                                              </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -240,30 +253,48 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <?php if (!isset($_POST['id_usuario']) && !isset($_POST['id_persona'])): ?>
                                     <div class="product-tab-list tab-pane fade" id="INFORMATION">
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="review-content-section">
                             												<div class="row">
-                            													<div class="col-lg-12">
+                            													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             														<div class="devit-card-custom">
-                            															<div class="form-group">
-                            																<input type="text" class="form-control" name="nombre_apoderado" id="nombre_apoderado"placeholder="nombre apoderado">
-                            															</div>
-                                                          <div class="form-group">
-                            																<input type="number" class="form-control" name="telefono_apoderado" id="telefono_apoderado"placeholder="Telefono apoderado">
-                            															</div>
-                                                    	</div>
+                                                          <div class="row">
+                                                            <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                <select  class="form-control" name="id_rol" id="id_rol">
+                                                                  <option value="">Seleccionar rol</option>
+                                                                  <option value="1">Administrador</option>
+                                                                </select>
+                                                              </div>
+                                															<div class="form-group">
+                                																<input type="text" class="form-control" name="usuario" id="usuario"placeholder="Ingrese usuario">
+                                															</div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                <input type="password" class="form-control" name="password" id="password" placeholder="*****************************">
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <input type="password" class="form-control" name="password_confirm" id="password_confirm" placeholder="*****************************">
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                    	   </div>
                             													</div>
                             												</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <?php endif; ?>
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="payment-adress">
-                                                <button type="submit" class="btn btn-primary waves-effect waves-light">GUARDAR</button>
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: #bb9c7f; border: 1px #bb9c7f solid">GUARDAR</button>
                                             </div>
                                         </div>
                                     </div>
@@ -367,7 +398,7 @@
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
-    <script src="ajax/paciente.js"></script>
+    <script src="ajax/usuarios.js"></script>
 
 </body>
 

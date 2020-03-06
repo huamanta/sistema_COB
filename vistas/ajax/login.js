@@ -11,7 +11,7 @@ $('#loginForm').submit(function (e) {
       $('#btn_login_auth').html('INGRESAR');
       var jsonData = JSON.parse(response);
       if (jsonData.success == "1") {
-          location.href = 'vistas/historia.php';
+          location.href = 'vistas/principal';
       }else if (jsonData.success == "2"){
         $("#message").html("<div class='alert alert-info alert-dismissible'>"+
                               "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+

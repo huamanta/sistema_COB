@@ -12,7 +12,7 @@
                   $db = new DbConnect();
                   $conn = $db->connect();
                   $stm = $conn->prepare("SELECT * FROM permiso p INNER JOIN ruta r ON p.id_ruta = r.id_ruta WHERE p.id_rol = ? AND r.nivel= 1 AND r.deleted_at IS NULL");
-                  $stm->execute(array('1'));
+                  $stm->execute(array($_SESSION['id_rol']));
                   foreach ($stm as $result) {
                     $expand = ($result['ruta']) ? '' : 'has-arrow';
                     $ruta = ($result['ruta']) ? $result['ruta'] : '#';
@@ -23,7 +23,7 @@
                           <ul class="submenu-angle" aria-expanded="true">
                             <?php
                             $stm1 = $conn->prepare("SELECT*  FROM permiso p   INNER JOIN ruta r ON p.id_ruta = r.id_ruta WHERE p.id_rol = ? AND r.nivel= 2 AND id_parent = ? AND r.deleted_at IS NULL");
-                            $stm1->execute(array('1', $result['id_ruta']));
+                            $stm1->execute(array($_SESSION['id_rol'], $result['id_ruta']));
                             foreach ($stm1 as $result1) {
                               ?>
                               <li><a title="<?php echo $result1['nombre']; ?>" href="<?php echo $result1['ruta']; ?>"><span class="mini-sub-pro"><?php echo $result1['nombre']; ?></span></a></li>
