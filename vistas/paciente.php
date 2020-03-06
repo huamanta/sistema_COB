@@ -12,9 +12,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon1.png">
     <!-- Google Fonts
 		============================================ -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
     <!-- Bootstrap CSS
 		============================================ -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Bootstrap CSS
 		============================================ -->
@@ -67,7 +68,6 @@
     <link rel="stylesheet" href="css/responsive.css">
     <!-- modernizr JS
 		============================================ -->
-    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
@@ -99,7 +99,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="breadcome-heading">
                                             <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..." class="search-int form-control">
+                                                <input type="text" placeholder="Search..." value="" class="search-int form-control">
                                                 <a href="#"><i class="fa fa-search"></i></a>
                                             </form>
                                         </div>
@@ -130,11 +130,24 @@
                                 <li><a href="#reviews">Información De La Cuenta</a></li>
                                 <li><a href="#INFORMATION"> Informacion Social</a></li>
                             </ul>
+                            <style media="screen">
+                               .invalid{
+                                 color: red;
+                               }
+                            </style>
                             <form id="addPaciente" method="POST" >
                                 <div id="myTabContent" class="tab-content custom-product-edit">
-                                  <div class="row" id="id_persona" hidden>
 
-                                  </div>
+                                  <div class="row" id="div_id_paciente" >
+                                    <?php if (isset($_POST['id_paciente']) && isset($_POST['id_persona'])) {
+                                      ?>
+                                        <input type="hidden" class="form-control" name="id_paciente" id="id_paciente" value="<?php echo $_POST['id_paciente']; ?>">
+                                        <input type="hidden" class="form-control" name="id_persona" id="id_persona" value="<?php echo $_POST['id_persona']; ?>">
+
+                                      <?php
+                                    } ?>
+
+                                    </div>
                                     <div class="product-tab-list tab-pane fade active in" id="description">
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -154,13 +167,16 @@
                                                                       <input name="numero_documento" id="numero_documento"type="number" class="form-control" placeholder="N° Documento" value="">
                                                                   </div>
                                                                     <div class="form-group">
-                                                                        <input name="nombres" id="nombres" type="text" class="form-control" placeholder="Nombres" value="">
+                                                                        <input name="nombres" id="nombres" type="text" class="form-control" placeholder="Nombres" value="" >
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <input name="apellidos" id="apellidos"type="text" class="form-control" placeholder="Apellidos" value="">
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <input name="direccion" id="direccion"type="text" class="form-control" placeholder="Direccion" value="">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <input name="ocupacion" id="ocupacion"type="text" class="form-control" placeholder="Ocupación" value="">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -172,17 +188,15 @@
                                                                   <div class="form-group">
                                                                     <select class="form-control" data-placeholder="Choose a Category" tabindex="1" id="ubigeo" name="ubigeo">
                                                                         <option value="" hidden selected>Ubigeo</option>
-                                                                        <option value="1">Bambamarca</option>
-                                                                        <option value="2">Chota</option>
-                                                                        <option value="3">Tarapoto</option>
+                                                                        <option value="Bambamarca">Bambamarca</option>
+                                                                        <option value="Chota">Chota</option>
+                                                                        <option value="Tarapoto">Tarapoto</option>
                                                                     </select>
                                                                   </div>
                                                                   <div class="form-group">
                                                                       <input name="fecha_nacimiento" id="fecha_nacimiento" type="date" class="form-control" placeholder="Fecha Nacimiento" value="">
                                                                   </div>
-                                                                  <div class="form-group">
-                                                                      <input name="ocupacion" id="ocupacion"type="text" class="form-control" placeholder="Ocupación" value="">
-                                                                  </div>
+
                                                                     <div class="form-group">
                                                                       <select class="form-control" data-placeholder="Choose a Category" tabindex="1" id="genero" name="genero" >
                                                                           <option value="" hidden selected>Genero</option>
@@ -271,10 +285,14 @@
             </div>
         </div>
     </div>
-
+    <script src="js/jquery/jquery.min.js"></script>
+  <!-- Bootstrap tether Core JavaScript -->
+  <script src="js/bootstrap/js/popper.min.js"></script>
+  <script src="js/bootstrap/js/bootstrap.min.js"></script>
+  <!-- slimscrollbar scrollbar JavaScript -->
+  <script src="js/jquery.slimscroll.js"></script>
     <!-- jquery
 		============================================ -->
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <!-- bootstrap JS
 		============================================ -->
     <script src="js/bootstrap.min.js"></script>
