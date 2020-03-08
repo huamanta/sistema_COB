@@ -20,8 +20,7 @@
     <link href="css/sweetalert/sweetalert.css" rel="stylesheet">
     <!-- Bootstrap CSS
 		============================================ -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <!-- modals CSS
+    <link rel="stylesheet" href="css/font-awesome.min.css"><!-- modals CSS
 		============================================ -->
     <link rel="stylesheet" href="css/modals.css">
     <!-- owl.carousel CSS
@@ -157,34 +156,41 @@
                 </div>
             </div>
         </div>
-        <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+
+        <div id="modal_update_user" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header header-color-modal bg-color-1">
-                      <h4 class="modal-title">Nuevo registro</h4>
+                      <h4 class="modal-title">Actualizar usuario</h4>
                       <div class="modal-close-area modal-close-df">
                           <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                       </div>
                   </div>
-                    <form id="form_add_rol" method="POST" >
+                    <form id="form_update_user" method="POST" >
                     <div class="modal-body">
                       <div class="row">
                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-group" id="div_id_rol" hidden>
-
+                            <div class="form-group" id="div_id_user" hidden>
                             </div>
                             <div class="form-group">
-                                <input name="nombre_rol" id="nombre_rol" type="text" class="form-control" placeholder="Nombre rol" value="">
+                                <select class="form-control" name="id_rol_edit" id="id_rol_edit">
+                                  <option value="" selected hidden>Seleccionar rol</option>
+                                  <option value="1">Administrador</option>
+                                  <option value="5">Otro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input name="usuario_edit" id="usuario_edit" type="text" class="form-control" placeholder="usuario" value="">
                             </div>
                               <div class="form-group">
-                                  <input name="abreviacion_rol" id="abreviacion_rol" type="text" class="form-control" placeholder="Abreviacion" value="">
+                                  <input name="password_edit" id="password_edit" type="password" class="form-control" placeholder="**************" value="">
                               </div>
                           </div>
                       </div>
                     </div>
                     <div class="modal-footer">
-                        <a data-dismiss="modal" href="#" style="background: #bb9c7f">Cancel</a>
-                        <button type="submit" name="button">Guardar</button>
+                        <a data-dismiss="modal" href="#" style="background: #bb9c7f">Cancelar</a>
+                        <button type="submit" name="button">Actualizar</button>
                     </div>
                     <style media="screen">
                       .cancel{
@@ -238,18 +244,20 @@
                           </div>
                           <div class="sparkline13-graph">
                               <div class="table-responsive datatable-dashv1-list custom-datatable-overright">
-                                  <table id="table_roles" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-                                      <thead>
-                                          <tr>
-                                              <th>#</th>
-                                              <th>Creado</th>
-                                              <th>Rol</th>
-                                              <th>Abreviacion</th>
-                                              <th>Estado</th>
-                                              <th>Acciones</th>
-                                          </tr>
-                                      </thead>
-                                  </table>
+                                <table id="table_usuarios" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Creado</th>
+                                            <th>Apellidos y nombres</th>
+                                            <th>Telefono</th>
+                                            <th>Email</th>
+                                            <th>Usuario</th>
+                                            <th>Rol</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                </table>
                               </div>
                           </div>
                       </div>
@@ -257,66 +265,6 @@
 
               </div>
           </div>
-        </div>
-        <!-- Single pro tab review Start-->
-        <div class="single-pro-review-area mt-t-30 mg-b-15 hidden" id="add_permisos_rol">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="product-payment-inner-st">
-                          <div class="sparkline13-hd">
-                              <div class="main-sparkline13-hd">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                    <h1>Administración <span class="table-project-n">de</span> permisos</h1>
-                                  </div>
-                                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12" style="float: right">
-                                    <button type="button" class="btn btn-primary" name="button" id="regresar_lista" style="background: #354a77; float: right">Regresar</button>
-                                  </div>
-                                </div>
-                              </div>
-                          </div>
-                                <div id="myTabContent" class="tab-content custom-product-edit">
-                                    <div class="product-tab-list tab-pane fade active in" id="description">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                              <center>
-                                                <h5>Rutas del sistema</h5>
-                                              </center>
-                                                <div class="review-content-section">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                                  <ol class="list-group" id="lista_rutas_all">
-
-                                                                  </ol>
-                                                                </div>
-                                                            </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                              <center>
-                                                <h5>Permisos del rol</h5>
-                                              </center>
-                                                <div class="review-content-section">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                                  <ol class="list-group" id="lista_rutas_rol">
-
-                                                                  </ol>
-                                                                </div>
-                                                            </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="footer-copyright-area">
             <div class="container-fluid">
@@ -363,6 +311,7 @@
         <!-- metisMenu JS
     		============================================ -->
         <script src="js/metisMenu/metisMenu.min.js"></script>
+        <script src="js/form-validation/jquery.validate.min.js"></script>
         <script src="js/metisMenu/metisMenu-active.js"></script>
 
         <!--  editable JS
@@ -401,7 +350,7 @@
         <script src="js/main.js"></script>
         <!-- paciente JS
     		============================================ -->
-        <script src="ajax/roles-permisos.js"></script>
+        <script src="ajax/usuarios.js"></script>
 
     <!-- tawk chat JS
 		============================================ -->

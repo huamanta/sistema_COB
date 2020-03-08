@@ -31,7 +31,7 @@ class AuthUser
                   if ($result->estado != '1') {
                     return json_encode(array('success' => 2));
                   }else {
-                  return json_encode(array('success' => 1));
+                    return json_encode(array('success' => 1));
                   }
                 }else {
                   return json_encode(array('success' => 0));

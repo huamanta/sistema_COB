@@ -1296,7 +1296,7 @@ ul.tab-custon-design li, ul.tab-review-design li {
     left: 0px;
     width: 0%;
     height: 2px;
-    background: #006DF0;
+    background: #bb9c7f;
     content: "";
 	transition:all .4s ease 0s;
 }
@@ -1306,12 +1306,12 @@ ul.tab-custon-design li, ul.tab-review-design li {
     left: 0px;
     width: 80%;
     height: 2px;
-    background: #006DF0;
+    background: #bb9c7f;
     content: "";
 	transition:all .4s ease 0s;
 }
 ul.tab-custon-design li.active a, ul.tab-review-design li.active a {
-    color: #006DF0 !important;
+    color: #354a77 !important;
 }
 ul.tab-custon-design li a, ul.tab-custon-design li a:hover, ul.tab-custon-design li a:focus, ul.tab-review-design li a, ul.tab-review-design li a:hover, ul.tab-review-design li a:focus {
     font-size: 18px;

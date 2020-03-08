@@ -116,15 +116,13 @@ function listarRolesPermisosRol(id_rol) {
       var html = '';
       $.each(response, function (i, item) {
           html += '<li class="list-group-item d-flex justify-content-between align-items-center">'+
-          '<h5>'+response[i].nombre+'<div class="checkbox pull-right">'+
-              '<i class="fa fa-trash" style="font-size: 18px"></i></div></h5>';
+          '<h5>'+response[i].nombre+'</h5>';
           html += '<ol class="list-group" style="margin-top: 20px">';
           var children = response[i].children;
           $.each(children, function (i, item) {
             html += '<li class="list-group-item d-flex justify-content-between align-items-center"><h6>'+
               children[i].nombre+
-              '<div class="checkbox pull-right">'+
-                  '<i class="fa fa-trash" style="font-size: 18px"></i></div></h6>'+
+              '</h6>'+
             '</li>';
           });
           html += '</ol></li>';
@@ -178,28 +176,28 @@ function eliminarRol(id_rol) {
           showCancelButton: true,
           closeOnConfirm: false,
           showLoaderOnConfirm: true,
+          confirmButtonText: 'ELIMINAR',
+          confirmButtonColor: '#354a77',
+          cancelButtonText: 'CANCELAR',
+          cancelButtonColor: '#bb9c7f',
       },
       function(){
 
             $.ajax({
              type: "POST",
-             url: '../model/paciente.php?action=eliminarPaciente',
-             data: 'id_paciente='+id, // serializes the form's elements.
-             success: function(res)
-
+             url: '../model/roles_permisos.php?action=eliminar_rol',
+             data: 'id_rol='+id_rol, // serializes the form's elements.
+             success: function(response)
              {
-               var jsonData = JSON.parse(res);
-
-               if (jsonData.success == "1"){
+               var response = JSON.parse(response);
+               if (response.success == "1"){
                  swal({
                      type: "success",
                      title: "Eliminado correctamente",
                      timer: 1000,
                      showConfirmButton: false
                  });
-                 listarPacientes();
-               }else {
-
+                 listarRoles();
                }
              }
            });
@@ -209,13 +207,47 @@ function eliminarRol(id_rol) {
 
 $('#form_add_rol').submit(function (e) {
   e.preventDefault();
-  alert($(this).serialize());
+  var data = $(this).serialize();
+  $.ajax({
+   type: "POST",
+   url: '../model/roles_permisos.php?action=agregar_rol',
+   data: data, // serializes the form's elements.
+   success: function(response){
+     var response = JSON.parse(response);
+     if (response.success == "1"){
+       $('#PrimaryModalalert').modal('hide');
+       listarRoles();
+     }
+   }
+ });
 });
 
 function eliminarExistencia(id_ruta, id_rol) {
-  alert(id_ruta+' - '+id_rol);
+  $.ajax({
+   type: "POST",
+   url: '../model/roles_permisos.php?action=eliminar_existencia_rol',
+   data: 'id_rol='+id_rol+'&id_ruta='+id_ruta, // serializes the form's elements.
+   success: function(response){
+     var response = JSON.parse(response);
+     if (response.success == "1"){
+       listarRolesPermisosAll(id_rol);
+       listarRolesPermisosRol(id_rol);
+     }
+   }
+ });
 }
 
 function agregarExistencia(id_ruta, id_rol) {
-  alert(id_ruta+' - '+id_rol);
+  $.ajax({
+   type: "POST",
+   url: '../model/roles_permisos.php?action=agregar_existencia_rol',
+   data: 'id_rol='+id_rol+'&id_ruta='+id_ruta, // serializes the form's elements.
+   success: function(response){
+     var response = JSON.parse(response);
+     if (response.success == "1"){
+       listarRolesPermisosAll(id_rol);
+       listarRolesPermisosRol(id_rol);
+     }
+   }
+ });
 }

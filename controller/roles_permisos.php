@@ -2,6 +2,7 @@
 /**
  *
  */
+session_start();
 class RolesPermisos
 {
   private $conn;
@@ -97,8 +98,8 @@ class RolesPermisos
 
   public function validarExistenciaPermiso($id_ruta, $id_rol)
   {
-    $stm = $this->conn->prepare("SELECT * FROM permiso WHERE id_ruta = ?");
-    $stm->execute(array($id_ruta));
+    $stm = $this->conn->prepare("SELECT * FROM permiso WHERE id_ruta = ? AND id_rol = ?");
+    $stm->execute(array($id_ruta, $id_rol));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if ($result) {
       return 'checked onclick="eliminarExistencia('.$id_ruta.', '.$id_rol.')"';
@@ -131,6 +132,70 @@ class RolesPermisos
       return json_encode($data);
     } catch (\Exception $e) {
       die($e->getMessage());
+    }
+  }
+
+  public function guardarNuevoRol($nombre_rol, $abreviacion_rol)
+  {
+    $fecha_update = date('Y-m-d H:i:s');
+    $stm = $this->conn->prepare("INSERT INTO rol (updated_at, nombre, abreviacion) VALUES (?, ?, ?)");
+    $stm->execute(array($fecha_update, $nombre_rol, $abreviacion_rol));
+    $stm->fetch(PDO::FETCH_OBJ);
+    if ($stm) {
+      return json_encode(array('success' => '1'));
+    }else {
+      return json_encode(array('success' => '0'));
+    }
+  }
+
+  public function actualizarRol($nombre_rol, $abreviacion_rol, $id_rol)
+  {
+    $fecha_update = date('Y-m-d H:i:s');
+    $stm = $this->conn->prepare("UPDATE rol SET updated_at = ?, nombre = ?, abreviacion = ? WHERE id_rol = ?");
+    $stm->execute(array($fecha_update, $nombre_rol, $abreviacion_rol, $id_rol));
+    $stm->fetch(PDO::FETCH_OBJ);
+    if ($stm) {
+      return json_encode(array('success' => '1'));
+    }else {
+      return json_encode(array('success' => '0'));
+    }
+  }
+
+  public function eliminarRol($id_rol)
+  {
+    $fecha_delete= date('Y-m-d H:i:s');
+    $stm = $this->conn->prepare("UPDATE rol SET deleted_at = ?, estado = ? WHERE id_rol = ?");
+    $stm->execute(array($fecha_delete, '0', $id_rol));
+    $stm->fetch(PDO::FETCH_OBJ);
+    if ($stm) {
+      return json_encode(array('success' => '1'));
+    }else {
+      return json_encode(array('success' => '0'));
+    }
+  }
+
+  public function agregarExistencia($id_rol, $id_ruta)
+  {
+    $id_usuario = $_SESSION["id_usuario"];
+    $stm = $this->conn->prepare("INSERT INTO permiso (id_rol, id_ruta, id_usuario) VALUES (?, ?, ?)");
+    $stm->execute(array($id_rol, $id_ruta, $id_usuario));
+    $stm->fetch(PDO::FETCH_OBJ);
+    if ($stm) {
+      return json_encode(array('success' => '1'));
+    }else {
+      return json_encode(array('success' => '0'));
+    }
+  }
+
+  public function eliminarExistencia($id_rol, $id_ruta)
+  {
+    $stm = $this->conn->prepare("DELETE FROM permiso WHERE id_rol = ? AND id_ruta = ?");
+    $stm->execute(array($id_rol, $id_ruta));
+    $stm->fetch(PDO::FETCH_OBJ);
+    if ($stm) {
+      return json_encode(array('success' => '1'));
+    }else {
+      return json_encode(array('success' => '0'));
     }
   }
 
