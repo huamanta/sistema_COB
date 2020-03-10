@@ -1,3 +1,14 @@
+<?php
+require_once '../controller/seguridad.php';
+$seguridad = new SeguridadApp();
+if ($seguridad->sessionApp() == 0) {
+  header('location: ../');
+}
+if (!$seguridad->premisosTratamientos()) {
+  header('location: error-404');
+  exit;
+}
+ ?>
 <!doctype html>
 <html class="no-js" lang="en">
 

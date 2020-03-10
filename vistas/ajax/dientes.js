@@ -37,6 +37,13 @@ function listarDientes() {
             "columns": [0, 1, 3, 4, 5],
           },
           "titleAttr": 'print'
+      },
+      {
+          "text": '<i class="fa fa-cog"> registros eliminados</i>',
+          action: function ( e, dt, node, config ) {
+            listarDientesEliminados();
+          },
+          "titleAttr": 'Nuevo'
       }
   ],
    "ajax": {
@@ -65,7 +72,6 @@ function listarDientes() {
    })
 }
 function listarDientesEliminados() {
-  $('#recuperar').hide();
   $("#table_dientes").DataTable({
    "responsive": true,
    "aProcessing": true, //Activamos el procesamiento del datatables
@@ -103,6 +109,13 @@ function listarDientesEliminados() {
             "columns": [0, 1, 3, 4, 5],
           },
           "titleAttr": 'print'
+      },
+      {
+          "text": '<i class="fa fa-list"> Lista de registros</i>',
+          action: function ( e, dt, node, config ) {
+            listarDientes();
+          },
+          "titleAttr": 'Nuevo'
       }
   ],
    "ajax": {

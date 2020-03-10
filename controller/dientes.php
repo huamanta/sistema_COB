@@ -59,7 +59,7 @@ class Dientes
           '2' => $result['nombre'],
           '3' => '<i class="fa fa-life-ring" style="font-size: 25px; color: #354a77"></i>'.'<label for style="font-size: 24px; color: #354a77">'.'-'.$result['numero'].'</label>',
           '4' => '<center>
-                      <button type="button" name="button" class="btn btn-sm btn-info" onclick="recuperarDiente('.$result['id_diente'].')"><i class="fa fa-cog"></i></button>
+                      <button type="button" name="button" class="btn btn-sm btn-primary" onclick="recuperarDiente('.$result['id_diente'].')"><i class="fa fa-cog"></i></button>
                   </center>'
         );
       }

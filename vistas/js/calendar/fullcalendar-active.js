@@ -92,7 +92,7 @@ $(function() {
       alert("Day Clicked");
     },
     eventClick: function (event) {
-      console.log(event);
+      alert(event);
     },
 		select: function (date) {
 			alert(date);

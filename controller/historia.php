@@ -33,9 +33,9 @@ class Historia
     $stm->execute(array($id_ant_patologico));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if ($result) {
-      return 'checked onclick="eliminarAntecedenteHistoria('.$result->id_detalle_historia.')"';
+      return '<img src="img/cuadro2.png" alt="" width="25" onclick="eliminarAntecedenteHistoria('.$result->id_detalle_historia.')">';
     }else {
-      return 'onclick="agregarAntecedenteHistoria('.$id_ant_patologico.')"';
+      return '<img src="img/cuadro.png" alt="" width="25" onclick="agregarAntecedenteHistoria('.$id_ant_patologico.')"/>';
     }
   }
 
@@ -145,10 +145,9 @@ class Historia
     $stm->execute(array($id_diente));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if ($result) {
-      return '<i class="fa fa-close" onclick="eliminarDienteHistoria('.$result->id_detalle_historia.')" style="font-size: 35px; color: #5d6e92; position: absolute; left: 14px; top: 18px"></i>
-      <i class="fa fa-life-ring" style="font-size: 25px"></i>';
+      return '<img src="img/muela - copia.png" alt="" onclick="eliminarDienteHistoria('.$result->id_detalle_historia.')" style="width: 80%">';
     }else {
-      return '<i class="fa fa-life-ring" style="font-size: 25px" onclick="agregarDienteHistoria('.$id_diente.')"></i>';
+      return '<img src="img/muela.png" alt=""  onclick="agregarDienteHistoria('.$id_diente.')" style="width: 80%">';
     }
   }
 

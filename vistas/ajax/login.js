@@ -13,14 +13,20 @@ $('#loginForm').submit(function (e) {
       if (jsonData.success == "1") {
           location.href = 'vistas/principal';
       }else if (jsonData.success == "2"){
-        $("#message").html("<div class='alert alert-info alert-dismissible'>"+
-                              "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
-                              "<strong>Atencion! </strong>Sus credenciales de acceso han sido desactivados</div>");
+        $("#message").html('<div class="alert alert-info alert-mg-b alert-success-style4 alert-success-stylenone">'+
+                                '<button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">'+
+										'<span class="icon-sc-cl" aria-hidden="true">×</span>'+
+									'</button>'+
+                  '<p class="message-alert-none"><strong>Danger!</strong> A dangerous negative action.</p>'+
+                            '</div>');
         $("#ingresar").html('Ingresar');
       }else {
-        $("#message").html("<div class='alert alert-danger alert-dismissible'>"+
-                              "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
-                              "<strong>Error! </strong>Las credenciales que ingresaste son incorrectas.</div>");
+        $("#message").html('<div class="alert alert-danger alert-mg-b alert-success-style4 alert-success-stylenone">'+
+                                '<button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">'+
+										'<span class="icon-sc-cl" aria-hidden="true">×</span>'+
+									'</button>'+
+                  '<p class="message-alert-none"><strong>Danger!</strong> A dangerous negative action.</p>'+
+                            '</div>');
         $("#ingresar").html('Ingresar');
       }
     }

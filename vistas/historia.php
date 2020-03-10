@@ -1,4 +1,14 @@
-<?php session_start(); ?>
+<?php
+require_once '../controller/seguridad.php';
+$seguridad = new SeguridadApp();
+if ($seguridad->sessionApp() == 0) {
+  header('location: ../');
+}
+if (!$seguridad->premisosNuevaHistoria()) {
+  header('location: error-404');
+  exit;
+}
+ ?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -145,7 +155,7 @@
           <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="logo-pro">
-                      <a href="index.html"><img class="main-logo" src="img/logo/logo1.png" alt="" /></a>
+                      <a href="index.html"><img class="main-logo" src="img/logo/logo2.png" alt="" /></a>
                   </div>
               </div>
           </div>
@@ -271,70 +281,198 @@
                                           <div class="col-md-12">
                                             <label for="">ANTECEDENTES PATOLOGICOS</label>
                                           </div>
-                                          <div class="col-md-12" id="antecedentes_patologicos">
-
+                                          <style media="screen">
+                                          .antecedentes_patologicos>div {
+                                            width: 33%;
+                                            float: right;
+                                          }
+                                          @media only screen and (max-width: 991px) {
+                                            .antecedentes_patologicos>div {
+                                              height: 85px;
+                                            }                                           }
+                                          }
+                                          </style>
+                                          <div class="col-md-12 antecedentes_patologicos" id="antecedentes_patologicos">
+                                            
                                           </div>
-
                                           <div class="col-md-12">
                                             <label for="">ODONTOGRAMA</label>
                                           </div>
                                           <div class="col-md-12">
-                                            <div class="col-md-6" style="border-right: 1px #ccc solid">
-                                              <div class="col-md-12" id="bloque1">
 
-                                              </div>
-                                              <div class="col-md-12" id="bloque2" style="margin-top: 10px">
+                                            <div class="" style="width: 50%; float: right">
+                                              <table class="" style="width: 100%; text-align: right">
+                                                <tbody>
+                                                  <tr style="border: hidden" id="tabla3">
 
-                                              </div>
+                                                  </tr>
+                                                  <tr style="border: hidden" id="tabla4">
+
+                                                  </tr>
+                                                </tbody>
+                                              </table>
                                             </div>
-                                            <div class="col-md-6">
-                                              <div class="col-md-12" id="bloque3">
+                                            <div class="" style="width: 50%; border-right: 1px #ccc solid">
+                                              <table class="" style="width: 100%">
+                                                <tr style="border: hidden" id="tabla1">
 
-                                              </div>
-                                              <div class="col-md-12" id="bloque4" style="margin-top: 10px">
+                                                    </tr>
+                                                <tr style="border: hidden" id="tabla2">
 
-                                              </div>
+                                                  </tr>
+                                              </table>
                                             </div>
                                           </div>
                                           <div class="col-md-12">
-                                            <div class="col-md-2">
-                                            </div>
-                                            <div class="col-md-1">
-                                              <label for="">DERECHO</label>
-                                            </div>
-                                            <div class="col-md-2">
-                                              <hr>
-                                            </div>
-                                            <div class="col-md-2" style="text-align: center">
-                                              <label for="">LENGUALES</label>
-                                            </div>
-                                            <div class="col-md-2">
-                                              <hr>
-                                            </div>
-                                            <div class="col-md-2">
-                                              <label for="">IZQUIERDO</label>
-                                            </div>
-                                            <div class="col-md-1">
-                                            </div>
+                                            <table  class="table table-responsive">
+                                              <tbody>
+                                                <tr style="border: hidden">
+                                                  <td style="width: 18%"></td>
+                                                  <td style="width: 10%">DERECHO</td>
+                                                  <td style="width: 16%">
+                                                    <hr>
+                                                  </td>
+                                                  <td style="width: 10%">LENGUALES</td>
+                                                  <td style="width: 16%">
+                                                    <hr>
+                                                  </td>
+                                                  <td>IZQUIERDO</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
                                           </div>
                                           <div class="col-md-12">
-                                            <div class="col-md-6" style="border-right: 1px #ccc solid">
-
-                                              <div class="col-md-12" id="bloque5">
-
-                                              </div>
-                                              <div class="col-md-12" id="bloque6" style="margin-top: 10px">
-
-                                              </div>
+                                            <div class="" style="width: 50%; float: right">
+                                              <table class="" style="width: 100%; text-align: right">
+                                                <tbody>
+                                                  <tr style="border: hidden" id="tabla7">
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td>
+                                                    <span for="">23</span><br>
+                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                  </td>
+                                                  <td>
+                                                    <span for="">23</span><br>
+                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                  </td>
+                                                  <td>
+                                                    <span for="">23</span><br>
+                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                  </td>
+                                                  <td>
+                                                    <span for="">23</span><br>
+                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                  </td>
+                                                  <td>
+                                                    <span for="">23</span><br>
+                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                  </td>
+                                                </tr>
+                                                  <tr style="border: hidden" id="tabla8">
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
                                             </div>
-                                            <div class="col-md-6">
-                                              <div class="col-md-12" id="bloque7">
-
-                                              </div>
-                                              <div class="col-md-12" id="bloque8" style="margin-top: 10px">
-
-                                              </div>
+                                            <div class="" style="width: 50%; border-right: 1px #ccc solid">
+                                              <table class="" style="width: 100%;">
+                                                <tbody>
+                                                  <tr style="border: hidden" id="tabla5">
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td>
+                                                    <span for="">23</span><br>
+                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                  </td>
+                                                  <td>
+                                                    <span for="">23</span><br>
+                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                  </td>
+                                                  <td>
+                                                    <span for="">23</span><br>
+                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                  </td>
+                                                  <td>
+                                                    <span for="">23</span><br>
+                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                  </td>
+                                                  <td>
+                                                    <span for="">23</span><br>
+                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                  </td>
+                                                </tr>
+                                                  <tr style="border: hidden" id="tabla6">
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                    <td>
+                                                      <span for="">23</span><br>
+                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
                                             </div>
+
                                           </div>
 
                                           <div class="form-group col-md-12">
@@ -411,7 +549,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="footer-copy-right">
-                            <p>Copyright © 2018. All rights reserved. Template by <a href="https://colorlib.com/wp/templates/">Colorlib</a></p>
+                            <p>Copyright © 2020. Todos los derechos reservados. Elaborado por <a href="https://colorlib.com/wp/templates/">SysPider Technology</a></p>
                         </div>
                     </div>
                 </div>

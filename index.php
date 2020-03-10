@@ -23,7 +23,9 @@
 		============================================ -->
     <link rel="stylesheet" href="vistas/css/owl.carousel.css">
     <link rel="stylesheet" href="vistas/css/owl.theme.css">
-    <link rel="stylesheet" href="vistas/css/owl.transitions.css">
+    <link rel="stylesheet" href="vistas/css/owl.transitions.css"><!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/alerts.css">
     <!-- animate CSS
 		============================================ -->
     <link rel="stylesheet" href="vistas/css/animate.css">
@@ -72,20 +74,20 @@
 				<div class="hpanel">
                     <div class="panel-body">
                     <div class="text-center m-b-md custom-login">
-                    				<h3>PLEASE LOGIN TO APP</h3>
-                    				<p>This is the best app ever!</p>
+                    				<h3>LOGIN</h3>
+                    				<p>Ingrese sus credenciales de acceso</p>
                     			</div>
                         <div class="" id="message">
 
                         </div>
                         <form action="#" id="loginForm">
                             <div class="form-group">
-                                <label class="control-label" for="username">Username</label>
+                                <label class="control-label" for="username">Usuario</label>
                                 <input type="text" placeholder="example@gmail.com" title="Please enter you username" required="" value="" name="username" id="username" class="form-control">
 
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="password">Password</label>
+                                <label class="control-label" for="password">Contraseña</label>
                                 <input type="password" title="Please enter your password" placeholder="******" required="" value="" name="password" id="password" class="form-control">
 
                             </div>
@@ -94,7 +96,7 @@
 										<input type="checkbox" class="i-checks"> Remember me </label>
                                 <p class="help-block small">(if this is a private computer)</p>
                             </div-->
-                            <button class="btn btn-success btn-block loginbtn" id="btn_login_auth">INGRESAR</button>
+                            <button class="btn btn-success btn-block loginbtn" id="btn_login_auth" style="background: #354a77; border: 1px #354a77 solid">INGRESAR</button>
                         </form>
                     </div>
                 </div>

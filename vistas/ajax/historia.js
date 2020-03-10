@@ -68,27 +68,20 @@ function listarAntecedentesForSelected() {
       var response = JSON.parse(response);
       var html = '';
       $.each(response, function(i, item) {
-        html += '<div class="col-md-4">'+
-          '<div class="col-md-8">'+
-            '<p style="margin-top: 10px">'+response[i].nombre+' </p>'+
-          '</div>'+
-          '<div class="col-md-4">'+
-          '<div class="checkbox">'+
-              '<label style="font-size: 1.2em">'+
-                  '<input type="checkbox" value="" '+response[i].action+'>'+
-                  '<span class="cr"><i class="cr-icon fa fa-check"></i></span>'+
-              '</label>'+
-          '</div>'+
-          '</div>'+
+        html += '<div class="">'+
+            '<div class="" style="width: 79%; display: inline-block;">'+
+              '<p>'+response[i].nombre+'</p>'+
+            '</div>'+
+            '<div class="" style="width: 19%; display: inline-block;">'+response[i].action+'</div>'+
         '</div>';
       });
-      html += '<div class="col-md-4">'+
-        '<div class="col-md-4">'+
-          '<p style="margin-top: 10px">OTROS </p>'+
-        '</div>'+
-        '<div class="col-md-8">'+
-          '<input type="text" name="otro_antecedente" id="otro_antecedente" class="form-control">'+
-        '</div>'+
+      html += '<div class="">'+
+          '<div class="" style="width: 29%; display: inline-block;">'+
+            '<p>OTROS</p>'+
+          '</div>'+
+          '<div class="" style="width: 69%; display: inline-block;">'+
+            '<input type="text" name="otro_antecedente" id="otro_antecedente" class="form-control">'+
+          '</div>'+
       '</div>';
       $("#antecedentes_patologicos").html(html);
     },
@@ -203,12 +196,12 @@ function listarDientesBloque1() {
       var response = JSON.parse(response);
       var html = '';
       $.each(response, function(i, item) {
-        html += '<div class="col-md-1" style="width: 12.5%; text-align: center">'+
-          '<label for="">'+response[i].numero+'</label>'+
+        html += '<td>'+
+          '<span for="">'+response[i].numero+'</span><br>'+
           response[i].action+
-          '</div>';
+        '</td>';
       });
-      $("#bloque1").html(html);
+      $("#tabla1").html(html);
     }
   });
 }
@@ -223,14 +216,14 @@ function listarDientesBloque2() {
     },
     success: function (response) {
       var response = JSON.parse(response);
-      var html = '<div class="col-md-4"></div>';
+      var html = '<td></td><td></td><td></td>';
       $.each(response, function(i, item) {
-        html += '<div class="col-md-1" style="width: 13.333%; text-align: center">'+
-          '<label for="">'+response[i].numero+'</label>'+
+        html += '<td>'+
+          '<span for="">'+response[i].numero+'</span><br>'+
           response[i].action+
-          '</div>';
+        '</td>';
       });
-      $("#bloque2").html(html);
+      $("#tabla2").html(html);
     }
   });
 }
@@ -247,12 +240,12 @@ function listarDientesBloque3() {
       var response = JSON.parse(response);
       var html = '';
       $.each(response, function(i, item) {
-        html += '<div class="col-md-1" style="width: 12.5%; text-align: center">'+
-          '<label for="">'+response[i].numero+'</label>'+
+        html += '<td>'+
+          '<span for="">'+response[i].numero+'</span><br>'+
           response[i].action+
-          '</div>';
+        '</td>';
       });
-      $("#bloque3").html(html);
+      $("#tabla3").html(html);
     }
   });
 }
@@ -269,13 +262,13 @@ function listarDientesBloque4() {
       var response = JSON.parse(response);
       var html = '';
       $.each(response, function(i, item) {
-        html += '<div class="col-md-1" style="width: 13.333%; text-align: center">'+
-          '<label for="">'+response[i].numero+'</label>'+
+        html += '<td>'+
+          '<span for="">'+response[i].numero+'</span><br>'+
           response[i].action+
-          '</div>';
+        '</td>';
       });
-      html += '<div class="col-md-4"></div>';
-      $("#bloque4").html(html);
+      html += '<td></td><td></td><td></td>';
+      $("#tabla4").html(html);
     }
   });
 }
@@ -290,14 +283,14 @@ function listarDientesBloque5() {
     },
     success: function (response) {
       var response = JSON.parse(response);
-      var html = '<div class="col-md-4"></div>';
+      var html = '<td></td><td></td><td></td>';
       $.each(response, function(i, item) {
-        html += '<div class="col-md-1" style="width: 13.333%; text-align: center">'+
-          '<label for="">'+response[i].numero+'</label>'+
+        html += '<td>'+
+          '<span for="">'+response[i].numero+'</span><br>'+
           response[i].action+
-          '</div>';
+        '</td>';
       });
-      $("#bloque5").html(html);
+      $("#tabla5").html(html);
     }
   });
 }
@@ -314,12 +307,12 @@ function listarDientesBloque6() {
       var response = JSON.parse(response);
       var html = '';
       $.each(response, function(i, item) {
-        html += '<div class="col-md-1" style="width: 12.5%; text-align: center">'+
-          '<label for="">'+response[i].numero+'</label>'+
+        html += '<td>'+
+          '<span for="">'+response[i].numero+'</span><br>'+
           response[i].action+
-          '</div>';
+        '</td>';
       });
-      $("#bloque6").html(html);
+      $("#tabla6").html(html);
     }
   });
 }
@@ -336,13 +329,12 @@ function listarDientesBloque7() {
       var response = JSON.parse(response);
       var html = '';
       $.each(response, function(i, item) {
-        html += '<div class="col-md-1" style="width: 13.333%; text-align: center">'+
-          '<label for="">'+response[i].numero+'</label>'+
+        html += '<td>'+
+          '<span for="">'+response[i].numero+'</span><br>'+
           response[i].action+
-          '</div>';
+        '</td>';
       });
-      html += '<div class="col-md-4"></div>';
-      $("#bloque7").html(html);
+      $("#tabla7").html(html);
     }
   });
 }
@@ -359,12 +351,12 @@ function listarDientesBloque8() {
       var response = JSON.parse(response);
       var html = '';
       $.each(response, function(i, item) {
-        html += '<div class="col-md-1" style="width: 12.5%; text-align: center">'+
-          '<label for="">'+response[i].numero+'</label>'+
+        html += '<td>'+
+          '<span for="">'+response[i].numero+'</span><br>'+
           response[i].action+
-          '</div>';
+        '</td>';
       });
-      $("#bloque8").html(html);
+      $("#tabla8").html(html);
     }
   });
 }

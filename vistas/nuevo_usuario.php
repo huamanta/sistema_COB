@@ -1,4 +1,15 @@
-<?php session_start(); ?>
+<?php
+require_once '../controller/seguridad.php';
+$seguridad = new SeguridadApp();
+if ($seguridad->sessionApp() == 0) {
+  header('location: ../');
+  exit;
+}
+if (!$seguridad->premisosUsuarios()) {
+  header('location: error-404');
+  exit;
+}
+ ?>
 <!doctype html>
 <html class="no-js" lang="en">
 

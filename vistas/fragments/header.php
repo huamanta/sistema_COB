@@ -146,15 +146,11 @@
                       <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                     </a>
                                             <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                <li><a href="#"><span class="edu-icon edu-home-admin author-log-ic"></span>My Account</a>
+                                                <li><a href="#"><span class="edu-icon edu-user-rounded author-log-ic"></span> Mi perfil</a>
                                                 </li>
-                                                <li><a href="#"><span class="edu-icon edu-user-rounded author-log-ic"></span>My Profile</a>
+                                                <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Configurcion</a>
                                                 </li>
-                                                <li><a href="#"><span class="edu-icon edu-money author-log-ic"></span>User Billing</a>
-                                                </li>
-                                                <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a>
-                                                </li>
-                                                <li><a href="#"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
+                                                <li><a href="../controller/logout"><span class="edu-icon edu-locked author-log-ic"></span>Cerrar sesión</a>
                                                 </li>
                                             </ul>
                                         </li>

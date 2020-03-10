@@ -1,3 +1,15 @@
+<?php
+require_once '../controller/seguridad.php';
+$seguridad = new SeguridadApp();
+if ($seguridad->sessionApp() == 0) {
+  header('location: ../');
+  exit;
+}
+if (!$seguridad->premisosDientes()) {
+  header('location: error-404');
+  exit;
+}
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -229,10 +241,6 @@
                                   <h1>Odontología <span class="table-project-n"></span></h1>
                               </div>
                           </div>
-                          
-                            <div class="row col-md_6" style="text-align: right;width:1083px" id="recuperar">
-                              <button type="button" class="btn " style="background:#354a77" onclick="listarDientesEliminados()">Recuperar Registro </button>
-                            </div>
 
                           <div class="sparkline13-graph">
                               <div class="table-responsive datatable-dashv1-list custom-datatable-overright">
