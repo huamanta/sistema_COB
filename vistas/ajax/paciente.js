@@ -29,6 +29,10 @@ function listarDepartamentos() {
       });
 }
 
+$('#listar_paciente').click(function () {
+  location.href = 'listar_paciente';
+})
+
 $('#departamento').change(function () {
   var url = 'http://localhost/restapi/v1/ubigeo/data_list';
   var token = '8f126c231ef98f4e45d331dc1bc336278935fed6f09fc214f07691258baa16b0';
@@ -111,6 +115,13 @@ function listarPacientes() {
             "columns": [0, 1, 3, 4, 5],
           },
           "titleAttr": 'print'
+      },
+      {
+          "text": '<i class="fa fa-plus"> Nuevo Paciente</i>',
+          action: function ( e, dt, node, config ) {
+            location.href = './paciente';
+          },
+          "titleAttr": 'Nuevo Paciente'
       }
   ],
    "ajax": {
@@ -203,25 +214,7 @@ $("#addPaciente").validate({
           console.log(response);
 
           if (jsonData.success == "1") {
-            $('#tipo_doc').val('');
-            $('#numero_documento').val('');
-            $('#nombres').val('');
-            $('#apellidos').val('');
-            $('#direccion').val('');
-            $('#ubigeo').val('');
-            $('#fecha_nacimiento').val('');
-            $('#tipo_doc').val('');
-            $('#ocupacion').val('');
-            $('#genero').val('');
-            $('#estado_civil').val('');
-            $('#telefono').val('');
-            $('#email').val('');
-            $('#nombre_apoderado').val('');
-            $('#telefono_apoderado').val('');
-            $('#id_paciente').hide();
-            $('#id_persona').hide();
-            $("#addPaciente")[0].reset();
-
+            location.href = './listar_paciente';
           }else {
           }
 

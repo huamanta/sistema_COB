@@ -5,7 +5,7 @@ if ($seguridad->sessionApp() == 0) {
   header('location: ../');
 }
 if (!$seguridad->premisosNuevoPacientes()) {
-  header('location: error-404');
+  header('location: error-401');
   exit;
 }
 ?>
@@ -15,7 +15,7 @@ if (!$seguridad->premisosNuevoPacientes()) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Add Student | Kiaalap - Kiaalap Admin Template</title>
+    <title>Clínica Odontológica Bambamarca</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -93,9 +93,9 @@ if (!$seguridad->premisosNuevoPacientes()) {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
-                    </div>
+                  <div class="logo-pro">
+                      <a href="principal.php"><img class="main-logo" src="img/logo/logo2.png" alt="" /></a>
+                  </div>
                 </div>
             </div>
         </div>
@@ -140,6 +140,9 @@ if (!$seguridad->premisosNuevoPacientes()) {
                                 <li class="active"><a href="#description">Información Básica</a></li>
                                 <li><a href="#reviews">Información de contacto</a></li>
                                 <li><a href="#INFORMATION"> Informacion de referencia</a></li>
+                                <li class="pull-right">
+                                  <button type="button" class="btn btn-primary" name="button" style="background: #354a77" id="listar_paciente">Listar Pacientes</button>
+                                </li>
                             </ul>
                             <style media="screen">
                                .invalid{
@@ -273,7 +276,7 @@ if (!$seguridad->premisosNuevoPacientes()) {
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="payment-adress">
-                                                <button type="submit" class="btn btn-primary waves-effect waves-light">GUARDAR</button>
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light"   id="btn-action" style="background: #bb9c7f; border: 1px #bb9c7f solid">GUARDAR</button>
                                             </div>
                                         </div>
                                     </div>

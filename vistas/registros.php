@@ -4,7 +4,7 @@ $seguridad = new SeguridadApp();
 if ($seguridad->sessionApp() == 0) {
   header('location: ../');
 }
-if (!$seguridad->premisosTratamientos()) {
+if (!$seguridad->premisosRegistrosHistorias()) {
   header('location: error-401');
   exit;
 }
@@ -30,9 +30,7 @@ if (!$seguridad->premisosTratamientos()) {
     <link href="css/sweetalert/sweetalert.css" rel="stylesheet">
     <!-- Bootstrap CSS
 		============================================ -->
-    <link rel="stylesheet" href="css/font-awesome.min.css"><!-- modals CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- owl.carousel CSS
 		============================================ -->
     <link rel="stylesheet" href="css/owl.carousel.css">
@@ -86,66 +84,6 @@ if (!$seguridad->premisosTratamientos()) {
     <!-- modernizr JS
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-    <style media="screen">
-    .checkbox label:after,
-.radio label:after {
-    content: '';
-    display: table;
-    clear: both;
-}
-
-.checkbox .cr,
-.radio .cr {
-    position: relative;
-    display: inline-block;
-    border: 1px solid #a9a9a9;
-    border-radius: .25em;
-    width: 1.3em;
-    height: 1.3em;
-    float: left;
-    margin-right: .5em;
-}
-
-.radio .cr {
-    border-radius: 50%;
-}
-
-.checkbox .cr .cr-icon,
-.radio .cr .cr-icon {
-    position: absolute;
-    font-size: .8em;
-    line-height: 0;
-    top: 50%;
-    left: 20%;
-}
-
-.radio .cr .cr-icon {
-    margin-left: 0.04em;
-}
-
-.checkbox label input[type="checkbox"],
-.radio label input[type="radio"] {
-    display: none;
-}
-
-.checkbox label input[type="checkbox"] + .cr > .cr-icon,
-.radio label input[type="radio"] + .cr > .cr-icon {
-    transform: scale(3) rotateZ(-20deg);
-    opacity: 0;
-    transition: all .3s ease-in;
-}
-
-.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
-.radio label input[type="radio"]:checked + .cr > .cr-icon {
-    transform: scale(1) rotateZ(0deg);
-    opacity: 1;
-}
-
-.checkbox label input[type="checkbox"]:disabled + .cr,
-.radio label input[type="radio"]:disabled + .cr {
-    opacity: .5;
-}
-    </style>
 </head>
 
 <body>
@@ -163,42 +101,6 @@ if (!$seguridad->premisosTratamientos()) {
                   <div class="logo-pro">
                       <a href="principal.php"><img class="main-logo" src="img/logo/logo2.png" alt="" /></a>
                   </div>
-                </div>
-            </div>
-        </div>
-        <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header header-color-modal bg-color-1">
-                      <h4 class="modal-title">Tratamiento</h4>
-                      <div class="modal-close-area modal-close-df">
-                          <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                      </div>
-                  </div>
-                    <form id="form_add_tratamiento" method="POST" >
-                    <div class="modal-body">
-                      <div class="row">
-                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-group" id="div_id_tratamiento" hidden >
-
-                            </div>
-                            <div class="form-group">
-                                <input name="nombre" id="nombre" type="text" class="form-control" placeholder="ingrese nombre" value="" required>
-                            </div>
-                              <div class="form-group">
-                                  <input name="costo" id="costo" type="number" class="form-control" placeholder="costo" value="" required>
-                              </div>
-                              <div class="form-group">
-                                  <input name="descripcion" id="descripcion" type="text" class="form-control" placeholder="description" value="">
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a data-dismiss="modal" href="#" style="background: #bb9c7f">Cancel</a>
-                        <button type="submit" name="button">Guardar</button>
-                    </div>
-                  </form>
                 </div>
             </div>
         </div>
@@ -233,25 +135,26 @@ if (!$seguridad->premisosTratamientos()) {
                 </div>
             </div>
         </div>
-        <div class="product-status mg-b-15" id="lista_roles_page">
+        <div class="product-status mg-b-15">
           <div class="container-fluid">
               <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <div class="sparkline13-list">
                           <div class="sparkline13-hd">
                               <div class="main-sparkline13-hd">
-                                  <h1>Tratamiento <span class="table-project-n"></span></h1>
+                                  <h1>Registro <span class="table-project-n"></span> Historias</h1>
                               </div>
                           </div>
                           <div class="sparkline13-graph">
                               <div class="table-responsive datatable-dashv1-list custom-datatable-overright">
-                                  <table id="table_tratamiento" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                                  <table id="table_historias" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                       <thead>
                                           <tr>
                                               <th>#</th>
                                               <th>Creado</th>
-                                              <th>Nombre</th>
-                                              <th>costo</th>
+                                              <th>Paciente</th>
+                                              <th>Diagnostico</th>
+                                              <th>Estado</th>
                                               <th>Acciones</th>
                                           </tr>
                                       </thead>
@@ -260,11 +163,9 @@ if (!$seguridad->premisosTratamientos()) {
                           </div>
                       </div>
                   </div>
-
               </div>
           </div>
         </div>
-        <!-- Single pro tab review Start-->
         <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">
@@ -324,11 +225,11 @@ if (!$seguridad->premisosTratamientos()) {
         <!-- Chart JS
     		============================================ -->
         <script src="js/chart/jquery.peity.min.js"></script>
+          <script src="js/sweetalert/sweetalert.min.js"></script>
         <script src="js/peity/peity-active.js"></script>
         <!-- tab JS
     		============================================ -->
         <script src="js/tab.js"></script>
-        <script src="js/sweetalert/sweetalert.min.js"></script>
         <!-- plugins JS
     		============================================ -->
         <script src="js/plugins.js"></script>
@@ -348,7 +249,7 @@ if (!$seguridad->premisosTratamientos()) {
         <script src="js/main.js"></script>
         <!-- paciente JS
     		============================================ -->
-        <script src="ajax/tratamiento.js"></script>
+        <script src="ajax/registros.js"></script>
 
     <!-- tawk chat JS
 		============================================ -->

@@ -109,7 +109,7 @@ function listarTratamientoTable() {
 
         var html = '';
         $.each(response, function(i, item) {
-          html += '<tr>'+
+          html += '<tr style="border: hidden">'+
             '<td>'+
               '<input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" readonly class="form-control" name="" value="'+response[i].nombre+'">'+
             '</td>'+
@@ -286,8 +286,8 @@ function listarDientesBloque5() {
       var html = '<td></td><td></td><td></td>';
       $.each(response, function(i, item) {
         html += '<td>'+
+        response[i].action+
           '<span for="">'+response[i].numero+'</span><br>'+
-          response[i].action+
         '</td>';
       });
       $("#tabla5").html(html);
@@ -308,8 +308,8 @@ function listarDientesBloque6() {
       var html = '';
       $.each(response, function(i, item) {
         html += '<td>'+
+        response[i].action+
           '<span for="">'+response[i].numero+'</span><br>'+
-          response[i].action+
         '</td>';
       });
       $("#tabla6").html(html);
@@ -330,8 +330,8 @@ function listarDientesBloque7() {
       var html = '';
       $.each(response, function(i, item) {
         html += '<td>'+
+        response[i].action+
           '<span for="">'+response[i].numero+'</span><br>'+
-          response[i].action+
         '</td>';
       });
       $("#tabla7").html(html);
@@ -352,8 +352,8 @@ function listarDientesBloque8() {
       var html = '';
       $.each(response, function(i, item) {
         html += '<td>'+
+        response[i].action+
           '<span for="">'+response[i].numero+'</span><br>'+
-          response[i].action+
         '</td>';
       });
       $("#tabla8").html(html);
@@ -370,8 +370,9 @@ $('#nombre_paciente').keyup(function (e) {
       //$('#btn_login_auth').html('AUTENTICANDO...');
     },
     success: function (response) {
-      var response = JSON.parse(response);
       if (response != '') {
+        var response = JSON.parse(response);
+        $('#id_paciente').val(response[0].id_paciente);
         $('#nombre_paciente').val(response[0].primer_nombre+' '+response[0].segundo_nombre+' '+response[0].primer_apellido+' '+response[0].segundo_apellido);
         $('#fecha_nacimiento_paciente').val(response[0].fecha_nacimiento);
         $('#edad_paciente').val(response[0].edad);
@@ -384,7 +385,7 @@ $('#nombre_paciente').keyup(function (e) {
         $('#email_paciente').val(response[0].email);
         $('#apoderado_paciente').val(response[0].nombre_apoderado);
         $('#telefono_apoderado').val(response[0].telefono_apoderado);
-      }else {
+      } else {
         $('#fecha_nacimiento_paciente').val('');
         $('#edad_paciente').val('');
         $('#genero_paciente').val('');
@@ -415,11 +416,11 @@ function agregarDienteHistoria(id_diente) {
   })
 }
 
-function eliminarDienteHistoria(id_detalle_historia) {
+function eliminarDienteHistoria(id_diente) {
   $.ajax({
     type: 'POST',
     url: '../model/historia.php?action=eliminar_diente_historia',
-    data: 'id_detalle_historia='+id_detalle_historia,
+    data: 'id_diente='+id_diente,
     beforeSend: function () {
       //$('#btn_login_auth').html('AUTENTICANDO...');
     },
@@ -443,11 +444,11 @@ function agregarAntecedenteHistoria(id_ant_patologico) {
   })
 }
 
-function eliminarAntecedenteHistoria(id_detalle_historia) {
+function eliminarAntecedenteHistoria(id_ant_patologico) {
   $.ajax({
     type: 'POST',
     url: '../model/historia.php?action=eliminar_antecedente_historia',
-    data: 'id_detalle_historia='+id_detalle_historia,
+    data: 'id_ant_patologico='+id_ant_patologico,
     beforeSend: function () {
       //$('#btn_login_auth').html('AUTENTICANDO...');
     },
@@ -460,4 +461,16 @@ function eliminarAntecedenteHistoria(id_detalle_historia) {
 $('#form_add_historia').submit(function (e) {
   e.preventDefault();
   console.log($(this).serialize());
+  $.ajax({
+    type: 'POST',
+    url: '../model/historia.php?action=procesar_historia_clinica',
+    data: $(this).serialize(),
+    beforeSend: function () {
+      $('#guardar_historia').html('Procesando');
+      $('#guardar_historia').attr('readonly', true);
+    },
+    success: function (response) {
+      location.reload();
+    }
+  })
 });

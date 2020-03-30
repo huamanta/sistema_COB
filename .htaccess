@@ -1,7 +1,14 @@
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
+Options +SymLinksIfOwnerMatch
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . vistas/error-404 [L]
+
 # varias horas
- RewriteCond %{TIME_HOUR} ^()$
- RewriteRule ^.*$ - [F,L]
+RewriteCond %{TIME_HOUR} ^()$
+RewriteRule ^.*$ - [F,L]

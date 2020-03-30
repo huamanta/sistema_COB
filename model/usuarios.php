@@ -23,7 +23,7 @@ switch ($action) {
       $id_rol = $_POST['id_rol'];
       $usuario = $_POST['usuario'];
       $password = md5($_POST['password_confirm']);
-      echo $usuarios->guardarUsuario($tipo_doc, $numero_documento, $nombres, $apellidos, $ocupacion, $ubigeo, $fecha_nacimiento, $genero, $estado_civil, $email, $etelefono, $direccion, $id_rol, $usuario, $password);
+      echo $usuarios->guardarUsuario($tipo_doc, $numero_documento, $nombres, $apellidos, $ocupacion, $ubigeo, $fecha_nacimiento, $genero, $estado_civil, $email, $telefono, $direccion, $id_rol, $usuario, $password);
     }else {
       $id_usuario = $_POST['id_usuario'];
       $id_persona = $_POST['id_persona'];

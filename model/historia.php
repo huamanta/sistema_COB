@@ -56,8 +56,8 @@ switch ($action) {
 
   case 'eliminar_diente_historia':
     //$id_diente = $_POST['id_diente'];
-    $id_detalle_historia = $_POST['id_detalle_historia'];
-    echo $historia_paciente->eliminarDienteHistoria($id_detalle_historia);
+    $id_diente = $_POST['id_diente'];
+    echo $historia_paciente->eliminarDienteHistoria($id_diente);
     break;
 
   case 'agregar_antecedente_historia':
@@ -68,8 +68,8 @@ switch ($action) {
 
   case 'eliminar_antecedente_historia':
     //$id_diente = $_POST['id_diente'];
-    $id_detalle_historia = $_POST['id_detalle_historia'];
-    echo $historia_paciente->eliminarAntecedenteHistoria($id_detalle_historia);
+    $id_ant_patologico = $_POST['id_ant_patologico'];
+    echo $historia_paciente->eliminarAntecedenteHistoria($id_ant_patologico);
     break;
 
   case 'agregar_tratamiento_table':
@@ -85,6 +85,13 @@ switch ($action) {
     //$id_diente = $_POST['id_diente'];
     $id_tratamiento = $_POST['id_tratamiento'];
     echo $historia_paciente->eliminarTratamientoHistoria($id_tratamiento);
+    break;
+
+  case 'procesar_historia_clinica':
+    $id_paciente = $_POST['id_paciente'];
+    $diagnostico= $_POST['diagnostico'];
+    $observaciones= $_POST['observaciones'];
+    echo $historia_paciente->procesarHistoriaClinica($id_paciente, $diagnostico, $observaciones);
     break;
 
   default:

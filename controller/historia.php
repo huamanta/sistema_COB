@@ -2,14 +2,17 @@
 /**
  *
  */
+session_start();
 class Historia
 {
   private $conn;
+  private $token;
   function __construct()
   {
     require_once 'connection.php';
     $db = new DbConnect();
     $this->conn = $db->connect();
+    $this->token = md5($_SESSION['username']);
   }
 
   public function listarAntecedentesForSelected()
@@ -29,11 +32,11 @@ class Historia
 
   public function validarActionAntecedente($id_ant_patologico)
   {
-    $stm = $this->conn->prepare("SELECT * FROM detalle_historia WHERE id_ant_patologico = ?");
-    $stm->execute(array($id_ant_patologico));
+    $stm = $this->conn->prepare("SELECT * FROM detalle_historia_temp WHERE id_ant_patologico = ? AND token = ?");
+    $stm->execute(array($id_ant_patologico, $this->token));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if ($result) {
-      return '<img src="img/cuadro2.png" alt="" width="25" onclick="eliminarAntecedenteHistoria('.$result->id_detalle_historia.')">';
+      return '<img src="img/cuadro2.png" alt="" width="25" onclick="eliminarAntecedenteHistoria('.$id_ant_patologico.')">';
     }else {
       return '<img src="img/cuadro.png" alt="" width="25" onclick="agregarAntecedenteHistoria('.$id_ant_patologico.')"/>';
     }
@@ -59,8 +62,8 @@ class Historia
 
   public function validarTotalTratamiento()
   {
-    $stm = $this->conn->prepare("SELECT SUM(total) as total_servicio FROM detalle_historia WHERE id_historia_clinica = ?");
-    $stm->execute(array('1'));
+    $stm = $this->conn->prepare("SELECT SUM(total) as total_servicio FROM detalle_historia_temp WHERE token = ?");
+    $stm->execute(array($this->token));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if ($result) {
       return $result->total_servicio;
@@ -71,8 +74,8 @@ class Historia
 
   public function validarCosto($id_tratamiento, $costo)
   {
-    $stm = $this->conn->prepare("SELECT * FROM detalle_historia WHERE id_tratamiento = ?");
-    $stm->execute(array($id_tratamiento));
+    $stm = $this->conn->prepare("SELECT * FROM detalle_historia_temp WHERE id_tratamiento = ? AND token = ?");
+    $stm->execute(array($id_tratamiento, $this->token));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if ($result) {
       return $result->precio;
@@ -83,8 +86,8 @@ class Historia
 
   public function validarCantidad($id_tratamiento)
   {
-    $stm = $this->conn->prepare("SELECT * FROM detalle_historia WHERE id_tratamiento = ?");
-    $stm->execute(array($id_tratamiento));
+    $stm = $this->conn->prepare("SELECT * FROM detalle_historia_temp WHERE id_tratamiento = ? AND token = ?");
+    $stm->execute(array($id_tratamiento, $this->token));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if ($result) {
       return $result->cantidad;
@@ -95,8 +98,8 @@ class Historia
 
   public function validarTotal($id_tratamiento)
   {
-    $stm = $this->conn->prepare("SELECT * FROM detalle_historia WHERE id_tratamiento = ?");
-    $stm->execute(array($id_tratamiento));
+    $stm = $this->conn->prepare("SELECT * FROM detalle_historia_temp WHERE id_tratamiento = ? AND token = ?");
+    $stm->execute(array($id_tratamiento, $this->token));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if ($result) {
       return $result->total;
@@ -107,12 +110,13 @@ class Historia
 
   public function buscarPaciente($nombre_paciente)
   {
-    $stm = $this->conn->prepare("SELECT * FROM persona pe INNER JOIN paciente pa ON pe.id_persona = pa.id_paciente WHERE pe.primer_nombre = ? AND pa.deleted_at is null");
+    $stm = $this->conn->prepare("SELECT * FROM persona AS p, paciente AS pc WHERE p.id_persona = pc.id_persona AND p.numero_documento = ? AND pc.deleted_at IS NULL");
     $stm->execute(array($nombre_paciente));
     $data = Array();
     foreach ($stm as $result) {
       $data[] = array(
         'id_persona' => $result['id_persona'],
+        'id_paciente' => $result['id_paciente'],
         'primer_nombre' => $result['primer_nombre'],
         'segundo_nombre' => $result['segundo_nombre'],
         'primer_apellido' => $result['primer_apellido'],
@@ -141,11 +145,11 @@ class Historia
 
     public function validarActionOdontograma($id_diente)
   {
-    $stm = $this->conn->prepare("SELECT * FROM detalle_historia WHERE id_diente = ?");
-    $stm->execute(array($id_diente));
+    $stm = $this->conn->prepare("SELECT * FROM detalle_historia_temp WHERE id_diente = ? AND token = ?");
+    $stm->execute(array($id_diente, $this->token));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if ($result) {
-      return '<img src="img/muela - copia.png" alt="" onclick="eliminarDienteHistoria('.$result->id_detalle_historia.')" style="width: 80%">';
+      return '<img src="img/muela - copia.png" alt="" onclick="eliminarDienteHistoria('.$id_diente.')" style="width: 80%">';
     }else {
       return '<img src="img/muela.png" alt=""  onclick="agregarDienteHistoria('.$id_diente.')" style="width: 80%">';
     }
@@ -273,8 +277,8 @@ class Historia
 
   public function agregarDienteHistoria($id_diente)
   {
-    $stm = $this->conn->prepare("INSERT INTO detalle_historia (id_historia_clinica, id_diente) VALUES (?, ?)");
-    $stm->execute(array('1', $id_diente));
+    $stm = $this->conn->prepare("INSERT INTO detalle_historia_temp (token, id_diente) VALUES (?, ?)");
+    $stm->execute(array($this->token, $id_diente));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if ($result) {
       return json_encode(array('success' => 1));
@@ -283,10 +287,10 @@ class Historia
     }
   }
 
-  public function eliminarDienteHistoria($id_detalle_historia)
+  public function eliminarDienteHistoria($id_diente)
   {
-    $stm = $this->conn->prepare("DELETE FROM detalle_historia WHERE id_detalle_historia =? AND id_historia_clinica = ?");
-    $stm->execute(array($id_detalle_historia, '1'));
+    $stm = $this->conn->prepare("DELETE FROM detalle_historia_temp WHERE id_diente = ? AND token = ?");
+    $stm->execute(array($id_diente, $this->token));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if ($result) {
       return json_encode(array('success' => 1));
@@ -297,8 +301,8 @@ class Historia
 
   public function agregarAntecedenteHistoria($id_ant_patologico)
   {
-    $stm = $this->conn->prepare("INSERT INTO detalle_historia (id_historia_clinica, id_ant_patologico) VALUES (?, ?)");
-    $stm->execute(array('1', $id_ant_patologico));
+    $stm = $this->conn->prepare("INSERT INTO detalle_historia_temp (token, id_ant_patologico) VALUES (?, ?)");
+    $stm->execute(array($this->token, $id_ant_patologico));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if ($result) {
       return json_encode(array('success' => 1));
@@ -307,10 +311,10 @@ class Historia
     }
   }
 
-  public function eliminarAntecedenteHistoria($id_detalle_historia)
+  public function eliminarAntecedenteHistoria($id_ant_patologico)
   {
-    $stm = $this->conn->prepare("DELETE FROM detalle_historia WHERE id_detalle_historia =? AND id_historia_clinica = ?");
-    $stm->execute(array($id_detalle_historia, '1'));
+    $stm = $this->conn->prepare("DELETE FROM detalle_historia_temp WHERE token =? AND id_ant_patologico = ?");
+    $stm->execute(array($this->token, $id_ant_patologico));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if ($result) {
       return json_encode(array('success' => 1));
@@ -322,18 +326,18 @@ class Historia
   public function agregarTratamientoHistoria($id_tratamiento, $precio, $cantidad, $total)
   {
     $response = $this->validarExistenciaTratamientoHistoria($id_tratamiento);
-    if(!$response){
-      $stm = $this->conn->prepare("INSERT INTO detalle_historia (id_historia_clinica, id_tratamiento, cantidad, precio, total) VALUES (?, ?, ?, ?, ?)");
-      $stm->execute(array('1', $id_tratamiento, $cantidad, $precio, $total));
+    if($response != 1){
+      $stm = $this->conn->prepare("INSERT INTO detalle_historia_temp (token, id_tratamiento, cantidad, precio, total) VALUES (?, ?, ?, ?, ?)");
+      $stm->execute(array($this->token, $id_tratamiento, $cantidad, $precio, $total));
       $result = $stm->fetch(PDO::FETCH_OBJ);
-      if ($result) {
+      if (!$result) {
         return json_encode(array('success' => 1));
       }else {
         return json_encode(array('success' => 0));
       }
     }else {
-      $stm = $this->conn->prepare("UPDATE detalle_historia SET cantidad = ?, precio = ?, total = ? WHERE id_historia_clinica = ? AND id_tratamiento = ?");
-      $stm->execute(array($cantidad, $precio, $total, '1', $id_tratamiento));
+      $stm = $this->conn->prepare("UPDATE detalle_historia_temp SET cantidad = ?, precio = ?, total = ? WHERE token = ? AND id_tratamiento = ?");
+      $stm->execute(array($cantidad, $precio, $total, $this->token, $id_tratamiento));
       $result = $stm->fetch(PDO::FETCH_OBJ);
       if ($result) {
         return json_encode(array('success' => 1));
@@ -345,16 +349,20 @@ class Historia
 
   public function validarExistenciaTratamientoHistoria($id_tratamiento)
   {
-    $stm = $this->conn->prepare("SELECT * FROM detalle_historia WHERE id_tratamiento = ?");
-    $stm->execute(array($id_tratamiento));
-    $result = $stm->fetch(PDO::FETCH_OBJ);
-    return $result;
+    $stm = $this->conn->prepare("SELECT * FROM detalle_historia_temp WHERE id_tratamiento = ? AND token = ?");
+    $stm->execute(array($id_tratamiento, $this->token));
+    $result = $stm->rowCount();
+    if ($result > 0) {
+     return 1;
+    }else {
+     return 0;
+    }
   }
 
   public function eliminarTratamientoHistoria($id_tratamiento)
   {
-    $stm = $this->conn->prepare("DELETE FROM detalle_historia WHERE id_tratamiento =? AND id_historia_clinica = ?");
-    $stm->execute(array($id_tratamiento, '1'));
+    $stm = $this->conn->prepare("DELETE FROM detalle_historia_temp WHERE id_tratamiento =? AND token = ?");
+    $stm->execute(array($id_tratamiento, $this->token));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if ($result) {
       return json_encode(array('success' => 1));
@@ -363,6 +371,45 @@ class Historia
     }
   }
 
+  public function procesarHistoriaClinica($id_paciente, $diagnostico, $observaciones)
+  {
+    $id_usuario = $_SESSION['id_usuario'];
+    $fecha_update = date('Y-m-d H:i:s');
+    $temp_verify = $this->verificarTablaTemp();
+    if ($temp_verify != false) {
+      $stm = $this->conn->prepare("INSERT INTO historia_clinica (updated_at, diagnostico, observaciones, id_paciente, id_usuario) VALUES (?, ?, ?, ?, ?)");
+      $stm->execute(array($fecha_update, $diagnostico, $observaciones, $id_paciente, $id_usuario));
+      $result = $stm->fetch(PDO::FETCH_OBJ);
+      $id_insert = $this->conn->lastInsertId();
+      if (!$result) {
+        $stm1 = $this->conn->prepare("SELECT * FROM detalle_historia_temp WHERE token = ?");
+        $stm1->execute(array($this->token));
+        foreach ($stm1 as $stm1) {
+          $stm2 = $this->conn->prepare("INSERT INTO detalle_historia (id_historia_clinica, id_tratamiento, id_diente, id_ant_patologico, cantidad, precio, total) VALUES (?, ?, ?, ?, ?, ? ,?)");
+          $stm2->execute(array($id_insert, $stm1['id_tratamiento'], $stm1['id_diente'], $stm1['id_ant_patologico'], $stm1['cantidad'], $stm1['precio'], $stm1['total']));
+        }
+        $stm3 = $this->conn->prepare("DELETE FROM detalle_historia_temp WHERE token = ?");
+        $stm3->execute(array($this->token));
+        return json_encode(array('success' => 1));
+      }else {
+        return json_encode(array('success' => 0));
+      }
+    }else {
+      return json_encode(array('success' => 0));
+    }
+  }
+
+  public function verificarTablaTemp()
+  {
+    $stm = $this->conn->prepare("SELECT * FROM detalle_historia_temp");
+    $stm->execute(array());
+    $result = $stm->fetch(PDO::FETCH_OBJ);
+    if ($result) {
+      return true;
+    }else {
+      return false;
+    }
+  }
 }
 
  ?>

@@ -5,7 +5,7 @@ if ($seguridad->sessionApp() == 0) {
   header('location: ../');
 }
 if (!$seguridad->premisosNuevaHistoria()) {
-  header('location: error-404');
+  header('location: error-401');
   exit;
 }
  ?>
@@ -155,7 +155,7 @@ if (!$seguridad->premisosNuevaHistoria()) {
           <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="logo-pro">
-                      <a href="index.html"><img class="main-logo" src="img/logo/logo2.png" alt="" /></a>
+                      <a href="principal.php"><img class="main-logo" src="img/logo/logo2.png" alt="" /></a>
                   </div>
               </div>
           </div>
@@ -218,38 +218,54 @@ if (!$seguridad->premisosNuevaHistoria()) {
                                           <div class="col-md-12">
                                             <label for="">FICHA DE IDENTIFICACION</label>
                                           </div>
-                                          <div class="form-group col-md-7">
-                                              <input name="nombre_paciente" id="nombre_paciente" type="text" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">NOMBRE/NAME</label>
-                                          </div>
-                                          <div class="form-group col-md-3">
-                                              <input name="fecha_nacimiento_paciente" id="fecha_nacimiento_paciente" type="text" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">F. NACIMIENTO/BIRTHDAY</label>
-                                          </div>
-                                          <div class="form-group col-md-2">
-                                              <input name="edad_paciente" id="edad_paciente" type="text" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">EDAD/AGE</label>
-                                          </div>
+                                          <table class="table">
+                                            <tbody>
+                                              <tr>
+                                                <td colspan="6">
+                                                  <input name="nombre_paciente" id="nombre_paciente" type="text" class="form-control" placeholder="">
+                                                  <label class="pull-right" for="">NOMBRE/NAME</label>
+                                                </td>
+                                                <td colspan="3">
+                                                  <input name="fecha_nacimiento_paciente" id="fecha_nacimiento_paciente" type="text" class="form-control" placeholder="">
+                                                  <label class="pull-right" for="">F. NACIMIENTO/BIRTHDAY</label>
+                                                </td>
+                                                <td colspan="3">
+                                                  <input name="edad_paciente" id="edad_paciente" type="text" class="form-control" placeholder="">
+                                                  <label class="pull-right" for="">EDAD/AGE</label>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td colspan="3">
+                                                  <select class="form-control" name="genero_paciente" id="genero_paciente">
+                                                    <option value="" hidden selected>SELECCIONAR...</option>
+                                                    <option value="1">M</option>
+                                                    <option value="2">F</option>
+                                                  </select>
+                                                  <label class="pull-right" for="">SEXO/GENDER</label>
+                                                </td>
+                                                <td colspan="3">
+                                                  <select class="form-control" name="id_estado_civil" id="id_estado_civil">
+                                                    <option value="" hidden selected>SELECCIONAR...</option>
+                                                    <option value="1">SOLTERO</option>
+                                                    <option value="2">CASADO</option>
+                                                  </select>
+                                                    <label class="pull-right" for="">ESTADO CIVIL/CIVIL STATUS</label>
+                                                </td>
+                                                <td colspan="6">
+                                                  <input name="ubigeo_paciente" id="ubigeo_paciente" type="text" class="form-control" placeholder="">
+                                                  <label class="pull-right" for="">LUGAR DE NACIMIENTO/BIRTH PLACE</label>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
 
                                           <div class="form-group col-md-2">
-                                              <select class="form-control" name="genero_paciente" id="genero_paciente">
-                                                <option value="" hidden selected>SELECCIONAR...</option>
-                                                <option value="1">M</option>
-                                                <option value="2">F</option>
-                                              </select>
-                                              <label class="pull-right" for="">SEXO/GENDER</label>
+
                                           </div>
                                           <div class="form-group col-md-4">
-                                            <select class="form-control" name="id_estado_civil" id="id_estado_civil">
-                                              <option value="" hidden selected>SELECCIONAR...</option>
-                                              <option value="1">SOLTERO</option>
-                                              <option value="2">CASADO</option>
-                                            </select>
-                                              <label class="pull-right" for="">ESTADO CIVIL/CIVIL STATUS</label>
+
                                           </div>
                                           <div class="form-group col-md-6">
-                                              <input name="ubigeo_paciente" id="ubigeo_paciente" type="text" class="form-control" placeholder="">
-                                              <label class="pull-right" for="">LUGAR DE NACIMIENTO/BIRTH PLACE</label>
                                           </div>
                                           <div class="form-group col-md-6">
                                               <input name="ocupacion_paciente" id="ocupacion_paciente" type="text" class="form-control" placeholder="">
@@ -293,13 +309,23 @@ if (!$seguridad->premisosNuevaHistoria()) {
                                           }
                                           </style>
                                           <div class="col-md-12 antecedentes_patologicos" id="antecedentes_patologicos">
-                                            
+
                                           </div>
                                           <div class="col-md-12">
                                             <label for="">ODONTOGRAMA</label>
                                           </div>
                                           <div class="col-md-12">
-
+                                            <table  class="table table-responsive">
+                                              <tbody>
+                                                <tr style="border: hidden">
+                                                  <td style="width: 45%"></td>
+                                                  <td style="width: 10%">VESTIBULAR</td>
+                                                  <td style="width: 55%"></td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                          <div class="col-md-12">
                                             <div class="" style="width: 50%; float: right">
                                               <table class="" style="width: 100%; text-align: right">
                                                 <tbody>
@@ -327,13 +353,12 @@ if (!$seguridad->premisosNuevaHistoria()) {
                                             <table  class="table table-responsive">
                                               <tbody>
                                                 <tr style="border: hidden">
-                                                  <td style="width: 18%"></td>
                                                   <td style="width: 10%">DERECHO</td>
-                                                  <td style="width: 16%">
+                                                  <td style="width: 35%">
                                                     <hr>
                                                   </td>
                                                   <td style="width: 10%">LENGUALES</td>
-                                                  <td style="width: 16%">
+                                                  <td style="width: 35%">
                                                     <hr>
                                                   </td>
                                                   <td>IZQUIERDO</td>
@@ -341,69 +366,16 @@ if (!$seguridad->premisosNuevaHistoria()) {
                                               </tbody>
                                             </table>
                                           </div>
-                                          <div class="col-md-12">
+                                          <div class="col-md-12" style="margin-top: -30px">
                                             <div class="" style="width: 50%; float: right">
                                               <table class="" style="width: 100%; text-align: right">
                                                 <tbody>
                                                   <tr style="border: hidden" id="tabla7">
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td>
-                                                    <span for="">23</span><br>
-                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  </td>
-                                                  <td>
-                                                    <span for="">23</span><br>
-                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  </td>
-                                                  <td>
-                                                    <span for="">23</span><br>
-                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  </td>
-                                                  <td>
-                                                    <span for="">23</span><br>
-                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  </td>
-                                                  <td>
-                                                    <span for="">23</span><br>
-                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  </td>
+
                                                 </tr>
-                                                  <tr style="border: hidden" id="tabla8">
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                  </tr>
+                                                <tr style="border: hidden" id="tabla8">
+
+                                              </tr>
                                                 </tbody>
                                               </table>
                                             </div>
@@ -411,63 +383,10 @@ if (!$seguridad->premisosNuevaHistoria()) {
                                               <table class="" style="width: 100%;">
                                                 <tbody>
                                                   <tr style="border: hidden" id="tabla5">
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td>
-                                                    <span for="">23</span><br>
-                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  </td>
-                                                  <td>
-                                                    <span for="">23</span><br>
-                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  </td>
-                                                  <td>
-                                                    <span for="">23</span><br>
-                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  </td>
-                                                  <td>
-                                                    <span for="">23</span><br>
-                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  </td>
-                                                  <td>
-                                                    <span for="">23</span><br>
-                                                    <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                  </td>
+
                                                 </tr>
                                                   <tr style="border: hidden" id="tabla6">
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
-                                                    <td>
-                                                      <span for="">23</span><br>
-                                                      <i class="fa fa-life-ring" style="font-size: 25px"></i>
-                                                    </td>
+
                                                   </tr>
                                                 </tbody>
                                               </table>
@@ -508,7 +427,7 @@ if (!$seguridad->premisosNuevaHistoria()) {
                                                 </tr>
                                               </thead>
                                               <tbody>
-                                                <tr>
+                                                <tr  style="border: hidden">
                                                   <td>
                                                     <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid"  class="form-control" name="" value="">
                                                   </td>
@@ -529,7 +448,8 @@ if (!$seguridad->premisosNuevaHistoria()) {
                                         </div>
                                         <div class="col-md-12">
                                           <center>
-                                            <button class="btn btn-primary" type="submit" name="button">Guardar</button>
+                                            <input type="hidden" name="id_paciente" id="id_paciente" class="form-control" value="">
+                                            <button class="btn btn-primary" type="submit" name="button" id="guardar_historia">Guardar</button>
                                             <button class="btn btn-success" type="button" name="button" id="printButton">Imprimir</button>
                                           </center>
                                         </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>404 Page |Clínica Odontológica Bambamarca</title>
+    <title>401 Page |Clínica Odontológica Bambamarca</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -66,8 +66,8 @@
     <div class="error-pagewrap">
 		<div class="error-page-int">
 			<div class="content-error">
-				<h1>ERROR <span class="counter"> 404</span></h1>
-				<p>Pagina no encontrada, la direccion que esta solicitando no existe.</p>
+				<h1>ERROR <span class="counter"> 401</span></h1>
+				<p>Lo sentimos, usted no tiene permisos para ingresar al sistema, sis desea tener acceso comuniquese con la administración.</p>
 				<a href="principal" style="background: #354a77">Principal</a>
 				<a href="#" style="background: #bb9c7f">Reportar Problema</a>
 			</div>

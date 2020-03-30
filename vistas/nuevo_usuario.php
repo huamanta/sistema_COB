@@ -6,7 +6,7 @@ if ($seguridad->sessionApp() == 0) {
   exit;
 }
 if (!$seguridad->premisosUsuarios()) {
-  header('location: error-404');
+  header('location: error-401');
   exit;
 }
  ?>
@@ -16,12 +16,13 @@ if (!$seguridad->premisosUsuarios()) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Add Student | Kiaalap - Kiaalap Admin Template</title>
+    <title>Clínica Odontológica Bambamarca</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon1.png">
+
     <!-- Google Fonts
 		============================================ -->
     <!-- Bootstrap CSS
@@ -97,9 +98,9 @@ if (!$seguridad->premisosUsuarios()) {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
-                    </div>
+                  <div class="logo-pro">
+                      <a href="principal.php"><img class="main-logo" src="img/logo/logo2.png" alt="" /></a>
+                  </div>
                 </div>
             </div>
         </div>

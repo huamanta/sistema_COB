@@ -26,7 +26,7 @@ class Dientes
           '0' => $count++,
           '1' => date("Y-m-d", strtotime($result['created_at'])),
           '2' => $result['nombre'],
-          '3' => '<i class="fa fa-life-ring" style="font-size: 25px; color: #354a77"></i>'.'<label for style="font-size: 24px; color: #354a77">'.'-'.$result['numero'].'</label>',
+          '3' => '<i class="" style="font-size: 25px; color: #354a77"><img src="img/muela.png" alt="" style="width: 8%"></i>'.'<label for style="font-size: 22px; color: #354a77">'.'-'.$result['numero'].'</label>',
           '4' => '<center>
                       <button type="button" name="button" class="btn btn-sm btn-success" onclick="verDataDiente('.$result['id_diente'].')"><i class="fa fa-pencil"></i></button>
                       <button type="button" name="button" class="btn btn-sm btn-danger" onclick="eliminarDiente('.$result['id_diente'].')"><i class="fa fa-trash"></i></button>

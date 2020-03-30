@@ -31,9 +31,9 @@ class SeguridadApp
     $r = $stm->fetch(PDO::FETCH_OBJ);
     if ($r) {
      return true;
-   }else {
+    }else {
      return false;
-   }
+    }
   }
 
   public function premisosUsuarios()
@@ -124,6 +124,18 @@ class SeguridadApp
   {
     $stm = $this->conn->prepare("SELECT * FROM permiso WHERE id_rol = ? AND id_ruta = ?");
     $stm->execute(array($this->rol, '3'));
+    $r = $stm->fetch(PDO::FETCH_OBJ);
+    if ($r) {
+     return true;
+   }else {
+     return false;
+   }
+  }
+
+  public function premisosRegistrosHistorias()
+  {
+    $stm = $this->conn->prepare("SELECT * FROM permiso WHERE id_rol = ? AND id_ruta = ?");
+    $stm->execute(array($this->rol, '16'));
     $r = $stm->fetch(PDO::FETCH_OBJ);
     if ($r) {
      return true;

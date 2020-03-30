@@ -1,15 +1,24 @@
+<?php
+require_once 'controller/seguridad.php';
+$seguridad = new SeguridadApp();
+if ($seguridad->sessionApp() != 0) {
+  header('location: vistas/principal');
+  exit;
+}
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Login | Kiaalap - Kiaalap Admin Template</title>
+    <title>Login | Clínica Odontológica Bambamarca</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
 		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="vistas/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="vistas/img/favicon1.png">
+
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Play:400,700" rel="stylesheet">
