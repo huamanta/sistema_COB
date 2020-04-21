@@ -205,7 +205,7 @@ if (!$seguridad->premisosNuevaHistoria()) {
                                           <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
 
                                           </div>
-                                        <div class="col-lg-10 col-md-10  col-sm-10 col-xs-12" style="color: #5d6e92; border: 1px #5d6e92 solid; margin-top: 10px"  id="printElement">
+                                          <div class="col-lg-10 col-md-10  col-sm-10 col-xs-12" style="color: #5d6e92; border: 1px #5d6e92 solid; margin-top: 10px"  id="printElement">
                                           <div class="col-md-12">
                                             <h3 style="text-align: center; margin-top: 10px">HISTORIA CLINICA</h3>
                                           </div>

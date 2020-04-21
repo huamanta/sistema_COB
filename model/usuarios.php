@@ -6,6 +6,11 @@ switch ($action) {
   case 'listar_usuarios':
     echo $usuarios->listarUsuarios();
     break;
+
+  case 'listar_rol':
+    echo $usuarios->listarRol();
+    break;
+
   case 'guardar_usuario':
     $tipo_doc = $_POST['tipo_doc'];
     $numero_documento = $_POST['numero_documento'];

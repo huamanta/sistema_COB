@@ -185,9 +185,7 @@ if (!$seguridad->premisosUsuarios()) {
                             </div>
                             <div class="form-group">
                                 <select class="form-control" name="id_rol_edit" id="id_rol_edit">
-                                  <option value="" selected hidden>Seleccionar rol</option>
-                                  <option value="1">Administrador</option>
-                                  <option value="5">Otro</option>
+                                
                                 </select>
                             </div>
                             <div class="form-group">

@@ -12,6 +12,22 @@ class Usuarios
     $this->conn = $db->connect();
   }
 
+  public function listarRol()
+  {
+    // code...
+    $stm = $this->conn->prepare("SELECT * FROM rol WHERE deleted_at IS NULL");
+    $stm->execute();
+    $data = Array();
+    foreach ($stm as $result) {
+      $data[] = array(
+        'id_rol' => $result['id_rol'],
+        'nombre' => $result['nombre'],
+        'abreviacion' => $result['abreviacion'],
+        );
+    }
+    return json_encode($data);
+  }
+
   public function listarUsuarios()
   {
     try {

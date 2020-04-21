@@ -141,12 +141,15 @@
                                         </li>
                                         <li class="nav-item">
                                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                      <img src="img/contact/1.jpg" alt="" />
-                      <span class="admin-name">Administrador</span>
-                      <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
-                    </a>
+                                                <img src="#" alt="" id="foto_perfil_img" />
+                                                <span class="admin-name" id="admin-name">Administrador</span>
+                                                <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
+                                            </a>
                                             <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                <li><a href="#"><span class="edu-icon edu-user-rounded author-log-ic"></span> Mi perfil</a>
+                                                <li>
+                                                    <a href="perfil">
+                                                        <span class="edu-icon edu-user-rounded author-log-ic"></span> Mi perfil
+                                                    </a>
                                                 </li>
                                                 <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Configurcion</a>
                                                 </li>
@@ -208,4 +211,7 @@
             </div>
         </div>
     </div>
-    <!-- Mobile Menu end -->
+    <!-- Mobile Menu end --><!-- jquery
+        ============================================ -->
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="ajax/perfil.js"></script>

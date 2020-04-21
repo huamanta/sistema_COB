@@ -13,6 +13,54 @@ private $conn;
     $this->conn = $db->connect();
   }
 
+  public function listarGenero()
+  {
+    // code...
+    $stm = $this->conn->prepare("SELECT * FROM genero WHERE deleted_at IS NULL");
+    $stm->execute();
+    $data = Array();
+    foreach ($stm as $result) {
+      $data[] = array(
+        'id_genero' => $result['id_genero'],
+        'nombre' => $result['nombre'],
+        'abreviacion' => $result['abreviacion'],
+        );
+    }
+    return json_encode($data);
+  }
+
+  public function listarEstadoCivil()
+  {
+    // code...
+    $stm = $this->conn->prepare("SELECT * FROM estado_civil WHERE deleted_at IS NULL");
+    $stm->execute();
+    $data = Array();
+    foreach ($stm as $result) {
+      $data[] = array(
+        'id_estado_civil' => $result['id_estado_civil'],
+        'nombre' => $result['nombre'],
+        'abreviacion' => $result['abreviacion'],
+        );
+    }
+    return json_encode($data);
+  }
+
+  public function listarTipoDocumento()
+  {
+    // code...
+    $stm = $this->conn->prepare("SELECT * FROM tipo_documento WHERE deleted_at IS NULL");
+    $stm->execute();
+    $data = Array();
+    foreach ($stm as $result) {
+      $data[] = array(
+        'id_tipo_documento' => $result['id_tipo_documento'],
+        'nombre' => $result['nombre'],
+        'abreviacion' => $result['abreviacion'],
+        );
+    }
+    return json_encode($data);
+  }
+
   public function verDataPaciente($id_paciente)
   {
     // code...
@@ -129,8 +177,7 @@ public function listarPacientes()
         '4' => $result['email'],
         '5' => $result['telefono'],
         '6' => $result['ubigeo'],
-        '7' => '<button class="btn btn-danger" onclick="eliminarPaciente('.$result['id_paciente'].')"><i class="fa fa-trash"></i></button>
-                <a href="javascript:Redirect('."'".$result['id_paciente']."'".','."'".$result['id_persona']."'".')" class="btn btn-info"><i class="fa fa-pencil"></a>',
+        '7' => '<button class="btn btn-danger" onclick="eliminarPaciente('.$result['id_paciente'].')"><i class="fa fa-trash"></i></button><a href="" class="btn btn-success"><i class="fa fa-eye"></i></a><a href="javascript:Redirect('."'".$result['id_paciente']."'".','."'".$result['id_persona']."'".')" class="btn btn-info"><i class="fa fa-pencil"></i></a>',
         );
     }
     $results = array(

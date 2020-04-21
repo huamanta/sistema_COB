@@ -135,7 +135,7 @@ if (!$seguridad->premisosRegistrosHistorias()) {
                 </div>
             </div>
         </div>
-        <div class="product-status mg-b-15">
+        <div class="product-status mg-b-15" id="registro_historias">
           <div class="container-fluid">
               <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -165,6 +165,284 @@ if (!$seguridad->premisosRegistrosHistorias()) {
                   </div>
               </div>
           </div>
+        </div>
+        <div class="product-status mg-b-15 hidden" id="detalle_historia">
+          <div class="container-fluid">
+                <div class="row">
+                  <!--div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="sparkline13-list">
+                            <div class="sparkline13-hd">
+                              <div class="main-sparkline13-hd">
+                                  <h1>Detalle <span class="table-project-n"></span> Historia Nº1</h1>
+                                  
+                              </div>
+                          </div>
+                        </div>
+                    </div-->
+                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline8-list mt-b-30">
+                            <div class="sparkline8-graph">
+                                <div class="basic-login-form-ad">
+                                    <div class="row">
+                                        <form class="" id="form_add_historia" action="index.html" method="get">
+                                          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+
+                                          </div>
+                                          <div class="col-lg-10 col-md-10  col-sm-10 col-xs-12" style="color: #5d6e92; border: 1px #5d6e92 solid; margin-top: 10px"  id="printElement">
+                                          <div class="col-md-12">
+                                            <h3 style="text-align: center; margin-top: 10px">HISTORIA CLINICA</h3>
+                                          </div>
+                                          <div class="form-group col-md-9">
+                                          <button class="btn btn-primary" id="btn_volver_lista" style="background: #23527c; border: 1px #23527c solid">ATRAS</button>
+                                          </div>
+                                          <div class="form-group col-md-3">
+                                              <input name="fecha_documento" id="fecha_documento" type="text" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">FECHA/DATE</label>
+                                          </div>
+                                          <div class="col-md-12">
+                                            <label for="">FICHA DE IDENTIFICACION</label>
+                                          </div>
+                                          <table class="table">
+                                            <tbody>
+                                              <tr>
+                                                <td colspan="6">
+                                                  <input name="nombre_paciente" id="nombre_paciente" type="text" class="form-control" placeholder="">
+                                                  <label class="pull-right" for="">NOMBRE/NAME</label>
+                                                </td>
+                                                <td colspan="3">
+                                                  <input name="fecha_nacimiento_paciente" id="fecha_nacimiento_paciente" type="text" class="form-control" placeholder="">
+                                                  <label class="pull-right" for="">F. NACIMIENTO/BIRTHDAY</label>
+                                                </td>
+                                                <td colspan="3">
+                                                  <input name="edad_paciente" id="edad_paciente" type="text" class="form-control" placeholder="">
+                                                  <label class="pull-right" for="">EDAD/AGE</label>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td colspan="3">
+                                                  <select class="form-control" name="genero_paciente" id="genero_paciente">
+                                                    <option value="" hidden selected>SELECCIONAR...</option>
+                                                    <option value="1">M</option>
+                                                    <option value="2">F</option>
+                                                  </select>
+                                                  <label class="pull-right" for="">SEXO/GENDER</label>
+                                                </td>
+                                                <td colspan="3">
+                                                  <select class="form-control" name="id_estado_civil" id="id_estado_civil">
+                                                    <option value="" hidden selected>SELECCIONAR...</option>
+                                                    <option value="1">SOLTERO</option>
+                                                    <option value="2">CASADO</option>
+                                                  </select>
+                                                    <label class="pull-right" for="">ESTADO CIVIL/CIVIL STATUS</label>
+                                                </td>
+                                                <td colspan="6">
+                                                  <input name="ubigeo_paciente" id="ubigeo_paciente" type="text" class="form-control" placeholder="">
+                                                  <label class="pull-right" for="">LUGAR DE NACIMIENTO/BIRTH PLACE</label>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+
+                                          <div class="form-group col-md-2">
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                              <input name="ocupacion_paciente" id="ocupacion_paciente" type="text" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">OCUPACION/OCUPATION</label>
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                              <input name="telefono_paciente" id="telefono_paciente" type="number" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">TELEFONO/PHONE</label>
+                                          </div>
+                                          <div class="form-group col-md-8">
+                                              <input name="direccion_paciente" id="direccion_paciente" type="text" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">DIRECCION/ADDRES</label>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                              <input name="email_paciente" id="email_paciente" type="text" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">CORREO ELECTRONICO/EMAIL</label>
+                                          </div>
+                                          <div class="col-md-12">
+                                            <label for="">EN CASO DE EMERGENCIA LLAMAR A:</label>
+                                          </div>
+                                          <div class="form-group col-md-8">
+                                              <input name="apoderado_paciente" id="apoderado_paciente" type="text" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">NOMBRE/NAME</label>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                              <input name="telefono_apoderado" id="telefono_apoderado" type="text" class="form-control" placeholder="">
+                                              <label class="pull-right" for="">TELEFONO/PHONE</label>
+                                          </div>
+                                          <div class="col-md-12">
+                                            <label for="">ANTECEDENTES PATOLOGICOS</label>
+                                          </div>
+                                          <style media="screen">
+                                          .antecedentes_patologicos>div {
+                                            width: 33%;
+                                            float: right;
+                                          }
+                                          @media only screen and (max-width: 991px) {
+                                            .antecedentes_patologicos>div {
+                                              height: 85px;
+                                            }                                           }
+                                          }
+                                          </style>
+                                          <div class="col-md-12 antecedentes_patologicos" id="antecedentes_patologicos">
+
+                                          </div>
+                                          <div class="col-md-12">
+                                            <label for="">ODONTOGRAMA</label>
+                                          </div>
+                                          <div class="col-md-12">
+                                            <table  class="table table-responsive">
+                                              <tbody>
+                                                <tr style="border: hidden">
+                                                  <td style="width: 45%"></td>
+                                                  <td style="width: 10%">VESTIBULAR</td>
+                                                  <td style="width: 55%"></td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                          <div class="col-md-12">
+                                            <div class="" style="width: 50%; float: right">
+                                              <table class="" style="width: 100%; text-align: right">
+                                                <tbody>
+                                                  <tr style="border: hidden" id="tabla3">
+
+                                                  </tr>
+                                                  <tr style="border: hidden" id="tabla4">
+
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                            <div class="" style="width: 50%; border-right: 1px #ccc solid">
+                                              <table class="" style="width: 100%">
+                                                <tr style="border: hidden" id="tabla1">
+
+                                                    </tr>
+                                                <tr style="border: hidden" id="tabla2">
+
+                                                  </tr>
+                                              </table>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-12">
+                                            <table  class="table table-responsive">
+                                              <tbody>
+                                                <tr style="border: hidden">
+                                                  <td style="width: 10%">DERECHO</td>
+                                                  <td style="width: 35%">
+                                                    <hr>
+                                                  </td>
+                                                  <td style="width: 10%">LENGUALES</td>
+                                                  <td style="width: 35%">
+                                                    <hr>
+                                                  </td>
+                                                  <td>IZQUIERDO</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                          <div class="col-md-12" style="margin-top: -30px">
+                                            <div class="" style="width: 50%; float: right">
+                                              <table class="" style="width: 100%; text-align: right">
+                                                <tbody>
+                                                  <tr style="border: hidden" id="tabla7">
+
+                                                </tr>
+                                                <tr style="border: hidden" id="tabla8">
+
+                                              </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                            <div class="" style="width: 50%; border-right: 1px #ccc solid">
+                                              <table class="" style="width: 100%;">
+                                                <tbody>
+                                                  <tr style="border: hidden" id="tabla5">
+
+                                                </tr>
+                                                  <tr style="border: hidden" id="tabla6">
+
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+
+                                          </div>
+
+                                          <div class="form-group col-md-12">
+                                            <label for="">DIAGNOSTICO</label>
+                                            <textarea name="diagnostico" id="diagnostico"  style="border: 1px #5d6e92 solid" class="form-control" rows="1" cols="40"></textarea>
+                                          </div>
+                                          <div class="form-group col-md-12">
+                                            <label for="">OBSERVACIONES</label>
+                                            <textarea name="observaciones" id="observaciones"  style="border: 1px #5d6e92 solid" class="form-control" rows="1" cols="40"></textarea>
+                                          </div>
+                                          <div class="form-group col-md-12">
+                                            <table class="table table-responsive">
+                                              <thead style="background: #5d6e92; color: white">
+                                                <tr>
+                                                  <th>TRATAMIENTO</th>
+                                                  <th>CANTIDAD</th>
+                                                  <th>COSTO</th>
+                                                  <th>TOTAL</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody id="table_tratamiento">
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                          <div class="form-group col-md-12">
+                                            <table class="table table-responsive">
+                                              <thead style="background: #5d6e92; color: white">
+                                                <tr>
+                                                  <th>TRATAMIENTO</th>
+                                                  <th>FECHA</th>
+                                                  <th>A CUENTA</th>
+                                                  <th>SALDO</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr  style="border: hidden">
+                                                  <td>
+                                                    <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid"  class="form-control" name="" value="">
+                                                  </td>
+                                                  <td>
+                                                    <input type="date" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
+                                                  </td>
+                                                  <td>
+                                                    <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
+                                                  </td>
+                                                  <td>
+                                                    <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
+                                                  </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
+
+                                        </div>
+                                        <div class="col-md-12">
+                                          <center>
+                                            <input type="hidden" name="id_paciente" id="id_paciente" class="form-control" value="">
+                                            <button class="btn btn-primary" type="submit" name="button" id="guardar_historia">Guardar</button>
+                                            <button class="btn btn-success" type="button" name="button" id="printButton">Imprimir</button>
+                                          </center>
+                                        </div>
+                                      </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="footer-copyright-area">
             <div class="container-fluid">

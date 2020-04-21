@@ -7,7 +7,7 @@ class AuthUser
   private $conn;
   public $firstName;
   public $lastName;
-  function __construct(string $usuario, string $password)
+  function __construct($usuario,  $password)
   {
     require_once 'connection.php';
     $this->firstName = $usuario;

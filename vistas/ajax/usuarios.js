@@ -1,5 +1,67 @@
 listarDepartamentos();
 listarUsuarios();
+listarRol();
+listarGenero();
+listarEstadoCivil();
+listarTipoDocumento();
+
+function listarGenero() {
+  $.ajax({
+    type: 'POST',
+    url: '../model/paciente.php?action=listar_genero',
+    data: '',
+    beforeSend: function () {
+      // body...
+    },
+    success: function (response) {
+      var response = JSON.parse(response);
+      var html = '<option value="" hidden selected>Genero</option>';
+      $.each(response, function (i, item) {
+        html += '<option value="'+response[i].id_genero+'">'+response[i].nombre+'</option>';
+      });
+      $('#genero').html(html);
+    }
+  });
+}
+
+function listarEstadoCivil() {
+  $.ajax({
+    type: 'POST',
+    url: '../model/paciente.php?action=listar_estado_civil',
+    data: '',
+    beforeSend: function () {
+      // body...
+    },
+    success: function (response) {
+      var response = JSON.parse(response);
+      var html = '<option value="" hidden selected>Estado Civil</option>';
+      $.each(response, function (i, item) {
+        html += '<option value="'+response[i].id_estado_civil+'">'+response[i].nombre+'</option>';
+      });
+      $('#estado_civil').html(html);
+    }
+  });
+}
+
+function listarTipoDocumento() {
+  $.ajax({
+    type: 'POST',
+    url: '../model/paciente.php?action=listar_tipo_documento',
+    data: '',
+    beforeSend: function () {
+      // body...
+    },
+    success: function (response) {
+      var response = JSON.parse(response);
+      var html = '<option value="" hidden selected>Tipo Documento</option>';
+      $.each(response, function (i, item) {
+        html += '<option value="'+response[i].id_tipo_documento+'">'+response[i].nombre+'</option>';
+      });
+      $('#tipo_doc').html(html);
+    }
+  });
+}
+
 function listarUsuarios() {
   $("#table_usuarios").DataTable({
    "responsive": true,
@@ -70,6 +132,25 @@ function listarUsuarios() {
        "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
    }
    })
+}
+
+function listarRol() {
+  $.ajax({
+    type: 'POST',
+    url: '../model/usuarios.php?action=listar_rol',
+    data: '',
+    beforeSend: function () {
+      // body...
+    },
+    success: function (response) {
+      var response = JSON.parse(response);
+      var html = '<option value="" hidden selected>Seleccionar Rol</option>';
+      $.each(response, function (i, item) {
+        html += '<option value="'+response[i].id_rol+'">'+response[i].nombre+'</option>';
+      });
+      $('#id_rol_edit').html(html);
+    }
+  });
 }
 
  $("#add_usuario").validate({

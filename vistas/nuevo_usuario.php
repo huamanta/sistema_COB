@@ -178,9 +178,7 @@ if (!$seguridad->premisosUsuarios()) {
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                   <div class="form-group">
                                                                       <select name="tipo_doc" id="tipo_doc" class="form-control">
-                                                                          <option value="" selected  hidden>Tipo Documento</option>
-                                                                          <option value="1">DNI</option>
-                                                                          <option value="2">PASSPORTE</option>
+
                                                                     </select>
                                                                   </div>
                                                                   <div class="form-group">
@@ -216,16 +214,12 @@ if (!$seguridad->premisosUsuarios()) {
 
                                                                     <div class="form-group">
                                                                       <select class="form-control" data-placeholder="Choose a Category" tabindex="1" id="genero" name="genero" >
-                                                                          <option value="" hidden selected>Genero</option>
-                                                                          <option value="1">Masculino</option>
-                                                                          <option value="2">Femenino</option>
+
                                                                       </select>
                                                                     </div>
                                                                     <div class="form-group">
                                                                       <select class="form-control" data-placeholder="Choose a Category" tabindex="1" id="estado_civil" name="estado_civil">
-                                                                          <option value="" hidden selected>Estado Civil</option>
-                                                                          <option value="1">Soltero</option>
-                                                                          <option value="2">Casado</option>
+                                                                      
                                                                       </select>
                                                                     </div>
 

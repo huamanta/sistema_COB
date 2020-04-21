@@ -22,7 +22,7 @@ $('#fecha_documento').val(date);
 $('.input-group-append').html('');
 
 $('#fecha_nacimiento_paciente').change(function () {
-  var fechaNace = new Date($(this).val());
+   var fechaNace = new Date($(this).val());
     var fechaActual = new Date()
 
     var mes = fechaActual.getMonth();
@@ -370,8 +370,8 @@ $('#nombre_paciente').keyup(function (e) {
       //$('#btn_login_auth').html('AUTENTICANDO...');
     },
     success: function (response) {
+      var response = JSON.parse(response);
       if (response != '') {
-        var response = JSON.parse(response);
         $('#id_paciente').val(response[0].id_paciente);
         $('#nombre_paciente').val(response[0].primer_nombre+' '+response[0].segundo_nombre+' '+response[0].primer_apellido+' '+response[0].segundo_apellido);
         $('#fecha_nacimiento_paciente').val(response[0].fecha_nacimiento);

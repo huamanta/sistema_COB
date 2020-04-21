@@ -28,6 +28,7 @@ if (!$seguridad->premisosCitas()) {
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/sweetalert/sweetalert.css" rel="stylesheet">
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -39,6 +40,9 @@ if (!$seguridad->premisosCitas()) {
     <!-- animate CSS
 		============================================ -->
     <link rel="stylesheet" href="css/animate.css">
+    <!-- modals CSS
+        ============================================ -->
+    <link rel="stylesheet" href="css/modals.css">
     <!-- normalize CSS
 		============================================ -->
     <link rel="stylesheet" href="css/normalize.css">
@@ -65,6 +69,9 @@ if (!$seguridad->premisosCitas()) {
 		============================================ -->
     <link rel="stylesheet" href="css/calendar/fullcalendar.min.css">
     <link rel="stylesheet" href="css/calendar/fullcalendar.print.min.css">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="css/style-datatables.css">
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="style.css">
@@ -91,6 +98,65 @@ if (!$seguridad->premisosCitas()) {
                   <div class="logo-pro">
                       <a href="principal.php"><img class="main-logo" src="img/logo/logo2.png" alt="" /></a>
                   </div>
+                </div>
+            </div>
+        </div>
+        <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header header-color-modal bg-color-1">
+                      <h4 class="modal-title" id="titulo_modal_cita">@titulo</h4>
+                      <div class="modal-close-area modal-close-df">
+                          <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                      </div>
+                  </div>
+                    <form id="form_add_citas" method="POST" >
+                    <div class="modal-body">
+                      <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group" id="div_id_cita" hidden>
+                            </div>
+                            <div class="form-group col-md-9">
+                                <input id="cliente" name="cliente" class="form-control"  autocomplete="off" placeholder="Seleccionar cliente">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <button class="btn byn-primary" id="btn_agregar_paciente">AGREGAR</button>
+                            </div>                            
+                            <div class="col-md-12" id="ver_data_paciente"></div>
+                            <div class="form-group col-md-12">
+                                <input name="nombre" id="nombre" type="text" class="form-control" placeholder="nombre" value="" >
+                            </div>
+                            <div class="form-group col-md-12">
+                                <textarea id="descripcion" name="descripcion" class="form-control" placeholder="Descripcion"></textarea>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <input name="date_start" id="date_start" type="date" class="form-control" placeholder="nombre" value="" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <input name="hour_start" id="hour_start" type="text" class="form-control" placeholder="nombre" value="" >
+                            </div>
+                            <div class="form-group col-md-8">
+                                <input name="date_end" id="date_end" type="date" class="form-control" placeholder="nombre" value="" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <input name="hour_end" id="hour_end" type="text" class="form-control" placeholder="nombre" value="" >
+                            </div>
+                            <div class="form-group col-md-12">
+                                <input name="color" id="color" type="color" class="form-control" placeholder="nombre" value="" >
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a data-dismiss="modal" href="#" style="background: #bb9c7f">CANCELAR</a>
+                        <button type="submit" name="button" id="btn_guardar_data">GUARDAR</button>
+                    </div>
+                    <style media="screen">
+                      .cancel{
+                        background: #bb9c7f !important;
+                      }
+                    </style>
+                  </form>
                 </div>
             </div>
         </div>
@@ -130,7 +196,25 @@ if (!$seguridad->premisosCitas()) {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="calender-inner">
+                            <center>
+                                <button type="submit" class="btn btn-primary btn-sm" name="button" id="nuevo_evento">NUEVA CITA</button>
+                                <button type="submit" class="btn btn-success btn-sm" name="button" id="lista_eventos">LISTA</button>
+                                <button type="submit" class="btn btn-info btn-sm" name="button" id="lista_calendario">CALENDARIO</button>
+                            </center>
                             <div id='calendar'></div>
+                            <table id="table_citas" class="display nowrap table table-hover hidden" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th>Fecha Inicio</th>
+                                        <th>Fecha Fin</th>
+                                        <th>Color</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -173,6 +257,7 @@ if (!$seguridad->premisosCitas()) {
     <!-- scrollUp JS
 		============================================ -->
     <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/sweetalert/sweetalert.min.js"></script>
     <!-- mCustomScrollbar JS
 		============================================ -->
     <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -191,12 +276,28 @@ if (!$seguridad->premisosCitas()) {
     <script src="js/calendar/moment.min.js"></script>
     <script src="js/calendar/fullcalendar.min.js"></script>
     <script src="js/calendar/fullcalendar-active.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>  
+  
+
     <!-- plugins JS
 		============================================ -->
+    <!-- data table JS
+        ============================================ -->
+    <script src="js/datatables/datatables.min.js"></script>
+    <script src="js/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="js/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="js/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="js/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="js/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="js/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="js/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script src="js/datatables/datatables-init.js"></script>
     <script src="js/plugins.js"></script>
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
+
+    <script src="ajax/citas.js"></script>
 </body>
 
 </html>

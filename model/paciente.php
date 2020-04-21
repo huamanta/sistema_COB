@@ -3,6 +3,19 @@ $action = $_GET['action'];
 require_once '../controller/paciente.php';
 $paciente = new Paciente();
 switch ($action) {
+
+  case 'listar_genero':
+    echo $paciente->listarGenero();
+    break;
+
+  case 'listar_estado_civil':
+    echo $paciente->listarEstadoCivil();
+    break;
+
+  case 'listar_tipo_documento':
+    echo $paciente->listarTipoDocumento();
+    break;
+
   case 'guardar':
     // code...
   $tipo_doc_paciente = $_POST['tipo_doc'];
