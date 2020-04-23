@@ -1,6 +1,6 @@
-<?php 
+<?php
 	/**
-	* 
+	*
 	*/
 	session_start();
 	class Perfil
@@ -9,7 +9,7 @@
     private $id_usuario;
     private $fecha_delete;
     private $fecha_update;
-    
+
     function __construct()
     {
       require_once 'connection.php';
@@ -101,5 +101,17 @@
         return json_encode(array('success' => '1'));
       }
     }
+
+		public function guardarFooto($foto_perfil)
+		{
+			$stm = $this->conn->prepare("INSERT INTO foto_perfil () VALUES ()");
+      $stm->execute(array($foto_perfil));
+      $stm->fetch(PDO::FETCH_OBJ);
+      if ($stm) {
+        return json_encode(array('success' => '1'));
+      }else{
+        return json_encode(array('success' => '0'));
+      }
+		}
 	}
  ?>

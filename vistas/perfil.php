@@ -105,8 +105,7 @@ if ($seguridad->sessionApp() == 0) {
                           <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                       </div>
                   </div>
-                  <div class="modal-header header-color-modal bg-color-1">
-                    <input type="file" name="">
+                  <div class="modal-header header-color-modal bg-color-1" id="btn_cambiar_foto">
                       <h6 class="modal-title" id="titulo_modal_cita">CAMBIAR FOTO</h6>
                   </div>
                   <div class="modal-header header-color-modal bg-color-1" id="btn_eliminar_foto">
@@ -119,6 +118,7 @@ if ($seguridad->sessionApp() == 0) {
                       .modal-title{
                         text-align: center;
                       }
+
                     </style>
                 </div>
             </div>
@@ -145,6 +145,55 @@ if ($seguridad->sessionApp() == 0) {
                       .modal-title{
                         text-align: center;
                       }
+                    </style>
+                </div>
+            </div>
+        </div>
+        <div id="cambiarPerfilModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header header-color-modal bg-color-1" id="btn_ver_foto">
+                      <h6 class="modal-title" id="titulo_modal_cita">VER FOTO</h6>
+                      <div class="modal-close-area modal-close-df">
+                          <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                      </div>
+                    </div>
+                    <form id="form_add_perfil" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                      <input type="file" name="file-1" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} archivos seleccionados" multiple />
+                      <label for="file-1" id="label-file-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="iborrainputfile" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg>
+                      <span class="iborrainputfile">Seleccionar archivo</span>
+                      </label>
+                      <div class="row" id="uploadForm">
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a data-dismiss="modal" href="#" style="background: #bb9c7f">CERRAR</a>
+                        <button type="button" class="hidden" name="button" id="btn_eliminar_perfil">ELIMINAR</button>
+                        <button type="submit" class="hidden" name="button" id="btn_guardar_perfil">GUARDAR</button>
+                    </div>
+                    </form>
+                    <style media="screen">
+                      .cancel{
+                        background: #bb9c7f !important;
+                      }
+                      .modal-title{
+                        text-align: center;
+                      }
+                      #btn_eliminar_perfil{
+                        background: red !important;
+                        border: 2px red solid;
+                      }
+                      .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
                     </style>
                 </div>
             </div>
@@ -337,4 +386,4 @@ if ($seguridad->sessionApp() == 0) {
     <script src="ajax/perfil.js"></script>
 </body>
 
-</html>
+</html>                                                                                                                                                                                                                                                       
