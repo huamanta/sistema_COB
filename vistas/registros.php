@@ -174,7 +174,7 @@ if (!$seguridad->premisosRegistrosHistorias()) {
                             <div class="sparkline13-hd">
                               <div class="main-sparkline13-hd">
                                   <h1>Detalle <span class="table-project-n"></span> Historia Nº1</h1>
-                                  
+
                               </div>
                           </div>
                         </div>
@@ -282,7 +282,7 @@ if (!$seguridad->premisosRegistrosHistorias()) {
                                           <style media="screen">
                                           .antecedentes_patologicos>div {
                                             width: 33%;
-                                            float: right;
+                                            display: inline-block;
                                           }
                                           @media only screen and (max-width: 991px) {
                                             .antecedentes_patologicos>div {
@@ -534,4 +534,4 @@ if (!$seguridad->premisosRegistrosHistorias()) {
     <!--<script src="js/tawk-chat.js"></script> -->
 </body>
 
-</html>
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                     

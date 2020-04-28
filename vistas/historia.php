@@ -300,7 +300,7 @@ if (!$seguridad->premisosNuevaHistoria()) {
                                           <style media="screen">
                                           .antecedentes_patologicos>div {
                                             width: 33%;
-                                            float: right;
+                                            display: inline-block;
                                           }
                                           @media only screen and (max-width: 991px) {
                                             .antecedentes_patologicos>div {
@@ -426,10 +426,14 @@ if (!$seguridad->premisosNuevaHistoria()) {
                                                   <th>SALDO</th>
                                                 </tr>
                                               </thead>
-                                              <tbody>
-                                                <tr  style="border: hidden">
+                                              <tbody id="data_pago_tratamiento">
+                                                <!--tr  style="border: hidden">
                                                   <td>
-                                                    <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid"  class="form-control" name="" value="">
+                                                    <div class="dropdown">
+                                                      <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid"  class="form-control" name="search_tratamiento" id="search_tratamiento" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                      <div class="dropdown-menu hidden" id="data_list" aria-labelledby="search_tratamiento">
+                                                      </div>
+                                                    </div>
                                                   </td>
                                                   <td>
                                                     <input type="date" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
@@ -440,11 +444,10 @@ if (!$seguridad->premisosNuevaHistoria()) {
                                                   <td>
                                                     <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
                                                   </td>
-                                                </tr>
+                                                </tr-->
                                               </tbody>
                                             </table>
                                           </div>
-
                                         </div>
                                         <div class="col-md-12">
                                           <center>

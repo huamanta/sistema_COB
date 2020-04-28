@@ -29,7 +29,7 @@ function mostrarFotoUser() {
     success: function (response) {
       var response = JSON.parse(response);
       if (response != '') {
-        $("#foto_perfil_img").attr("src","img/product/"+response[0].foto_perfil);
+        $("#foto_perfil_img").attr("src","img/profile/"+response[0].foto_perfil);
       }else{
         $("#foto_perfil_img").attr("src","img/profile/default-user.png");
       }
@@ -70,7 +70,7 @@ $('#btn_ver_foto').click(function (e) {
     	{
     		var response = JSON.parse(response);
         if(response != ''){
-          $("#foto_perfil_large").attr("src","img/product/"+response[0].nombre);
+          $("#foto_perfil_large").attr("src","img/profile/"+response[0].nombre);
         }else{
           $("#foto_perfil_large").attr("src","");
         }
@@ -125,8 +125,9 @@ function fotoPerfilUser() {
     	{
         var response = JSON.parse(response);
     		if (response != '') {
-          $("#foto_perfil_usuario").attr("src","img/product/"+response[0].nombre);
+          $("#foto_perfil_usuario").attr("src","img/profile/"+response[0].nombre);
           $('#foto_perfil_input').val(response[0].id_foto_perfil);
+					$('#id-foto').val(response[0].id_foto_perfil);
     		}else{
           $("#foto_perfil_usuario").attr("src","img/profile/default-user.png");
     		}
@@ -147,6 +148,7 @@ $('#btn_cambiar_foto').click(function (e) {
 
 $('#form_add_perfil').submit(function (e) {
 	e.preventDefault();
+	var id_foto_perfil = $('#foto_perfil_input').val();
 	$.ajax({
      type: "POST",
      url: '../model/perfil.php?action=add_imagen_prefil',
@@ -154,9 +156,25 @@ $('#form_add_perfil').submit(function (e) {
      contentType: false,
      cache: false,
      processData:false,
-     success: function(res)
+		 beforeSend: function () {
+		 	$('#btn_guardar_perfil').html('GUARDANDO');
+		 },
+     success: function(response)
      {
-       console.log(res);
+			 var response = JSON.parse(response);
+			 if (response.success == "1"){
+					 swal({
+							 type: "success",
+							 title: "Eliminado correctamente",
+							 timer: 1000,
+							 showConfirmButton: false
+					 });
+					 $('#cambiarPerfilModalalert').modal('hide');
+					 fotoPerfilUser();
+					 mostrarFotoUser();
+			 }else {
+			 		$('#btn_guardar_perfil').html('GUARDAR');
+			 }
      }
    });
 })

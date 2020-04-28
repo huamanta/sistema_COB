@@ -211,7 +211,3 @@
             </div>
         </div>
     </div>
-    <!-- Mobile Menu end --><!-- jquery
-        ============================================ -->
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="ajax/perfil.js"></script>

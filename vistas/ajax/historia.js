@@ -1,6 +1,7 @@
 listarAntecedentesForSelected();
 listarTratamientoTable();
 listarDientes();
+listarPagoTratamiento();
 
 var hoy = new Date();
 var dd = hoy.getDate();
@@ -97,7 +98,7 @@ function listarTratamientoTable() {
       url: '../model/historia.php',
       data: 'action=listar_tratamiento_table',
       beforeSend: function () {
-        //$('#btn_login_auth').html('AUTENTICANDO...');
+        
       },
       success: function (response) {
         var response = JSON.parse(response);
@@ -474,3 +475,85 @@ $('#form_add_historia').submit(function (e) {
     }
   })
 });
+
+function listarPagoTratamiento() {
+  $.ajax({
+    type: 'GET',
+    url: '../model/historia.php',
+    data: 'action=listar_pago_tratamiento',
+    beforeSend: function () {
+
+    },
+    success: function (response) {
+      $('#data_pago_tratamiento').html(response);
+    }
+  });
+}
+
+function searchTratamiento() {
+  if($('#search_tratamiento').val().length > 0){
+    var data = $('#search_tratamiento').val();
+    $.ajax({
+      type: 'POST',
+      url: '../model/historia.php?action=search_tratamiento',
+      data: 'query_search='+data,
+      beforeSend: function () {
+
+      },
+      success: function (response) {
+        var response = JSON.parse(response);
+        if(response.length > 0){
+          $('#data_list').removeClass('hidden');
+          var html = '';
+          $.each(response, function (i, item) {
+              html += '<li><a href="#" onclick="seleccionarTratamiento(event, '+response[i].id_tratamiento+')">'+response[i].nombre+'</a></li>';
+          });
+          $('#data_list').html(html);
+        }else {
+          $('#data_list').html('<li><a>No existe datos para: '+data+'</a></li>');
+        }
+      }
+    })
+  }else {
+    $('#data_list').addClass('hidden');
+  }
+}
+
+
+function seleccionarTratamiento(e, id_tratamiento) {
+  e.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url: '../model/historia.php?action=add_tratamiento_pago',
+    data: 'id_tratamiento='+id_tratamiento,
+    beforeSend: function () {
+
+    },
+    success: function (response) {
+      var jsonData = JSON.parse(response);
+      if (jsonData.success == "1") {
+        listarPagoTratamiento();
+      }
+    }
+  });
+}
+
+function updateCuenta(id_tratamiento) {
+  if ($('#cuenta_add'+id_tratamiento).val().length > 0 && $('#cuenta_add'+id_tratamiento).val() != 0) {
+    var data = $('#cuenta_add'+id_tratamiento).val();
+    $.ajax({
+      type: 'POST',
+      url: '../model/historia.php?action=update_cuenta',
+      data: 'id_tratamiento='+id_tratamiento+'&data='+data,
+      beforeSend: function () {
+
+      },
+      success: function (response) {
+        var jsonData = JSON.parse(response);
+        if (jsonData.success == "1") {
+          listarPagoTratamiento();
+        }
+      }
+    });
+  }
+}

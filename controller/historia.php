@@ -410,6 +410,147 @@ class Historia
       return false;
     }
   }
+
+  public function listarPagoTratamiento()
+  {
+    $stm1 = $this->conn->prepare("SELECT * FROM pago_temp WHERE token = ?");
+    $stm1->execute(array($this->token));
+    $r = $stm1->fetch(PDO::FETCH_OBJ);
+    if ($r) {
+      $stm = $this->conn->prepare("SELECT * FROM pago_temp WHERE token = ?");
+      $stm->execute(array($this->token));
+      $data = '';
+      foreach ($stm as $result) {
+        $data .= '<tr  style="border: hidden">
+        <td>
+          <div class="dropdown">
+            <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid"  class="form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="'.$this->obtenerNombreTratamiento($result['id_tratamiento']).'">
+            <div class="dropdown-menu hidden" aria-labelledby="search_tratamient">
+            </div>
+          </div>
+        </td>
+        <td>
+          <input type="date" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="'.date('Y-m-d', strtotime($result['fecha_pago'])).'">
+        </td>
+        <td>
+          <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" onkeyup="updateCuenta('.$result['id_tratamiento'].')"  id="cuenta_add'.$result['id_tratamiento'].'" value="'.$this->obtenerCuenta($result['tipo_pago'], $result['monto']).'">
+        </td>
+        <td>
+          <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="'.$this->obtenerSaldo($result['tipo_pago'], $result['monto']).'">
+        </td>
+      </tr><br/>';
+      }
+      $data .= '<tr style="border: hidden">
+      <td>
+        <div class="dropdown">
+          <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid"  class="form-control" onkeyup="searchTratamiento()" name="search_tratamiento" id="search_tratamiento" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="dropdown-menu hidden" id="data_list" aria-labelledby="search_tratamiento">
+          </div>
+        </div>
+      </td>
+      <td>
+        <input type="date" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
+      </td>
+      <td>
+        <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
+      </td>
+      <td>
+        <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
+      </td>
+    </tr>';
+      return $data;
+    }else {
+      return '<tr  style="border: hidden">
+      <td>
+        <div class="dropdown">
+          <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid"  class="form-control" onkeyup="searchTratamiento()" name="search_tratamiento" id="search_tratamiento" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="dropdown-menu hidden" id="data_list" aria-labelledby="search_tratamiento">
+          </div>
+        </div>
+      </td>
+      <td>
+        <input type="date" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
+      </td>
+      <td>
+        <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
+      </td>
+      <td>
+        <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
+      </td>
+    </tr>';
+    }
+  }
+
+  public function obtenerNombreTratamiento($id_tratamiento)
+  {
+    $stm = $this->conn->prepare("SELECT * FROM tratamiento WHERE id_tratamiento = ? AND deleted_at IS NULL");
+    $stm->execute(array($id_tratamiento));
+    $data = Array();
+    foreach ($stm as $result) {
+      return $result['nombre'];
+    }
+  }
+
+  public function obtenerCuenta($tipo_pago, $monto)
+  {
+    if ($tipo_pago === '1') {
+      return $monto;
+    }else if ($tipo_pago === '2'){
+      return '0';
+    }else{
+      return '0';
+    }
+  }
+
+  public function obtenerSaldo($tipo_pago, $monto)
+  {
+    if ($tipo_pago === '2') {
+      return $monto;
+    }else if ($tipo_pago === '1'){
+      return '0';
+    }else {
+      return '0';
+    }
+  }
+
+  public function searchTratamiento($data)
+  {
+    $stm = $this->conn->prepare("SELECT * FROM tratamiento WHERE nombre LIKE ? AND deleted_at IS NULL");
+    $stm->execute(array('%'.$data.'%'));
+    $data = Array();
+    foreach ($stm as $result) {
+      $data[] = array(
+        'id_tratamiento' => $result['id_tratamiento'],
+        'nombre' => $result['nombre'],
+      );
+    }
+    return json_encode($data);
+  }
+
+  public function addTratamientoPago($id_tratamiento)
+  {
+    $fecha_actual = date('Y-m-d H:i:s');
+    $stm = $this->conn->prepare("INSERT INTO pago_temp (token, fecha_pago, tipo_pago, id_tratamiento) VALUES (?, ?, ?, ?)");
+    $stm->execute(array($this->token, $fecha_actual, '0', $id_tratamiento));
+    $result = $stm->fetch(PDO::FETCH_OBJ);
+    if (!$result) {
+      return json_encode(array('success' => 1));
+    }else {
+      return json_encode(array('success' => 0));
+    }
+  }
+
+  public function updateCuenta($id_tratamiento, $data)
+  {
+    $stm = $this->conn->prepare("UPDATE pago_temp SET tipo_pago = ?, monto = ? WHERE token = ? AND id_tratamiento = ?");
+    $stm->execute(array('1', $data,  $this->token, $id_tratamiento));
+    $result = $stm->fetch(PDO::FETCH_OBJ);
+    if (!$result) {
+      return json_encode(array('success' => 1));
+    }else {
+      return json_encode(array('success' => 0));
+    }
+  }
 }
 
  ?>

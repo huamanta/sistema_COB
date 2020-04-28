@@ -92,8 +92,8 @@
 
     public function eliminarFotoUsuario($id_foto_perfil)
     {
-      $stm = $this->conn->prepare("UPDATE foto_perfil SET deleted_at = ? WHERE id_foto_perfil = ?");
-      $stm->execute(array($this->fecha_delete, $id_foto_perfil));
+      $stm = $this->conn->prepare("UPDATE foto_perfil SET deleted_at = ?, estado = ? WHERE id_foto_perfil = ?");
+      $stm->execute(array($this->fecha_delete, '0', $id_foto_perfil));
       $stm->fetch(PDO::FETCH_OBJ);
       if (!$stm) {
         return json_encode(array('success' => '0'));
@@ -102,13 +102,20 @@
       }
     }
 
-		public function guardarFooto($foto_perfil)
+		public function guardarFoto($foto_perfil, $id_foto)
 		{
-			$stm = $this->conn->prepare("INSERT INTO foto_perfil () VALUES ()");
-      $stm->execute(array($foto_perfil));
+			$stm = $this->conn->prepare("INSERT INTO foto_perfil (nombre, tipo_foto, estado, id_usuario) VALUES (?, ?, ?, ?)");
+      $stm->execute(array($foto_perfil, '1', '1', $this->id_usuario));
       $stm->fetch(PDO::FETCH_OBJ);
       if ($stm) {
-        return json_encode(array('success' => '1'));
+				$stm1 = $this->conn->prepare("UPDATE foto_perfil SET deleted_at = ?, estado = ? WHERE id_foto_perfil = ?");
+	      $stm1->execute(array($this->fecha_delete, '0', $id_foto));
+	      $stm1->fetch(PDO::FETCH_OBJ);
+	      if (!$stm1) {
+	        return json_encode(array('success' => '0'));
+	      }else{
+	        return json_encode(array('success' => '1'));
+	      }
       }else{
         return json_encode(array('success' => '0'));
       }

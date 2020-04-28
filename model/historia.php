@@ -94,6 +94,26 @@ switch ($action) {
     echo $historia_paciente->procesarHistoriaClinica($id_paciente, $diagnostico, $observaciones);
     break;
 
+  case 'listar_pago_tratamiento':
+    echo $historia_paciente->listarPagoTratamiento();
+    break;
+
+  case 'search_tratamiento':
+    $data = $_POST['query_search'];
+    echo $historia_paciente->searchTratamiento($data);
+    break;
+
+  case 'add_tratamiento_pago':
+    $id_tratamiento = $_POST['id_tratamiento'];
+    echo $historia_paciente->addTratamientoPago($id_tratamiento);
+    break;
+
+  case 'update_cuenta':
+    $id_tratamiento = $_POST['id_tratamiento'];
+    $data = $_POST['data'];
+    echo $historia_paciente->updateCuenta($id_tratamiento, $data);
+    break;
+
   default:
     // code...
     break;
