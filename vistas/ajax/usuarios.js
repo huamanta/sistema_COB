@@ -249,6 +249,44 @@ function listarDataUsuario(id_usuario, id_persona) {
           $('#email').val(response[0].email);
           $('#telefono').val(response[0].telefono);
           $('#direccion').val(response[0].direccion);
+          setTimeout(function () {
+            $("#departamento").val('	'+response[0].ubigeo.substr(0,2)+'	');
+            var url = 'http://localhost/restapi/v1/ubigeo/data_list';
+            var token = '8f126c231ef98f4e45d331dc1bc336278935fed6f09fc214f07691258baa16b0';
+            var data = 'ubigeo='+$("#departamento").val();
+            $.ajax({
+              url: url,
+              headers: {
+              'Authorization': token,
+              },
+              type: 'GET',
+              data: data,
+              accepts: "application/json",
+              crossDomain: true,
+              beforeSend: function () {
+                //$('#btn_login_auth').html('AUTENTICANDO...');
+              },
+              success: function (response) {
+                var departamento = response[0].departamento;
+                $.each(departamento, function (i, item) {
+                  var provincias = departamento[i].provincias;
+                  var html = '';
+                  $.each(provincias, function (i, item) {
+                    var distritos = provincias[i].distritos;
+                    html += '<optgroup label="'+provincias[i].nombre+'">';
+                    $.each(distritos, function (i, item) {
+                      html += '<option value="'+distritos[i].ubigeo+'">'+distritos[i].nombre+'</option>';
+                    })
+                    html += '</optgroup>';
+                  })
+                  $("#ubigeo").html(html);
+                });
+              }
+            });
+            setTimeout(function () {
+              $("#ubigeo").val('	'+response[0].ubigeo+'	');
+            }, 1000);
+          }, 1000);
         }
       }
     });

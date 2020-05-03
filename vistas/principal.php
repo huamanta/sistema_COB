@@ -414,6 +414,7 @@ if ($seguridad->sessionApp() == 0) {
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
+    <script src="ajax/perfil.js"></script>
 </body>
 
 </html>

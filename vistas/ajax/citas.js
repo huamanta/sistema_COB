@@ -112,7 +112,7 @@ $('#form_add_citas').submit(function (e) {
           }else{
             $('#btn_guardar_data').html('ACTUALIZAR');
           }
-        }      		
+        }
      	},
      	error: function(error) {
        		console.log(e.responseText);
@@ -125,7 +125,7 @@ $('#lista_eventos').click(function (e){
 	$("#table_citas_wrapper").removeClass('hidden');
   $("#table_citas").removeClass('hidden');
 	$("#calendar").addClass('hidden');
-	listaTablaCitas();	
+	listaTablaCitas();
 });
 
 function listaTablaCitas() {
@@ -196,7 +196,7 @@ function listaTablaCitas() {
 
 $('#lista_calendario').click(function (e) {
 	e.preventDefault();
-	$("#table_citas_wrapper").addClass('hidden');  
+	$("#table_citas_wrapper").addClass('hidden');
   $("#table_citas").addClass('hidden');
 	$("#calendar").removeClass('hidden');
 });
@@ -271,25 +271,32 @@ function eliminarcita(id_cita) {
        });
  }
 
-$(document).ready(function(){
-    $('#cliente').typeahead({
-      source: function(query, result)
+ $('#search_tratamiento').keyup(function (e) {
+   e.preventDefault();
+   if ($(this).val().length > 0) {
+     $.ajax({
+      url:"../model/citas.php?action=search_data_paciente",
+      method:"POST",
+      data: 'query='+$(this).val(),
+      success:function(response)
       {
-       $.ajax({
-        url:"../model/citas.php?action=search_data_paciente",
-        method:"POST",
-        data:{query:query},
-        dataType:"json",
-        success:function(data)
-        {
-         result($.map(data, function(item){
-          return item;
-         }));
+        var response = JSON.parse(response);
+        if(response.length > 0){
+          $('#data_list').removeClass('hidden');
+          var html = '';
+          $.each(response, function (i, item) {
+              html += '<li><a href="#" onclick="seleccionarTratamiento()">'+response[i].primer_nombre+' '+response[i].segundo_nombre+' '+response[i].primer_apellido+' '+response[i].segundo_apellido+'</a></li>';
+          });
+          $('#data_list').html(html);
+        }else {
+          $('#data_list').html('<li><a>No existe datos para: '+data+'</a></li>');
         }
-       })
       }
-    });
- })
+     })
+   }else {
+     $('#data_list').addClass('hidden');
+   }
+ });
 
 $('#cliente').keyup(function (e) {
   e.preventDefault();
@@ -305,7 +312,7 @@ $('#cliente').keyup(function (e) {
       success: function (response) {
         var response = JSON.parse(response);
         var html = '';
-        $.each(response, function (i, item) {          
+        $.each(response, function (i, item) {
           html += '<li>'+response[i]+'<button class="btn btn-success">seleccionar</button></li>';
         })
         $('#ver_data_paciente').html(html);

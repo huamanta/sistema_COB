@@ -117,11 +117,15 @@ if (!$seguridad->premisosCitas()) {
                             <div class="form-group" id="div_id_cita" hidden>
                             </div>
                             <div class="form-group col-md-9">
-                                <input id="cliente" name="cliente" class="form-control"  autocomplete="off" placeholder="Seleccionar cliente">
+                                <div class="dropdown">
+                                  <input type="text" class="form-control" onkeyup="searchTratamiento()" name="search_tratamiento" id="search_tratamiento" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <div class="dropdown-menu hidden" id="data_list" aria-labelledby="search_tratamiento">
+                                  </div>
+                                </div>
                             </div>
                             <div class="form-group col-md-3">
                                 <button class="btn byn-primary" id="btn_agregar_paciente">AGREGAR</button>
-                            </div>                            
+                            </div>
                             <div class="col-md-12" id="ver_data_paciente"></div>
                             <div class="form-group col-md-12">
                                 <input name="nombre" id="nombre" type="text" class="form-control" placeholder="nombre" value="" >
@@ -276,8 +280,7 @@ if (!$seguridad->premisosCitas()) {
     <script src="js/calendar/moment.min.js"></script>
     <script src="js/calendar/fullcalendar.min.js"></script>
     <script src="js/calendar/fullcalendar-active.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>  
-  
+
 
     <!-- plugins JS
 		============================================ -->

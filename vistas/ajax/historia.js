@@ -98,7 +98,7 @@ function listarTratamientoTable() {
       url: '../model/historia.php',
       data: 'action=listar_tratamiento_table',
       beforeSend: function () {
-        
+
       },
       success: function (response) {
         var response = JSON.parse(response);
@@ -155,6 +155,16 @@ function calcularCantidad(id_tratamiento) {
       },
       success: function (response) {
         listarTratamientoTable();
+        setTimeout(function () {
+          var obj = $('#cantidad'+id_tratamiento),
+          // Guardamos en una variable el contenido
+          val = obj.val();
+          // Ponemos el foco, limpiamos el contenido y volvemos a poner
+          // nuevamente el mismo contenido
+          obj.focus().val("").val(val);
+          // Movemos el scroll
+          obj.scrollTop(obj[0].scrollHeight);
+        }, 1000);
       }
     });
   }else {
@@ -167,6 +177,16 @@ function calcularCantidad(id_tratamiento) {
       },
       success: function (response) {
         listarTratamientoTable();
+        setTimeout(function () {
+          var obj = $('#cantidad'+id_tratamiento),
+          // Guardamos en una variable el contenido
+          val = obj.val();
+          // Ponemos el foco, limpiamos el contenido y volvemos a poner
+          // nuevamente el mismo contenido
+          obj.focus().val("").val(val);
+          // Movemos el scroll
+          obj.scrollTop(obj[0].scrollHeight);
+        }, 1000);
       }
     });
   }
@@ -490,6 +510,22 @@ function listarPagoTratamiento() {
   });
 }
 
+function deletePagoTratamiento(id_tratamiento) {
+  if($('#eliminar_registro_'+id_tratamiento).val().length == 0){
+    $.ajax({
+      type: 'POST',
+      url: '../model/historia.php?action=delete_tratamiento',
+      data: 'id_tratamiento='+id_tratamiento,
+      success: function (response) {
+        var jsonData = JSON.parse(response);
+        if (jsonData.success == "1") {
+          listarPagoTratamiento();
+        }
+      }
+    });
+  }
+}
+
 function searchTratamiento() {
   if($('#search_tratamiento').val().length > 0){
     var data = $('#search_tratamiento').val();
@@ -498,7 +534,7 @@ function searchTratamiento() {
       url: '../model/historia.php?action=search_tratamiento',
       data: 'query_search='+data,
       beforeSend: function () {
-
+        $('#data_list').addClass('Cargando...');
       },
       success: function (response) {
         var response = JSON.parse(response);
@@ -552,8 +588,38 @@ function updateCuenta(id_tratamiento) {
         var jsonData = JSON.parse(response);
         if (jsonData.success == "1") {
           listarPagoTratamiento();
+          setTimeout(function () {
+            var obj = $('#cuenta_add'+id_tratamiento),
+            // Guardamos en una variable el contenido
+            val = obj.val();
+            // Ponemos el foco, limpiamos el contenido y volvemos a poner
+            // nuevamente el mismo contenido
+            obj.focus().val("").val(val);
+            // Movemos el scroll
+            obj.scrollTop(obj[0].scrollHeight);
+          }, 1000);
+        }else if (jsonData.success == "0"){
+          listarPagoTratamiento();
         }
       }
     });
   }
+}
+
+function cambiarFechaRegistro(id_tratamiento) {
+  var fecha_registro = $('#fecha_registro'+id_tratamiento).val();
+  $.ajax({
+    type: 'POST',
+    url: '../model/historia.php?action=update_fecha_registro',
+    data: 'id_tratamiento='+id_tratamiento+'&fecha_registro='+fecha_registro,
+    beforeSend: function () {
+
+    },
+    success: function (response) {
+      var jsonData = JSON.parse(response);
+      if (jsonData.success == "1") {
+        listarPagoTratamiento();
+      }
+    }
+  });
 }

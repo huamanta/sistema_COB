@@ -114,6 +114,17 @@ switch ($action) {
     echo $historia_paciente->updateCuenta($id_tratamiento, $data);
     break;
 
+  case 'update_fecha_registro':
+    $id_tratamiento = $_POST['id_tratamiento'];
+    $fecha_registro = $_POST['fecha_registro'];
+    echo $historia_paciente->updateFechaRegistro($id_tratamiento, $fecha_registro);
+    break;
+
+  case 'delete_tratamiento':
+    $id_tratamiento = $_POST['id_tratamiento'];
+    echo $historia_paciente->deleteTrataiento($id_tratamiento);
+    break;
+
   default:
     // code...
     break;

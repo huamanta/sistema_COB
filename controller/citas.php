@@ -1,6 +1,6 @@
-<?php 
+<?php
  /**
- * 
+ *
  */
  class Citas
  {
@@ -29,7 +29,7 @@
           			'color' => $result['color'],
         		);
       		}
-              
+
             return json_encode($data);
 
  		} catch (Exception $e) {
@@ -56,13 +56,13 @@
                       <button class="btn btn-danger" onclick="eliminarcita('.$result['id_cita'].')"><i class="fa fa-trash"></i></button>',
            );
         }
-            
+
         $results = array(
               "sEcho"=>1, //Información para el datatables
               "iTotalRecords"=>count($data), //enviamos el total registros al datatable
               "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
               "aaData"=>$data);
-              
+
         return json_encode($results);
 
     } catch (Exception $e) {
@@ -162,7 +162,12 @@
       $stm->execute();
       $data = Array();
       foreach ($stm as $result) {
-        $data[] = $result['primer_nombre'].' '.$result['segundo_nombre'].' '.$result['primer_apellido'].' '.$result['segundo_apellido'];
+        $data[] = array(
+          'primer_nombre' => $result['primer_nombre'],
+          'segundo_nombre' => $result['segundo_nombre'],
+          'primer_apellido' => $result['primer_apellido'],
+          'segundo_apellido' => $result['segundo_apellido'],
+        );
       }
       return json_encode($data);
 

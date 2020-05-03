@@ -424,19 +424,19 @@ class Historia
         $data .= '<tr  style="border: hidden">
         <td>
           <div class="dropdown">
-            <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid"  class="form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="'.$this->obtenerNombreTratamiento($result['id_tratamiento']).'">
+            <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid"  class="form-control" data-toggle="dropdown" onkeyup="deletePagoTratamiento('.$result['id_tratamiento'].')" id="eliminar_registro_'.$result['id_tratamiento'].'" aria-haspopup="true" aria-expanded="false" value="'.$this->obtenerNombreTratamiento($result['id_tratamiento']).'">
             <div class="dropdown-menu hidden" aria-labelledby="search_tratamient">
             </div>
           </div>
         </td>
         <td>
-          <input type="date" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="'.date('Y-m-d', strtotime($result['fecha_pago'])).'">
+          <input type="date" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" onchange="cambiarFechaRegistro('.$result['id_tratamiento'].')" id="fecha_registro'.$result['id_tratamiento'].'" value="'.date('Y-m-d', strtotime($result['fecha_pago'])).'">
         </td>
         <td>
-          <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" onkeyup="updateCuenta('.$result['id_tratamiento'].')"  id="cuenta_add'.$result['id_tratamiento'].'" value="'.$this->obtenerCuenta($result['tipo_pago'], $result['monto']).'">
+          <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" onkeyup="updateCuenta('.$result['id_tratamiento'].')"  id="cuenta_add'.$result['id_tratamiento'].'" value="'.$result['a_cuenta'].'">
         </td>
         <td>
-          <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="'.$this->obtenerSaldo($result['tipo_pago'], $result['monto']).'">
+          <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="'.$result['saldo'].'">
         </td>
       </tr><br/>';
       }
@@ -491,28 +491,6 @@ class Historia
     }
   }
 
-  public function obtenerCuenta($tipo_pago, $monto)
-  {
-    if ($tipo_pago === '1') {
-      return $monto;
-    }else if ($tipo_pago === '2'){
-      return '0';
-    }else{
-      return '0';
-    }
-  }
-
-  public function obtenerSaldo($tipo_pago, $monto)
-  {
-    if ($tipo_pago === '2') {
-      return $monto;
-    }else if ($tipo_pago === '1'){
-      return '0';
-    }else {
-      return '0';
-    }
-  }
-
   public function searchTratamiento($data)
   {
     $stm = $this->conn->prepare("SELECT * FROM tratamiento WHERE nombre LIKE ? AND deleted_at IS NULL");
@@ -530,8 +508,8 @@ class Historia
   public function addTratamientoPago($id_tratamiento)
   {
     $fecha_actual = date('Y-m-d H:i:s');
-    $stm = $this->conn->prepare("INSERT INTO pago_temp (token, fecha_pago, tipo_pago, id_tratamiento) VALUES (?, ?, ?, ?)");
-    $stm->execute(array($this->token, $fecha_actual, '0', $id_tratamiento));
+    $stm = $this->conn->prepare("INSERT INTO pago_temp (token, fecha_pago, a_cuenta, saldo, id_tratamiento) VALUES (?, ?, ?, ?, ?)");
+    $stm->execute(array($this->token, $fecha_actual, '0', '0', $id_tratamiento));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if (!$result) {
       return json_encode(array('success' => 1));
@@ -542,8 +520,46 @@ class Historia
 
   public function updateCuenta($id_tratamiento, $data)
   {
-    $stm = $this->conn->prepare("UPDATE pago_temp SET tipo_pago = ?, monto = ? WHERE token = ? AND id_tratamiento = ?");
-    $stm->execute(array('1', $data,  $this->token, $id_tratamiento));
+    $cuenta = $this->obtenerCuentaTratamiento($id_tratamiento);
+    if ($data>$cuenta) {
+      return json_encode(array('success' => 0));
+    }
+    $saldo = $cuenta-$data;
+    $stm = $this->conn->prepare("UPDATE pago_temp SET a_cuenta = ?, saldo = ? WHERE token = ? AND id_tratamiento = ?");
+    $stm->execute(array($data, $saldo, $this->token, $id_tratamiento));
+    $result = $stm->fetch(PDO::FETCH_OBJ);
+    if (!$result) {
+      return json_encode(array('success' => 1));
+    }else {
+      return json_encode(array('success' => 0));
+    }
+  }
+
+  public function obtenerCuentaTratamiento($id_tratamiento)
+  {
+    $stm = $this->conn->prepare("SELECT * FROM detalle_historia_temp WHERE id_tratamiento = ? AND token = ?");
+    $stm->execute(array($id_tratamiento,  $this->token));
+    foreach ($stm as $result) {
+      return $result['total'];
+    }
+  }
+
+  public function updateFechaRegistro($id_tratamiento, $fecha_registro)
+  {
+    $stm = $this->conn->prepare("UPDATE pago_temp SET fecha_pago = ? WHERE token = ? AND id_tratamiento = ?");
+    $stm->execute(array($fecha_registro,  $this->token, $id_tratamiento));
+    $result = $stm->fetch(PDO::FETCH_OBJ);
+    if (!$result) {
+      return json_encode(array('success' => 1));
+    }else {
+      return json_encode(array('success' => 0));
+    }
+  }
+
+  public function deleteTrataiento($id_tratamiento)
+  {
+    $stm = $this->conn->prepare("DELETE FROM pago_temp WHERE token = ? AND id_tratamiento = ?");
+    $stm->execute(array($this->token, $id_tratamiento));
     $result = $stm->fetch(PDO::FETCH_OBJ);
     if (!$result) {
       return json_encode(array('success' => 1));

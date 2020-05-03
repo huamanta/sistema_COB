@@ -171,7 +171,7 @@ if (!$seguridad->premisosNuevoPacientes()) {
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
                                                                   <div class="form-group">
-                                                                      <select name="tipo_doc" id="tipo_doc" class="form-control">                                                              
+                                                                      <select name="tipo_doc" id="tipo_doc" class="form-control">
                                                                       </select>
                                                                   </div>
                                                                   <div class="form-group">
@@ -199,9 +199,6 @@ if (!$seguridad->premisosNuevoPacientes()) {
                                                                   <div class="form-group">
                                                                     <select class="form-control" data-placeholder="Choose a Category" tabindex="1" id="ubigeo" name="ubigeo">
                                                                         <option value="" hidden selected>Ubigeo</option>
-                                                                        <option value="Bambamarca">Bambamarca</option>
-                                                                        <option value="Chota">Chota</option>
-                                                                        <option value="Tarapoto">Tarapoto</option>
                                                                     </select>
                                                                   </div>
                                                                   <div class="form-group">

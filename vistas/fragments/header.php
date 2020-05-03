@@ -141,7 +141,7 @@
                                         </li>
                                         <li class="nav-item">
                                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                                <img src="#" alt="" id="foto_perfil_img" />
+                                                <img src="#" alt="" id="foto_perfil_img" style="height: 35px; width: 35px" />
                                                 <span class="admin-name" id="admin-name">Administrador</span>
                                                 <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                                             </a>
