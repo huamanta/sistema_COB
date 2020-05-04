@@ -30,7 +30,7 @@ class Historias
           '2' => $result['primer_nombre'].' '.$result['segundo_nombre'].' '.$result['primer_apellido'].' '.$result['segundo_apellido'],
           '3' => $result['diagnostico'],
           '4' => ($result['estado']) ? '<span class="badge badge-success badge-pill" style="background: green">Activo</span>' : '<span class="badge badge-primary badge-pill" style="background: red">Inactivo</span>',
-          '5' => '<button class="btn btn-danger" onclick="verdetalle('.$result['id_historia_clinica'].')"><i class="fa fa-eye"></i></button>',
+          '5' => '<button class="btn btn-success" onclick="verdetalle('.$result['id_historia_clinica'].')"><i class="fa fa-eye"></i></button><button style="margin-left: 5px" class="btn btn-danger"><i class="fa fa-trash"></i></button>',
           );
       }
       $results = array(
@@ -46,7 +46,7 @@ class Historias
   }
 
   public function getDataPaciente($id_historia_clinica)
-  { 
+  {
     try {
        $stm = $this->conn->prepare("SELECT  hc.id_historia_clinica, hc.created_at, pe.primer_apellido, pe.segundo_apellido, pe.primer_nombre, pe.segundo_nombre, pe.fecha_nacimiento, pe.id_genero, pe.id_estado_civil, pe.ubigeo, pe.ocupacion, pe.telefono, pe.direccion, pe.email, pa.nombre_apoderado, pa.telefono_apoderado, hc.diagnostico, hc.observaciones FROM historia_clinica hc, paciente pa, persona pe WHERE hc.id_paciente = pa.id_paciente AND pa.id_persona = pe.id_persona AND hc.id_historia_clinica = ?");
       $stm->execute(array($id_historia_clinica));
@@ -302,6 +302,44 @@ class Historias
       return $result->total;
     }else {
       return '';
+    }
+  }
+
+  public function listarPagoTratamiento($id_historia_clinica)
+  {
+    $stm = $this->conn->prepare("SELECT * FROM pago WHERE id_historia_clinica = ?");
+    $stm->execute(array($id_historia_clinica));
+    $data = '';
+    foreach ($stm as $result) {
+      $data .= '<tr  style="border: hidden">
+      <td>
+        <div class="dropdown">
+          <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid"  class="form-control" data-toggle="dropdown" id="eliminar_registro_'.$result['id_tratamiento'].'" aria-haspopup="true" aria-expanded="false" value="'.$this->obtenerNombreTratamiento($result['id_tratamiento']).'">
+          <div class="dropdown-menu hidden" aria-labelledby="search_tratamient">
+          </div>
+        </div>
+      </td>
+      <td>
+        <input type="date" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" id="fecha_registro'.$result['id_tratamiento'].'" value="'.date('Y-m-d', strtotime($result['fecha_pago'])).'">
+      </td>
+      <td>
+        <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control"  id="cuenta_add'.$result['id_tratamiento'].'" value="'.$result['a_cuenta'].'">
+      </td>
+      <td>
+        <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="'.$result['saldo'].'">
+      </td>
+    </tr><br/>';
+    }
+    return $data;
+  }
+
+  public function obtenerNombreTratamiento($id_tratamiento)
+  {
+    $stm = $this->conn->prepare("SELECT * FROM tratamiento WHERE id_tratamiento = ? AND deleted_at IS NULL");
+    $stm->execute(array($id_tratamiento));
+    $data = Array();
+    foreach ($stm as $result) {
+      return $result['nombre'];
     }
   }
 

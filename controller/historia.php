@@ -388,12 +388,33 @@ class Historia
           $stm2 = $this->conn->prepare("INSERT INTO detalle_historia (id_historia_clinica, id_tratamiento, id_diente, id_ant_patologico, cantidad, precio, total) VALUES (?, ?, ?, ?, ?, ? ,?)");
           $stm2->execute(array($id_insert, $stm1['id_tratamiento'], $stm1['id_diente'], $stm1['id_ant_patologico'], $stm1['cantidad'], $stm1['precio'], $stm1['total']));
         }
+        $sql_select_pago = $this->conn->prepare("SELECT * FROM pago_temp WHERE token = ?");
+        $sql_select_pago->execute(array($this->token));
+        foreach ($sql_select_pago as $pago_temp) {
+          $sql_insert_pago = $this->conn->prepare("INSERT INTO pago (fecha_pago, a_cuenta, saldo, id_historia_clinica, id_tratamiento) VALUES (?, ?, ?, ?, ?)");
+          $sql_insert_pago->execute(array($pago_temp['fecha_pago'], $pago_temp['a_cuenta'], $pago_temp['saldo'], $id_insert, $pago_temp['id_tratamiento']));
+        }
         $stm3 = $this->conn->prepare("DELETE FROM detalle_historia_temp WHERE token = ?");
         $stm3->execute(array($this->token));
+        $delete_pago_temp = $this->conn->prepare("DELETE FROM pago_temp WHERE token = ?");
+        $delete_pago_temp->execute(array($this->token));
         return json_encode(array('success' => 1));
       }else {
         return json_encode(array('success' => 0));
       }
+    }else {
+      return json_encode(array('success' => 0));
+    }
+  }
+
+  public function eliminarHistoriaClinica()
+  {
+    $delete_detalle_historia_temp = $this->conn->prepare("DELETE FROM detalle_historia_temp WHERE token = ?");
+    $delete_detalle_historia_temp->execute(array($this->token));
+    $delete_pago_temp = $this->conn->prepare("DELETE FROM pago_temp WHERE token = ?");
+    $delete_pago_temp->execute(array($this->token));
+    if ($delete_pago_temp) {
+      return json_encode(array('success' => 1));
     }else {
       return json_encode(array('success' => 0));
     }

@@ -71,7 +71,7 @@ private $conn;
     $stm->execute(array($id_paciente));
     foreach ($stm as $stm) {
       return json_encode($stm);
-  }
+    }
 }
 
 public function guardarPaciente($tipo_doc_paciente, $numero_documento, $nombres_paciente, $apellidos_paciente, $fecha_nacimiento, $ocupacion_paciente, $genero_paciente, $estado_civil, $email_paciente, $direccion_paciente,  $ubigeo_paciente, $telefono_paciente, $nombre_apoderado, $telefono_apoderado)

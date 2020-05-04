@@ -63,6 +63,11 @@ switch ($action) {
     echo $registros->listarTratamientoPaciente($id_historia_clinica);
     break;
 
+  case 'listar_pago_tratamiento':
+    $id_historia_clinica = $_POST['id_historia_clinica'];
+    echo $registros->listarPagoTratamiento($id_historia_clinica);
+    break;
+
   default:
     // code...
     break;

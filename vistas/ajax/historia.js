@@ -22,6 +22,21 @@ var date = mm + "/" + dd + "/" + yyyy;
 $('#fecha_documento').val(date);
 $('.input-group-append').html('');
 
+
+function print() {
+$('#printButton').html('IMPRIMIR');
+printJS({
+  printable: 'printElement',
+  type: 'html',
+  targetStyles: ['*']
+})
+}
+
+$('#printButton').click(function () {
+  $('#printButton').html('IMPRIMIENDO');
+  print();
+})
+
 $('#fecha_nacimiento_paciente').change(function () {
    var fechaNace = new Date($(this).val());
     var fechaActual = new Date()
@@ -482,18 +497,27 @@ function eliminarAntecedenteHistoria(id_ant_patologico) {
 $('#form_add_historia').submit(function (e) {
   e.preventDefault();
   console.log($(this).serialize());
-  $.ajax({
-    type: 'POST',
-    url: '../model/historia.php?action=procesar_historia_clinica',
-    data: $(this).serialize(),
-    beforeSend: function () {
-      $('#guardar_historia').html('Procesando');
-      $('#guardar_historia').attr('readonly', true);
-    },
-    success: function (response) {
-      location.reload();
-    }
-  })
+  if ($('#id_paciente').val().length > 0) {
+    $.ajax({
+      type: 'POST',
+      url: '../model/historia.php?action=procesar_historia_clinica',
+      data: $(this).serialize(),
+      beforeSend: function () {
+        $('#guardar_historia').html('Procesando');
+        $('#guardar_historia').attr('readonly', true);
+      },
+      success: function (response) {
+        location.reload();
+      }
+    });
+  }else {
+    $("#message").html('<div class="alert alert-danger alert-mg-b alert-success-style4 alert-success-stylenone">'+
+                            '<button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">'+
+                '<span class="icon-sc-cl" aria-hidden="true">×</span>'+
+              '</button>'+
+              '<p class="message-alert-none"><strong>Atencion!</strong> Tiene que asignar un paciente a la historia clinica.</p>'+
+                        '</div>');
+  }
 });
 
 function listarPagoTratamiento() {
@@ -623,3 +647,33 @@ function cambiarFechaRegistro(id_tratamiento) {
     }
   });
 }
+
+$('#cancelar_historia').click(function () {
+  swal({
+          title: "¿Eliminar registro?",
+          text: "Podra volver a recuperar el registro",
+          type: "info",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          showLoaderOnConfirm: true,
+          confirmButtonText: 'ELIMINAR',
+          confirmButtonColor: '#354a77',
+          cancelButtonText: 'CANCELAR',
+          cancelButtonColor: '#bb9c7f',
+      },
+      function(){
+            $.ajax({
+             type: "POST",
+             url: '../model/historia.php?action=eliminar_historia_clinica',
+             data: '', // serializes the form's elements.
+             success: function(res)
+             {
+               var jsonData = JSON.parse(res);
+               if (jsonData.success == "1"){
+                 location.reload();
+               }
+             }
+           });
+
+      });
+})

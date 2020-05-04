@@ -101,6 +101,22 @@ if (!$seguridad->premisosCitas()) {
                 </div>
             </div>
         </div>
+        <div id="opcionesAlert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="text-align: center">
+                  <input type="hidden" id="id_cita" name="id_cita" value="">
+                  <div class="modal-header header-color-modal bg-color-1" id="btn_editar_cita">
+                      <h6 class="modal-title">EDITAR CITA</h6>
+                      <div class="modal-close-area modal-close-df">
+                          <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                      </div>
+                  </div>
+                  <div class="modal-header header-color-modal bg-color-1" id="btn_eliminar_cita">
+                      <h6 class="modal-title">ELIMINAR CITA</h6>
+                  </div>
+                </div>
+            </div>
+        </div>
         <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -117,9 +133,10 @@ if (!$seguridad->premisosCitas()) {
                             <div class="form-group" id="div_id_cita" hidden>
                             </div>
                             <div class="form-group col-md-9">
+                                <input type="hidden" class="form-control" name="id_paciente" id="id_paciente">
                                 <div class="dropdown">
-                                  <input type="text" class="form-control" onkeyup="searchTratamiento()" name="search_tratamiento" id="search_tratamiento" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <div class="dropdown-menu hidden" id="data_list" aria-labelledby="search_tratamiento">
+                                  <input type="text" class="form-control" name="search_cliente" id="search_cliente" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <div class="dropdown-menu hidden" id="data_list" aria-labelledby="search_cliente">
                                   </div>
                                 </div>
                             </div>

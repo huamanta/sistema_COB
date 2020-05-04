@@ -28,7 +28,7 @@ switch ($action) {
   $estado_civil = $_POST['estado_civil'];
   $email_paciente = $_POST['email'];
   $direccion_paciente = $_POST['direccion'];
-  $ubigeo_paciente = $_POST['ubigeo'];
+  $ubigeo_paciente = trim($_POST['ubigeo']);
   $telefono_paciente = $_POST['telefono'];
   $nombre_apoderado = $_POST['nombre_apoderado'];
   $telefono_apoderado = $_POST['telefono_apoderado'];

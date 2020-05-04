@@ -101,17 +101,17 @@ if ($seguridad->sessionApp() == 0) {
                     <input type="hidden" name="" id="foto_perfil_input">
                   <div class="modal-header header-color-modal bg-color-1">
                     <div class="" id="btn_ver_foto">
-                      <h6 class="modal-title" id="titulo_modal_cita">VER FOTO</h6>
+                      <h6 class="modal-title">VER FOTO</h6>
                     </div>
                       <div class="modal-close-area modal-close-df">
                           <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                       </div>
                   </div>
                   <div class="modal-header header-color-modal bg-color-1" id="btn_cambiar_foto">
-                      <h6 class="modal-title" id="titulo_modal_cita">CAMBIAR FOTO</h6>
+                      <h6 class="modal-title"CAMBIAR FOTO</h6>
                   </div>
                   <div class="modal-header header-color-modal bg-color-1" id="btn_eliminar_foto">
-                      <h6 class="modal-title" id="titulo_modal_cita">ELIMINAR FOTO</h6>
+                      <h6 class="modal-title">ELIMINAR FOTO</h6>
                   </div>
                     <style media="screen">
                       .cancel{

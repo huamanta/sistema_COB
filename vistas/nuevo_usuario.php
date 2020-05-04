@@ -292,12 +292,11 @@ if (!$seguridad->premisosUsuarios()) {
                                             </div>
                                         </div>
                                     </div>
-
                                     <?php endif; ?>
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="payment-adress">
-                                                <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: #bb9c7f; border: 1px #bb9c7f solid">GUARDAR</button>
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: #bb9c7f; border: 1px #bb9c7f solid" id="btn_gurdar_usuario">GUARDAR</button>
                                             </div>
                                         </div>
                                     </div>

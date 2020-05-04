@@ -169,31 +169,23 @@ if (!$seguridad->premisosRegistrosHistorias()) {
         <div class="product-status mg-b-15 hidden" id="detalle_historia">
           <div class="container-fluid">
                 <div class="row">
-                  <!--div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                      <div class="sparkline13-list">
-                            <div class="sparkline13-hd">
-                              <div class="main-sparkline13-hd">
-                                  <h1>Detalle <span class="table-project-n"></span> Historia Nº1</h1>
-
-                              </div>
-                          </div>
-                        </div>
-                    </div-->
                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="sparkline8-list mt-b-30">
                             <div class="sparkline8-graph">
                                 <div class="basic-login-form-ad">
                                     <div class="row">
+                                      <div class="form-group col-md-6">
+                                        <button class="btn btn-primary" id="btn_volver_lista" style="background: #23527c; border: 1px #23527c solid">ATRAS</button>
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                        <button class="btn btn-primary pull-right" id="btn_nueva_historia" style="background: red; border: 1px red solid">NUEVA HISTORIA</button>
+                                      </div>
                                         <form class="" id="form_add_historia" action="index.html" method="get">
-                                          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-
-                                          </div>
-                                          <div class="col-lg-10 col-md-10  col-sm-10 col-xs-12" style="color: #5d6e92; border: 1px #5d6e92 solid; margin-top: 10px"  id="printElement">
+                                          <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12" style="color: #5d6e92; border: 1px #5d6e92 solid; margin-top: 10px"  id="printElement">
                                           <div class="col-md-12">
-                                            <h3 style="text-align: center; margin-top: 10px">HISTORIA CLINICA</h3>
+                                            <h3 style="text-align: center; margin-top: 10px">HISTORIA CLINICA Nº --</h3>
                                           </div>
                                           <div class="form-group col-md-9">
-                                          <button class="btn btn-primary" id="btn_volver_lista" style="background: #23527c; border: 1px #23527c solid">ATRAS</button>
                                           </div>
                                           <div class="form-group col-md-3">
                                               <input name="fecha_documento" id="fecha_documento" type="text" class="form-control" placeholder="">
@@ -408,31 +400,16 @@ if (!$seguridad->premisosRegistrosHistorias()) {
                                                   <th>SALDO</th>
                                                 </tr>
                                               </thead>
-                                              <tbody>
-                                                <tr  style="border: hidden">
-                                                  <td>
-                                                    <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid"  class="form-control" name="" value="">
-                                                  </td>
-                                                  <td>
-                                                    <input type="date" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
-                                                  </td>
-                                                  <td>
-                                                    <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
-                                                  </td>
-                                                  <td>
-                                                    <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
-                                                  </td>
-                                                </tr>
+                                              <tbody id="data_pago_tratamiento">
                                               </tbody>
                                             </table>
                                           </div>
 
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12"><br/>
                                           <center>
-                                            <input type="hidden" name="id_paciente" id="id_paciente" class="form-control" value="">
-                                            <button class="btn btn-primary" type="submit" name="button" id="guardar_historia">Guardar</button>
-                                            <button class="btn btn-success" type="button" name="button" id="printButton">Imprimir</button>
+                                            <button class="btn btn-primary" type="button" name="button" id="anular_historia_clinica">ANULAR</button>
+                                            <button class="btn btn-success" type="button" name="button" id="printButton">IMPRIMIR</button>
                                           </center>
                                         </div>
                                       </form>
@@ -528,6 +505,7 @@ if (!$seguridad->premisosRegistrosHistorias()) {
         <!-- paciente JS
     		============================================ -->
         <script src="ajax/registros.js"></script>
+        <script src="js/print.js"></script>
 
     <!-- tawk chat JS
 		============================================ -->

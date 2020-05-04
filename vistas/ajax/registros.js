@@ -1,5 +1,19 @@
 listarHistorias();
 
+function print() {
+$('#printButton').html('IMPRIMIR');
+printJS({
+  printable: 'printElement',
+  type: 'html',
+  targetStyles: ['*']
+})
+}
+
+$('#printButton').click(function () {
+  $('#printButton').html('IMPRIMIENDO');
+  print();
+})
+
 function listarHistorias() {
   $('#registro_historias').removeClass('hidden');
   $('#detalle_historia').addClass('hidden');
@@ -91,6 +105,7 @@ function verdetalle(id_historia_clinica) {
   listar_antecedentes_paciente(id_historia_clinica);
   listar_dientes_paciente(id_historia_clinica);
   listar_tratamiento_paciente(id_historia_clinica);
+  listarPagoTratamiento(id_historia_clinica)
 }
 
 function listar_dientes_paciente(id_historia_clinica) {
@@ -412,3 +427,21 @@ function listar_tratamiento_paciente(id_historia_clinica) {
       }
     });
 }
+
+function listarPagoTratamiento(id_historia_clinica) {
+  $.ajax({
+    type: 'POST',
+    url: '../model/registros.php?action=listar_pago_tratamiento',
+    data: 'id_historia_clinica='+id_historia_clinica,
+    beforeSend: function () {
+
+    },
+    success: function (response) {
+      $('#data_pago_tratamiento').html(response);
+    }
+  });
+}
+
+$('#btn_nueva_historia').click(function () {
+  location.href = 'historia';
+})

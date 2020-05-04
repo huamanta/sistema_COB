@@ -125,6 +125,10 @@ switch ($action) {
     echo $historia_paciente->deleteTrataiento($id_tratamiento);
     break;
 
+  case 'eliminar_historia_clinica':
+    echo $historia_paciente->eliminarHistoriaClinica();
+    break;
+
   default:
     // code...
     break;

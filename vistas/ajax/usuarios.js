@@ -1,6 +1,7 @@
 listarDepartamentos();
 listarUsuarios();
 listarRol();
+listarRolAdd();
 listarGenero();
 listarEstadoCivil();
 listarTipoDocumento();
@@ -153,6 +154,25 @@ function listarRol() {
   });
 }
 
+function listarRolAdd() {
+  $.ajax({
+    type: 'POST',
+    url: '../model/usuarios.php?action=listar_rol',
+    data: '',
+    beforeSend: function () {
+      // body...
+    },
+    success: function (response) {
+      var response = JSON.parse(response);
+      var html = '<option value="" hidden selected>Seleccionar Rol</option>';
+      $.each(response, function (i, item) {
+        html += '<option value="'+response[i].id_rol+'">'+response[i].nombre+'</option>';
+      });
+      $('#id_rol').html(html);
+    }
+  });
+}
+
  $("#add_usuario").validate({
    rules: {
      tipo_doc: 'required',
@@ -209,7 +229,7 @@ function listarRol() {
          url:'../model/usuarios.php?action=guardar_usuario',
          data: formData,
          beforeSend: function() {
-           //$("#ingresar").html('Autenticando...');
+           $("#btn_gurdar_usuario").html('PROCESANDO...');
          },
          success: function(response) {
            var jsonData = JSON.parse(response);
@@ -391,7 +411,7 @@ function listarDataUsuario(id_usuario, id_persona) {
  })
 
  function Redirect(id_usuario, id_persona) {
-   redirect_by_post('nuevo_usuario.php', {
+   redirect_by_post('nuevo_usuario', {
        id_usuario: id_usuario,
        id_persona: id_persona
    }, true);

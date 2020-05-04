@@ -242,16 +242,28 @@ $("#numero_documento").keyup(function(a){
 
 $("#addPaciente").validate({
   rules: {
-    nombres: "required",
-    apellidos: "required",
+    tipo_doc: {required: true},
+    numero_documento: {required: true},
+    nombres: {required: true},
+    apellidos: {required: true},
+    departamento: {required: true},
+    ubigeo: {required: true},
+    genero: {required: true},
+    estado_civil: {required: true},
     email: {
+      required: true,
       email: true
     }
   },
   messages: {
-    nombres: "Please specify your name",
-    apellidos:"Please specify your last name",
-    numero_documento: "Please specify your Number Document",
+    tipo_doc: {required: "Por favor seleccione tipo de documento"},
+    numero_documento: {required: "Por favor ingrese numero de documento"},
+    nombres: {required: "Por favor ingrese sus nombres"},
+    apellidos: {required: "Por favor ingrese sus apellidos"},
+    departamento: {required: "Por favor seleccione un departamento"},
+    ubigeo: {required: "Por favor seleccione un distrito"},
+    genero: {required: "Por favor seleccione un genero"},
+    estado_civil: {required: "Por favor seleccione un estado civil"},
     email: {
       required: "We need your email address to contact you",
       email: "Your email address must be in the format of name@domain.com"
@@ -259,13 +271,13 @@ $("#addPaciente").validate({
   },
   submitHandler: function(form){
     var formData = $("#addPaciente").serialize();
-
+    console.log(formData);
     $.ajax({
         type: "POST",
         url:'../model/paciente.php?action=guardar',
         data: formData,
         beforeSend: function() {
-          //$("#ingresar").html('Autenticando...');
+          $("#btn-action").html('CARGANDO...');
         },
         success: function(response) {
           var jsonData = JSON.parse(response);

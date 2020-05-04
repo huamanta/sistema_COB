@@ -10,6 +10,7 @@ switch ($action) {
 		break;
 
 	case 'guardar_cita':
+		$id_paciente = $_POST['id_paciente'];
 		$nombre = $_POST['nombre'];
 		$descripcion = $_POST['descripcion'];
 		$date_start= ($_POST['date_start']) ? $_POST['date_start'] : NULL;
@@ -18,10 +19,10 @@ switch ($action) {
 		$hour_end = ($_POST['hour_end']) ? $_POST['hour_end'] : NULL;
 		$color = $_POST['color'];
 		if (!isset($_POST['id_cita'])) {
-			echo $citas->guardarCita($nombre, $descripcion, $date_start, $hour_start, $date_end, $hour_end, $color);
+			echo $citas->guardarCita($id_paciente, $nombre, $descripcion, $date_start, $hour_start, $date_end, $hour_end, $color);
 		}else{
 			$id_cita = $_POST['id_cita'];
-			echo $citas->actualizarCita($id_cita, $nombre, $descripcion, $date_start, $hour_start, $date_end, $hour_end, $color);
+			echo $citas->actualizarCita($id_paciente, $id_cita, $nombre, $descripcion, $date_start, $hour_start, $date_end, $hour_end, $color);
 		}
 
 		break;
@@ -44,7 +45,7 @@ switch ($action) {
 		$data = $_POST['query'];
 		echo $citas->searchDataPaciente($data);
 		break;
-	
+
 	default:
 		# code...
 		break;

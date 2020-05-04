@@ -28,6 +28,7 @@ if (!$seguridad->premisosNuevaHistoria()) {
 		============================================ -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/sweetalert/sweetalert.css" rel="stylesheet">
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -178,9 +179,9 @@ if (!$seguridad->premisosNuevaHistoria()) {
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <ul class="breadcome-menu">
-                                        <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                                        <li><a href="#">Principal</a> <span class="bread-slash">/</span>
                                         </li>
-                                        <li><span class="bread-blod">Add Professor</span>
+                                        <li><span class="bread-blod">Nueva historia</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -202,12 +203,9 @@ if (!$seguridad->premisosNuevaHistoria()) {
                                 <div class="basic-login-form-ad">
                                     <div class="row">
                                         <form class="" id="form_add_historia" action="index.html" method="get">
-                                          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-
-                                          </div>
-                                          <div class="col-lg-10 col-md-10  col-sm-10 col-xs-12" style="color: #5d6e92; border: 1px #5d6e92 solid; margin-top: 10px"  id="printElement">
+                                          <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12" style="color: #5d6e92; border: 1px #5d6e92 solid; margin-top: 10px"  id="printElement">
                                           <div class="col-md-12">
-                                            <h3 style="text-align: center; margin-top: 10px">HISTORIA CLINICA</h3>
+                                            <h3 style="text-align: center; margin-top: 10px">NUEVA HISTORIA CLINICA</h3>
                                           </div>
                                           <div class="form-group col-md-9">
                                           </div>
@@ -427,36 +425,22 @@ if (!$seguridad->premisosNuevaHistoria()) {
                                                 </tr>
                                               </thead>
                                               <tbody id="data_pago_tratamiento">
-                                                <!--tr  style="border: hidden">
-                                                  <td>
-                                                    <div class="dropdown">
-                                                      <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid"  class="form-control" name="search_tratamiento" id="search_tratamiento" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                      <div class="dropdown-menu hidden" id="data_list" aria-labelledby="search_tratamiento">
-                                                      </div>
-                                                    </div>
-                                                  </td>
-                                                  <td>
-                                                    <input type="date" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
-                                                  </td>
-                                                  <td>
-                                                    <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
-                                                  </td>
-                                                  <td>
-                                                    <input type="text" style="border-left: 1px #5d6e92 solid; border-bottom: 1px #5d6e92 solid" class="form-control" name="" value="">
-                                                  </td>
-                                                </tr-->
                                               </tbody>
                                             </table>
                                           </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12"><br/>
                                           <center>
                                             <input type="hidden" name="id_paciente" id="id_paciente" class="form-control" value="">
-                                            <button class="btn btn-primary" type="submit" name="button" id="guardar_historia">Guardar</button>
-                                            <button class="btn btn-success" type="button" name="button" id="printButton">Imprimir</button>
+                                            <button class="btn btn-info" type="button" name="button" id="cancelar_historia">CANCELAR</button>
+                                            <button class="btn btn-success" type="button" name="button" id="printButton">IMPRIMIR</button>
+                                            <button class="btn btn-primary" type="submit" name="button" id="guardar_historia">GUARDAR</button>
                                           </center>
                                         </div>
+                                        <div class="col-md-12" id="message">
+                                        </div>
                                       </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -504,6 +488,7 @@ if (!$seguridad->premisosNuevaHistoria()) {
     <!-- scrollUp JS
 		============================================ -->
     <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/sweetalert/sweetalert.min.js"></script>
     <!-- mCustomScrollbar JS
 		============================================ -->
     <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>

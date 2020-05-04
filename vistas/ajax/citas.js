@@ -41,35 +41,8 @@ function listarCitas() {
 	      		alert("Day Clicked");
 	    	},
 	    	eventClick: function (event) {
-	  			$.ajax({
-					url: '../model/citas.php?action=listar_cita_data',
-			    	type: "post",
-			    	data: 'id_cita='+event._id,
-			     	beforeSend: function() {
-			       		//$("#table_productos").html(".sdfsldf,sd");
-			     	},
-			     	success: function(response) {
-			     		$('#PrimaryModalalert').modal('show');
-              $('#btn_guardar_data').html('ACTUALIZAR');
-              $('#titulo_modal_cita').html('EDITAR CITA');
-			     		var response = JSON.parse(response);
-	  					$('#div_id_cita').html('<div class="col-md-12">'
-		            		+'<div class="form-group has-success">'
-		                	+'<input type="text" id="id_cita" name="id_cita" class="form-control" value="'+response[0].id+'">'
-		              		+'</div>'
-		        			+'</div>');
-		  				$('#nombre').val(response[0].title);
-		  				$('#descripcion').val(response[0].descripcion);
-		  				$('#date_start').val(response[0].date_start);
-		  				$('#hour_start').val(response[0].hour_start);
-		  				$('#date_end').val(response[0].date_end);
-		  				$('#hour_end').val(response[0].hour_end);
-		  				$('#color').val(response[0].color);
-			     	},
-			     	error: function(error) {
-			       		console.log(error.responseText);
-			     	}
-				})
+          $('#id_cita').val(event._id);
+          $('#opcionesAlert').modal('show');
 	        },
 			select: function (date) {
 				alert(date);
@@ -81,6 +54,46 @@ function listarCitas() {
      	}
 	})
 };
+
+$('#btn_eliminar_cita').click(function () {
+  $('#opcionesAlert').modal('hide');
+  eliminarcita($('#id_cita').val());
+});
+
+$('#btn_editar_cita').click(function () {
+  $('#opcionesAlert').modal('hide');
+  $('#PrimaryModalalert').modal('show');
+  $.ajax({
+  url: '../model/citas.php?action=listar_cita_data',
+    type: "post",
+    data: 'id_cita='+$('#id_cita').val(),
+    beforeSend: function() {
+        //$("#table_productos").html(".sdfsldf,sd");
+    },
+    success: function(response) {
+      $('#btn_guardar_data').html('ACTUALIZAR');
+      $('#titulo_modal_cita').html('EDITAR CITA');
+      var response = JSON.parse(response);
+      $('#div_id_cita').html('<div class="col-md-12">'
+            +'<div class="form-group has-success">'
+              +'<input type="text" id="id_cita" name="id_cita" class="form-control" value="'+response[0].id+'">'
+              +'</div>'
+          +'</div>');
+      $('#id_paciente').val(response[0].id_paciente);
+      $('#search_cliente').val(response[0].paciente);
+      $('#nombre').val(response[0].title);
+      $('#descripcion').val(response[0].descripcion);
+      $('#date_start').val(response[0].date_start);
+      $('#hour_start').val(response[0].hour_start);
+      $('#date_end').val(response[0].date_end);
+      $('#hour_end').val(response[0].hour_end);
+      $('#color').val(response[0].color);
+    },
+    error: function(error) {
+        console.log(error.responseText);
+    }
+})
+})
 
 $('#nuevo_evento').click(function(e){
 	e.preventDefault();
@@ -117,7 +130,7 @@ $('#form_add_citas').submit(function (e) {
      	error: function(error) {
        		console.log(e.responseText);
      	}
-    })
+    });
 })
 
 $('#lista_eventos').click(function (e){
@@ -219,7 +232,9 @@ function verDataCita(id_cita) {
             	+'<input type="text" id="id_cita" name="id_cita" class="form-control" value="'+response[0].id+'">'
           		+'</div>'
     			+'</div>');
-				$('#nombre').val(response[0].title);
+				$('#id_paciente').val(response[0].id_paciente);
+        $('#search_cliente').val(response[0].paciente);
+        $('#nombre').val(response[0].title);
 				$('#descripcion').val(response[0].descripcion);
 				$('#date_start').val(response[0].date_start);
 				$('#hour_start').val(response[0].hour_start);
@@ -271,7 +286,7 @@ function eliminarcita(id_cita) {
        });
  }
 
- $('#search_tratamiento').keyup(function (e) {
+ $('#search_cliente').keyup(function (e) {
    e.preventDefault();
    if ($(this).val().length > 0) {
      $.ajax({
@@ -285,7 +300,7 @@ function eliminarcita(id_cita) {
           $('#data_list').removeClass('hidden');
           var html = '';
           $.each(response, function (i, item) {
-              html += '<li><a href="#" onclick="seleccionarTratamiento()">'+response[i].primer_nombre+' '+response[i].segundo_nombre+' '+response[i].primer_apellido+' '+response[i].segundo_apellido+'</a></li>';
+              html += '<li><a href="#" onclick="seleccionarTratamiento('+response[i].id_paciente+', '+"'"+response[i].primer_nombre+"'"+', '+"'"+response[i].segundo_nombre+"'"+','+"'"+response[i].primer_apellido+"'"+','+"'"+response[i].segundo_apellido+"'"+')">'+response[i].primer_nombre+' '+response[i].segundo_nombre+' '+response[i].primer_apellido+' '+response[i].segundo_apellido+'</a></li>';
           });
           $('#data_list').html(html);
         }else {
@@ -298,32 +313,16 @@ function eliminarcita(id_cita) {
    }
  });
 
-$('#cliente').keyup(function (e) {
-  e.preventDefault();
-  var query = $(this).val();
-  if ($(this).val().length > 0) {
-    $.ajax({
-      type: 'POST',
-      url: '../model/citas.php?action=search_data_paciente',
-      data: {query:query},
-      beforeSend: function () {
-        // body...
-      },
-      success: function (response) {
-        var response = JSON.parse(response);
-        var html = '';
-        $.each(response, function (i, item) {
-          html += '<li>'+response[i]+'<button class="btn btn-success">seleccionar</button></li>';
-        })
-        $('#ver_data_paciente').html(html);
-      }
-    });
-  }else{
-    $('#ver_data_paciente').html('');
-  }
-})
-
  $('#btn_agregar_paciente').click(function (e) {
    e.preventDefault();
    location.href = 'paciente';
  })
+
+ function seleccionarTratamiento(id_paciente, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido) {
+   if (segundo_nombre != '') {
+     $('#search_cliente').val(primer_nombre+' '+segundo_nombre+' '+primer_apellido+' '+segundo_apellido);
+   }else {
+     $('#search_cliente').val(primer_nombre+' '+primer_apellido+' '+segundo_apellido);
+   }
+   $('#id_paciente').val(id_paciente);
+ }

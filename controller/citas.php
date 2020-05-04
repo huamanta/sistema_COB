@@ -2,28 +2,31 @@
  /**
  *
  */
+ session_start();
  class Citas
  {
 
  	private $conn;
+  private $id_usuario;
 
  	function __construct()
  	{
  		require_once 'connection.php';
     	$db = new DbConnect();
     	$this->conn = $db->connect();
+      $this->id_usuario = $_SESSION['id_usuario'];
  	}
 
  	public function listarCitasCalendar()
  	{
  		try {
- 			$stm = $this->conn->prepare("SELECT * FROM cita WHERE deleted_at IS NULL");
+ 			$stm = $this->conn->prepare("SELECT * FROM cita c, persona pe, paciente pa WHERE c.id_paciente = pa.id_paciente AND pa.id_persona = pe.id_persona AND c.deleted_at IS NULL");
       		$stm->execute();
       		$data = Array();
       		foreach ($stm as $result) {
         		$data[] = array(
                 '_id' => $result['id_cita'],
-          			'title' => $result['titulo'],
+          			'title' => $result['titulo'].' ('.$result['primer_nombre'].' '.$result['segundo_nombre'].' '.$result['primer_apellido'].' '.$result['segundo_apellido'].')',
           			'start' => $this->validarHoraStart($result['date_start'], $result['hour_start']),
           			'end' => $this->validarHoraEnd($result['date_end'], $result['hour_end']),
           			'color' => $result['color'],
@@ -92,13 +95,15 @@
   public function listarCitaData($id_cita)
   {
     try {
-      $stm = $this->conn->prepare("SELECT * FROM cita WHERE id_cita = ? AND deleted_at IS NULL");
+      $stm = $this->conn->prepare("SELECT * FROM cita c, persona pe, paciente pa WHERE c.id_paciente = pa.id_paciente AND pa.id_persona = pe.id_persona AND c.id_cita = ? AND c.deleted_at IS NULL");
           $stm->execute(array($id_cita));
           $data = Array();
           foreach ($stm as $result) {
             $data[] = array(
                 'id' => $result['id_cita'],
                 'title' => $result['titulo'],
+                'id_paciente' => $result['id_paciente'],
+                'paciente' => $this->validarPaciente($result['primer_nombre'], $result['segundo_nombre'], $result['primer_apellido'], $result['segundo_apellido']),
                 'descripcion' => $result['descripcion'],
                 'date_start' => $result['date_start'],
                 'hour_start' => $result['hour_start'],
@@ -114,12 +119,21 @@
     }
   }
 
-  public function guardarCita($nombre, $descripcion, $date_start, $hour_start, $date_end, $hour_end, $color)
+  public function validarPaciente($primer_nombre, $segundo_nombre, $primer_apellido, $segundo_apellido)
+  {
+    if ($segundo_nombre != '') {
+      return $primer_nombre.' '.$segundo_nombre.' '.$primer_apellido.' '.$segundo_apellido;
+    }else {
+      return $primer_nombre.' '.$primer_apellido.' '.$segundo_apellido;
+    }
+  }
+
+  public function guardarCita($id_paciente, $nombre, $descripcion, $date_start, $hour_start, $date_end, $hour_end, $color)
   {
     // code...
     $fecha_update = date('Y-m-d H:i:s');
-    $stm = $this->conn->prepare("INSERT INTO cita(updated_at, titulo, descripcion, date_start, hour_start, date_end, hour_end, color) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stm->execute(array($fecha_update, $nombre, $descripcion, $date_start, $hour_start, $date_end, $hour_end, $color));
+    $stm = $this->conn->prepare("INSERT INTO cita(updated_at, titulo, descripcion, date_start, hour_start, date_end, hour_end, color, id_paciente, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stm->execute(array($fecha_update, $nombre, $descripcion, $date_start, $hour_start, $date_end, $hour_end, $color, $id_paciente, $this->id_usuario));
     $stm->fetch(PDO::FETCH_OBJ);
     if(!$stm){
       return json_encode(array('success' => '0'));
@@ -128,11 +142,11 @@
     }
   }
 
-  public function actualizarCita($id_cita, $nombre, $descripcion, $date_start, $hour_start, $date_end, $hour_end, $color)
+  public function actualizarCita($id_paciente, $id_cita, $nombre, $descripcion, $date_start, $hour_start, $date_end, $hour_end, $color)
   {
     $fecha_update = date('Y-m-d H:i:s');
-    $stm = $this->conn->prepare("UPDATE cita SET updated_at = ?, titulo = ?, descripcion = ?, date_start = ?, hour_start = ?, date_end = ?, hour_end = ?, color = ? WHERE id_cita = ?");
-    $stm->execute(array($fecha_update, $nombre, $descripcion, $date_start, $hour_start, $date_end, $hour_end, $color, $id_cita));
+    $stm = $this->conn->prepare("UPDATE cita SET updated_at = ?, titulo = ?, descripcion = ?, date_start = ?, hour_start = ?, date_end = ?, hour_end = ?, color = ?, id_paciente = ? WHERE id_cita = ?");
+    $stm->execute(array($fecha_update, $nombre, $descripcion, $date_start, $hour_start, $date_end, $hour_end, $color, $id_paciente, $id_cita));
     $stm->fetch(PDO::FETCH_OBJ);
     if(!$stm){
       return json_encode(array('success' => '0'));
@@ -163,6 +177,7 @@
       $data = Array();
       foreach ($stm as $result) {
         $data[] = array(
+          'id_paciente' => $result['id_paciente'],
           'primer_nombre' => $result['primer_nombre'],
           'segundo_nombre' => $result['segundo_nombre'],
           'primer_apellido' => $result['primer_apellido'],

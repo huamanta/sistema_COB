@@ -12,7 +12,7 @@ class SeguridadApp
     require_once 'connection.php';
     $db = new DbConnect();
     $this->conn = $db->connect();
-    $this->rol = '1';
+    $this->rol = $_SESSION['id_rol'];
   }
 
   public function sessionApp()
